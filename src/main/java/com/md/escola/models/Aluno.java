@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-public class Aluno extends Usuario {
+public class Aluno extends User {
 
     String matriculaGeral;
 

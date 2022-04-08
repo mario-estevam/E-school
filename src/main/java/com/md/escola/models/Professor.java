@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-public class Professor extends Usuario  {
+public class Professor extends User  {
 
 
 
