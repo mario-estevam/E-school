@@ -6,21 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class Aluno {
-
+public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    String matriculaGeral;
-
-    @OneToOne
-    @JoinColumn(name = "pessoa_id")
-    Pessoa pessoa;
+    String nome;
+    String cpf;
+    String rg;
+    String idade;
+    String sexo;
 
 }

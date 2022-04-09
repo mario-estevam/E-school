@@ -13,12 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-public class Professor extends User  {
+public class Professor  {
 
-    String formacao;
-
-    @OneToMany(mappedBy="professor", fetch = FetchType.LAZY, orphanRemoval=true, cascade = CascadeType.ALL)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    String data_admissao;
+    @OneToMany(mappedBy="professor", fetch = FetchType.EAGER, orphanRemoval=true, cascade = CascadeType.ALL)
     List<Turma> turmas = new ArrayList<>();
-
-
 }

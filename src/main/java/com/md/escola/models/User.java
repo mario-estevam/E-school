@@ -16,11 +16,10 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Length(min = 5, message = "O campo nome deve conter no minimo 5 caracteres")
     @NotEmpty(message = "Por favor insira um nome")
@@ -31,10 +30,6 @@ public class User {
     @Length(min = 5, message = "Sua senha deve conter no minimo 5 caracteres")
     @NotEmpty(message = "Por favor insira uma senha")
     private String senha;
-    @NotEmpty(message = "Por favor insira um nome")
-    private String nome;
-    @NotEmpty(message = "Por favor insira seu sobrenome")
-    private String sobrenome;
     @Column(name = "active")
     private Boolean active;
     @ManyToMany(cascade = CascadeType.MERGE)
