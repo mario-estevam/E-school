@@ -2,7 +2,6 @@ package com.md.escola.controllers;
 
 
 
-
 import com.md.escola.models.User;
 import com.md.escola.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-public class LoginController {
+public class UserController {
 
     @Autowired
     private UserService userService;
@@ -29,6 +28,23 @@ public class LoginController {
         return modelAndView;
     }
 
+    @GetMapping(value={"/index"})
+    public ModelAndView index(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user != null){
+            modelAndView.addObject("usuario", user);
+
+        }else{
+            modelAndView.addObject("userName", "Nenhum usuário logado no sistema");
+        }
+
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+//spring
 
     @GetMapping(value="/registration")
     public ModelAndView registration(){
@@ -52,7 +68,7 @@ public class LoginController {
             modelAndView.setViewName("registration");
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("registration");
 
@@ -65,9 +81,29 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getNome() + " " + user.getSobrenome() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+        if(user.getRole().getId() != 1){
+            modelAndView.setViewName("error");
+        }else{
+            modelAndView.addObject("usuario", user);
+            modelAndView.addObject("adminMessage","Conteúdo disponível apenas para usuários com função de administrador");
+            modelAndView.setViewName("admin/home");
+        }
         modelAndView.setViewName("admin/home");
+        return modelAndView;
+    }
+
+    @GetMapping(value="/professor/home")
+    public ModelAndView homeProfessor(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user.getRole().getId() != 1){
+            modelAndView.setViewName("error");
+        }else{
+            modelAndView.addObject("usuario", user);
+            modelAndView.addObject("adminMessage","Conteúdo disponível apenas para usuários com função de administrador");
+            modelAndView.setViewName("professor/home");
+        }
         return modelAndView;
     }
 

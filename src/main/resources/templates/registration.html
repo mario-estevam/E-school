@@ -4,26 +4,32 @@
 <head>
     <title>Registration Form</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form th:action="@{/}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
-</form>
+
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <form autocomplete="off" action="#" th:action="@{/registration}"
-                  th:object="${user}" method="post" class="form-horizontal"
-                  role="form">
-                <h2>Registration Form</h2>
+
+
+
+    <div class="card mb-3" style="margin: 10%">
+
+
+        <form autocomplete="off" action="#" th:action="@{/registration}"
+              th:object="${user}" method="post" class="form-horizontal"
+              role="form">
+            <div style="padding-left: 25%">
+
+
+                <h2 style="position: center; padding-left: 20%; padding-top: 10px">Cadastrar usuario</h2>
                 <div class="form-group">
                     <div class="col-sm-9">
                         <label th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
-                               class="validation-message"></label>
+                               class="validation-message text-danger"></label>
                         <input type="text" th:field="*{nome}" placeholder="Nome"
                                class="form-control"/>
                     </div>
@@ -32,7 +38,7 @@
                 <div class="form-group">
                     <div class="col-sm-9">
                         <label th:if="${#fields.hasErrors('sobrenome')}" th:errors="*{sobrenome}"
-                               class="validation-message"></label>
+                               class="validation-message text-danger"></label>
                         <input type="text" th:field="*{sobrenome}"
                                placeholder="Sobrenome" class="form-control"/>
                     </div>
@@ -42,15 +48,27 @@
                         <input type="text" th:field="*{email}" placeholder="Email"
                                class="form-control"/> <label
                             th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                            class="validation-message"></label>
+                            class="validation-message text-danger"></label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <input type="text" th:field="*{userName}" placeholder="User Name"
+                        <label> Tipo de usuário:</label>
+                        <select id="role" th:field="*{role}">
+                            <option th:value="1">Adm</option>
+                            <option th:value="2">Professor</option>
+                            <option th:value="3">Aluno</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{userName}" placeholder="Nome de usuário"
                                class="form-control"/> <label
                             th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"
-                            class="validation-message"></label>
+                            class="validation-message text-danger"></label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -58,21 +76,28 @@
                         <input type="password" th:field="*{senha}"
                                placeholder="Senha" class="form-control"/> <label
                             th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"
-                            class="validation-message"></label>
+                            class="validation-message text-danger"></label>
                     </div>
                 </div>
 
+
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <button type="submit" class="btn btn-primary btn-block">Register User</button>
+                        <button type="submit" class="btn btn-primary btn-block">Cadastrar usuário</button>
+
                     </div>
                 </div>
 
                 <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+            </div>
 
-            </form>
-        </div>
+        </form>
+
+        <form th:action="@{/}" method="get" style=" margin: 20px; ">
+            <button class="btn btn-md btn-warning btn-block" type="Submit">Voltar para Login</button>
+        </form>
     </div>
+
 </div>
 
 </body>

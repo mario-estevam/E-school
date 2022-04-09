@@ -15,10 +15,10 @@ import java.util.List;
 @Entity
 public class Professor extends User  {
 
-
-
     String formacao;
 
     @OneToMany(mappedBy="professor", fetch = FetchType.LAZY, orphanRemoval=true, cascade = CascadeType.ALL)
     List<Turma> turmas = new ArrayList<>();
+
+
 }
