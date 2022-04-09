@@ -1,38 +1,34 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
+<html xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="fragments/head-page :: head"></head>
 <body>
-<form th:action="@{/registration}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-</form>
+  <span class="container-login">
+    <div class="bg-card">
+      <div class="content">
+        <h1>E-School</h1>
+        <p>A sua solução em gestão escolar!</p>
 
-<div class="container">
-    <h1>teste</h1>
-    <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
-    <form th:action="@{/login}" method="POST" class="form-signin">
-        <h3 class="form-signin-heading" th:text="Welcome"></h3>
-        <br/>
+      </div>
+    </div>
 
-        <input type="text" id="user_name" name="user_name" placeholder="Nome de usuario (username)"
-               class="form-control"/> <br/>
-        <input type="password" th:placeholder="Senha"
-               id="password" name="password" class="form-control"/> <br/>
+    <form th:action="@{/login}"  method="post" class="form-login needs-validation">
 
-        <div align="center" th:if="${param.error}">
+      <label for="usuario">Usuário</label>
+      <input type="text" id="user_name" name="user_name" placeholder="insira o seu usuário" required>
+
+      <label for="usuario">Senha</label>
+      <input type="password"  id="password" name="password" placeholder="insira a sua senha" required>
+      <div align="center" th:if="${param.error}">
             <p style="font-size: 20px; color: #FF1C19;">User Name or Password invalid, please verify</p>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
-                th:text="Login"></button>
+<!--      <span  th:if="${param.error}" class="text-danger form-error">-->
+<!--        Credencias inválidas.-->
+<!--      </span>-->
+      <button type="Submit" name="Submit"  value="Login">Entrar</button>
+
     </form>
-</div>
+
+
+  </div>
 </body>
 </html>

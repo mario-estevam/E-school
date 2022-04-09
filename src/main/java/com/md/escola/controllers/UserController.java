@@ -40,11 +40,11 @@ public class UserController {
             modelAndView.addObject("userName", "Nenhum usuário logado no sistema");
         }
 
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("teste");
         return modelAndView;
     }
 
-//spring
+
 
     @GetMapping(value="/registration")
     public ModelAndView registration(){
