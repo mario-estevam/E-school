@@ -65,7 +65,7 @@ public class UserController {
                             "There is already a user registered with the user name provided");
         }
         if (bindingResult.hasErrors()) {
-            modelAndView.addObject("usuario", user);
+
             modelAndView.setViewName("cadastro");
         } else {
             userService.saveUser(user);
