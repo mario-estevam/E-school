@@ -58,22 +58,21 @@ public class UserController {
     @PostMapping(value = "/registration")
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByUserName(user.getUserName());
-        if (userExists != null) {
-            bindingResult
-                    .rejectValue("userName", "error.user",
-                            "There is already a user registered with the user name provided");
-        }
+//        User userExists = userService.findUserByUserName(user.getUserName());
+//        if (userExists != null) {
+//            bindingResult
+//                    .rejectValue("userName", "error.user", "There is already a user registered with the user name provided");
+//        }
         if (bindingResult.hasErrors()) {
-
+            modelAndView.addObject("usuario", user);
             modelAndView.setViewName("cadastro");
-        } else {
+            return modelAndView;
+
+        }
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
             modelAndView.addObject("usuario", new User());
             modelAndView.setViewName("cadastro");
-
-        }
         return modelAndView;
     }
 

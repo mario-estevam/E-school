@@ -3,12 +3,10 @@
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head-page::head">
 
+
 </head>
 <body>
-<main class="container-conteudo">
 
-
-</main>
 <main class="container">
 
   <div class="row my-4">
@@ -19,39 +17,36 @@
         <form class="g-3"  action="#" th:action="@{/registration}"
               th:object="${usuario}" method="post" autocomplete="off"  role="form">
           <div class="row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4" class="form-label" >Email</label>
-              <input type="email" th:field="*{email}" class="form-control" id="inputEmail4">
-              <label
-                      th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                      class="validation-message text-danger"></label>
+            <div class="form-group col-md-6 has-validation">
+              <label for="userName" class="form-label">Usuário</label>
+              <input  id="userName" type="text" th:field="*{userName}" class="form-control" required minlength="4">
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
             </div>
             <div class="form-group col-md-6">
-              <label for="usuario" class="form-label">Usuário</label>
-              <input type="text" th:field="*{userName}" class="form-control">
-              <label
-                      th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"
-                      class="validation-message text-danger"></label>
-            </div>
-            <div class="form-group col-md-8">
-              <label for="password" class="form-label">Senha</label>
-              <input type="password" th:field="*{senha}" class="form-control">
-              <label
-                      th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"
-                      class="validation-message text-danger"></label>
+              <label for="email" class="form-label" >Email</label>
+              <input type="email"  th:field="*{email}" class="form-control" id="inputEmail4" required>
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+
             </div>
             <div class="form-group col-md-6">
-              <label for="password" class="form-label">Tipo de usuário</label>
-              <select  class="form-select" id="role" th:field="*{role}">
+              <label for="senha" class="form-label">Senha</label>
+              <input  id="senha" type="password" th:field="*{senha}" class="form-control" required minlength="8" >
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+
+            </div>
+            <div class="form-group col-md-6">
+              <label for="role" class="form-label">Tipo de usuário</label>
+              <select  class="form-select" id="role" th:field="*{role}" required>
                 <option  th:value="0" selected>Selecione o tipo de usuário</option>
                 <option th:value="1">Admin</option>
                 <option th:value="2">Professor</option>
                 <option th:value="3">Aluno</option>
               </select>
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
             </div>
 
           </div>
-          <button type="submit" class="btn btn-primary mb-2 col-2 mt-2">Cadastrar usuário</button>
+          <button type="submit" class="btn btn-primary mb-2 col-2 mt-2 submit-form-user">Cadastrar usuário</button>
         </form>
         <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
       </article>
@@ -59,5 +54,7 @@
     </div>
   </div>
 </main>
+<script type="text/javascript" th:src="@{/js/form-validation.js}"></script>
+
 </body>
 </html>
