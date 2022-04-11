@@ -40,7 +40,7 @@ public class UserController {
             modelAndView.addObject("userName", "Nenhum usuário logado no sistema");
         }
 
-        modelAndView.setViewName("teste");
+        modelAndView.setViewName("index");
         return modelAndView;
     }
 
@@ -50,8 +50,8 @@ public class UserController {
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
+        modelAndView.addObject("usuario", user);
+        modelAndView.setViewName("cadastro");
         return modelAndView;
     }
 
@@ -65,12 +65,13 @@ public class UserController {
                             "There is already a user registered with the user name provided");
         }
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("registration");
+            modelAndView.addObject("usuario", user);
+            modelAndView.setViewName("cadastro");
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
-            modelAndView.addObject("user", new User());
-            modelAndView.setViewName("registration");
+            modelAndView.addObject("usuario", new User());
+            modelAndView.setViewName("cadastro");
 
         }
         return modelAndView;

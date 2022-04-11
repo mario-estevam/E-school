@@ -39,4 +39,10 @@ public class User {
     @JoinColumn(name = "role_id")
     Role role;
 
+    // para primeira parte do projeto focado no logine cadastro de usuários, deixaremos omitido o cadastro de Pessoa
+//    @OneToOne
+//    @JoinColumn(name = "pessoa_id")
+//    Pessoa pessoa;
+
+
 }
