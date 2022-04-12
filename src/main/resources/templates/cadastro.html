@@ -22,18 +22,32 @@
               <input  id="userName" type="text" th:field="*{userName}" class="form-control" required minlength="4">
               <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
             </div>
-            <div class="form-group col-md-6">
-              <label for="email" class="form-label" >Email</label>
+
+
+            <div class="row">
+              <div class="form-group col-md-6 has-validation">
+                <label class="form-label">Confirme o cpf</label>
+                <input   type="text" th:field="*{cpf}" class="form-control" required minlength="4">
+                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+              </div>
+
+
+
+              <div class="form-group col-md-6">
+              <label for="inputEmail4" class="form-label" >Email</label>
               <input type="email"  th:field="*{email}" class="form-control" id="inputEmail4" required>
               <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
 
             </div>
             <div class="form-group col-md-6">
               <label for="senha" class="form-label">Senha</label>
-              <input  id="senha" type="password" th:field="*{senha}" class="form-control" required minlength="8" >
+              <input  id="senha"  type="password" th:field="*{senha}" class="form-control" required minlength="8" >
               <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
 
             </div>
+
+
+
             <div class="form-group col-md-6">
               <label for="role" class="form-label">Tipo de usuário</label>
               <select  class="form-select" id="role" th:field="*{role}" required>

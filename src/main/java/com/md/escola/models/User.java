@@ -19,7 +19,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Size(min=2, max=30)
@@ -39,10 +39,12 @@ public class User {
     @JoinColumn(name = "role_id")
     Role role;
 
+    String cpf;
+
     // para primeira parte do projeto focado no logine cadastro de usuários, deixaremos omitido o cadastro de Pessoa
-//    @OneToOne
-//    @JoinColumn(name = "pessoa_id")
-//    Pessoa pessoa;
+    @OneToOne
+    @JoinColumn(name = "pessoa_id")
+    Pessoa pessoa;
 
 
 }
