@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/registration")
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid User user, Pessoa pessoa, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 //        User userExists = userService.findUserByUserName(user.getUserName());
 //        if (userExists != null) {
@@ -81,7 +81,6 @@ public class UserController {
         }
 
 //            user.setId(user.getId());
-
 
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");

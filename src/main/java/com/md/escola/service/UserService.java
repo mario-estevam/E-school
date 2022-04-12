@@ -44,9 +44,9 @@ public class UserService {
     public User saveUser(User user) {
         user.setSenha(bCryptPasswordEncoder.encode(user.getSenha()));
         user.setActive(true);
+        Pessoa pessoa = user.getPessoa();
+        pessoaService.insert(pessoa);
         Role userRole = user.getRole();
-        Pessoa p = pessoaService.getPessoaByCpf(user.getCpf());
-        user.setPessoa(p);
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         return userRepository.save(user);
     }
