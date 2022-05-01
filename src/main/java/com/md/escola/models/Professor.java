@@ -19,9 +19,6 @@ public class Professor  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     String data_admissao;
-    @OneToMany(mappedBy="professor", fetch = FetchType.EAGER, orphanRemoval=true, cascade = CascadeType.ALL)
-    List<Turma> turmas = new ArrayList<>();
-
     @OneToOne
     @JoinColumn(name = "pessoa_id")
     Pessoa pessoa;
