@@ -1,4 +1,7 @@
 package com.md.escola.repository;
 
-public interface ProfessorRepository {
+import com.md.escola.models.Professor;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProfessorRepository  extends JpaRepository<Professor, Long> {
 }

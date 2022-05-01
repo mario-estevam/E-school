@@ -1,9 +1,7 @@
 package com.md.escola.service;
 
 
-import com.md.escola.models.Pessoa;
-import com.md.escola.models.Role;
-import com.md.escola.models.User;
+import com.md.escola.models.*;
 import com.md.escola.repository.PessoaRepository;
 import com.md.escola.repository.RoleRepository;
 import com.md.escola.repository.UsuarioRepository;
@@ -23,6 +21,12 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private PessoaService pessoaService;
+
+    @Autowired
+    private AlunoService alunoService;
+
+    @Autowired
+    private ProfessorService professorService;
 
     @Autowired
     public UserService(UsuarioRepository userRepository,
@@ -58,7 +62,16 @@ public class UserService {
         pessoaService.insert(pessoa);
         Role userRole = user.getRole();
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        System.out.println(userRole);
+        if(userRole.getRole().equals("ALUNO")){
+            Aluno aluno = new Aluno();
+            aluno.setPessoa(pessoa);
+            String matricula="10101010";
+            aluno.setMatriculaGeral(matricula);
+            alunoService.saveAluno(aluno);
+        }
+
+
         return userRepository.save(user);
     }
-
 }

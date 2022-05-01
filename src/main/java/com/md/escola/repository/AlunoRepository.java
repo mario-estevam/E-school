@@ -1,4 +1,7 @@
 package com.md.escola.repository;
 
-public interface AlunoRepository {
+import com.md.escola.models.Aluno;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 }

@@ -2,9 +2,13 @@ package com.md.escola.controllers;
 
 
 
+import com.md.escola.models.Aluno;
 import com.md.escola.models.Pessoa;
+import com.md.escola.models.Professor;
 import com.md.escola.models.User;
+import com.md.escola.service.AlunoService;
 import com.md.escola.service.PessoaService;
+import com.md.escola.service.ProfessorService;
 import com.md.escola.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -30,6 +34,11 @@ public class UserController {
     @Autowired
     private PessoaService pessoaService;
 
+    @Autowired
+    private AlunoService alunoService;
+
+    @Autowired
+    private ProfessorService professorService;
 
     @GetMapping(value={"/", "/login"})
     public ModelAndView login(){
@@ -60,13 +69,14 @@ public class UserController {
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
+        Professor professor = new Professor();
         modelAndView.addObject("usuario", user);
         modelAndView.setViewName("cadastro");
         return modelAndView;
     }
 
-    @PostMapping(value = "/registration")
-    public ModelAndView createNewUser(@Valid User user, Pessoa pessoa, BindingResult bindingResult) {
+    @PostMapping(value = "/save")
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("usuario", user);
@@ -76,6 +86,7 @@ public class UserController {
             try {
                Boolean confirm = userService.confirmarSenha(user.getSenha(),user.getRepetirSenha());
                 if(confirm){
+
                     userService.saveUser(user);
                     modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
                     modelAndView.addObject("usuario", new User());
@@ -126,4 +137,23 @@ public class UserController {
     }
 
 
+//    @PostMapping(value = "/admin/aluno/salvar")
+//    public ModelAndView createAluno(@Valid Aluno aluno, BindingResult bindingResult){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("/login");
+//
+//        return  modelAndView;
+//    }
+
+//    @GetMapping(value = "/admin/aluno/cadastro")
+//    public ModelAndView  getAlunoCadastro(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        User user = new User();
+//        Aluno aluno = new Aluno();
+//        modelAndView.addObject("usuario", user);
+//        modelAndView.addObject("aluno", aluno);
+//        modelAndView.setViewName("cadastro-aluno");
+//        return modelAndView;
+//
+//    }
 }
