@@ -2,9 +2,11 @@ package com.md.escola.controllers;
 
 
 
+import com.md.escola.models.Aluno;
 import com.md.escola.models.Pessoa;
 import com.md.escola.models.Professor;
 import com.md.escola.models.User;
+import com.md.escola.service.AlunoService;
 import com.md.escola.service.PessoaService;
 import com.md.escola.service.ProfessorService;
 import com.md.escola.service.UserService;
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.sql.SQLException;
 import java.util.Optional;
 
 @Controller
@@ -30,6 +31,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PessoaService pessoaService;
+
+    @Autowired
+    private AlunoService alunoService;
+
+    @Autowired
+    private ProfessorService professorService;
 
     @GetMapping(value={"/", "/login"})
     public ModelAndView login(){
@@ -60,12 +69,13 @@ public class UserController {
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
+        Professor professor = new Professor();
         modelAndView.addObject("usuario", user);
         modelAndView.setViewName("cadastro");
         return modelAndView;
     }
 
-    @PostMapping(value = "/registration")
+    @PostMapping(value = "/save")
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
@@ -73,23 +83,24 @@ public class UserController {
             modelAndView.setViewName("cadastro");
             return modelAndView;
         }
-            try {
-               Boolean confirm = userService.confirmarSenha(user.getSenha(),user.getRepetirSenha());
-                if(confirm){
-                    userService.saveUser(user);
-                    modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
-                    modelAndView.addObject("usuario", new User());
-                    modelAndView.setViewName("login");
-                }else{
-                    modelAndView.addObject("senhas","as senhas não coincidem");
-                    modelAndView.addObject("usuario", user);
-                    modelAndView.setViewName("cadastro");
-                }
-            }catch (Exception e){
-                modelAndView.addObject("erroCpf", "Este CPF já foi cadastrado");
+        try {
+            Boolean confirm = userService.confirmarSenha(user.getSenha(),user.getRepetirSenha());
+            if(confirm){
+
+                userService.saveUser(user);
+                modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
+                modelAndView.addObject("usuario", new User());
+                modelAndView.setViewName("cadastro");
+            }else{
+                modelAndView.addObject("senhas","as senhas não coincidem");
                 modelAndView.addObject("usuario", user);
                 modelAndView.setViewName("cadastro");
             }
+        }catch (Exception e){
+            modelAndView.addObject("erroCpf", "Este CPF já foi cadastrado");
+            modelAndView.addObject("usuario", user);
+            modelAndView.setViewName("cadastro");
+        }
 
         return modelAndView;
     }
@@ -124,9 +135,6 @@ public class UserController {
         }
         return modelAndView;
     }
-
-
-
 
 
 
