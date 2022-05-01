@@ -23,5 +23,6 @@ function validate(e){
 
 $(document).ready(function(){
     $('.cpf2').mask('000.000.000-00');
-    $('.rg').mask('000.000.000')
+    $('.rg').mask('000.000.000');
+    $('.date').mask('00/00/0000');
 });

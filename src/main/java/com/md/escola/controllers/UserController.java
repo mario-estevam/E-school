@@ -3,8 +3,10 @@ package com.md.escola.controllers;
 
 
 import com.md.escola.models.Pessoa;
+import com.md.escola.models.Professor;
 import com.md.escola.models.User;
 import com.md.escola.service.PessoaService;
+import com.md.escola.service.ProfessorService;
 import com.md.escola.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.Optional;
 
 @Controller
@@ -26,9 +29,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private PessoaService pessoaService;
 
 
     @GetMapping(value={"/", "/login"})
@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/registration")
-    public ModelAndView createNewUser(@Valid User user, Pessoa pessoa, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("usuario", user);
@@ -79,7 +79,7 @@ public class UserController {
                     userService.saveUser(user);
                     modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
                     modelAndView.addObject("usuario", new User());
-                    modelAndView.setViewName("cadastro");
+                    modelAndView.setViewName("login");
                 }else{
                     modelAndView.addObject("senhas","as senhas não coincidem");
                     modelAndView.addObject("usuario", user);
@@ -124,6 +124,10 @@ public class UserController {
         }
         return modelAndView;
     }
+
+
+
+
 
 
 }
