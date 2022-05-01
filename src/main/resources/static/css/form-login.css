@@ -41,10 +41,7 @@ form {
     align-self: center;
     justify-content: center;
 }
-form label {
-    font-size: 0.75rem;
-    margin-bottom: 2px;
-}
+
 input::-webkit-input-placeholder {
     font-size: 0.7rem;
     align-self: center;

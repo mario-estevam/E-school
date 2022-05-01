@@ -11,11 +11,12 @@
 
     <div class="container-principal">
       <header th:replace="fragments/header :: header"></header>
-
     </div>
-    <th:block th:replace="fragments/head-page :: body-final"></th:block>
+
     <div class="row m-0">
       <article class="" th:replace="this :: content"></article>
     </div>
+
+    <th:block th:replace="fragments/head-page :: body-final"></th:block>
   </body>
 </html>

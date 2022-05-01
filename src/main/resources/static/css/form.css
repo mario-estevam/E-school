@@ -1,0 +1,18 @@
+
+form label {
+    color: #5b6372;
+    font-size: .875rem;
+}
+label{
+
+}
+label.required::after {
+
+    color: #e32;
+    content: ' * ';
+    font-size: 12px;
+    display:inline;
+    position: absolute;
+    font-weight: 400;
+}
+
