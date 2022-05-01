@@ -1,0 +1,30 @@
+.header-bg{
+    background: var(--color-primary);
+
+}
+
+header nav h1{
+    font-size: 16px;
+    color: var(--color-white);
+}
+header nav{
+    height: 60px;
+    padding: 20px;
+}
+header nav ul{
+    display: flex;
+    gap: 20px;
+    color: var(--color-white);
+
+
+}
+
+header nav ul li a{
+    font-size: .9rem;
+    transition: hover 2s;
+
+}
+
+header nav ul li a:hover{
+    color: #495057;
+}

@@ -9,12 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="E-school" />
         <module name="escola" />
+        <module name="E-school-1.1.1" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="E-school" options="-parameters" />
+      <module name="E-school-1.1.1" options="-parameters" />
       <module name="escola" options="-parameters" />
     </option>
   </component>

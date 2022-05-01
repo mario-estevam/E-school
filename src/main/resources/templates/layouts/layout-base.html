@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+<html
+    lang="pt-br"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    th:fragment="page"
+>
 
-<head th:replace="fragments/head-page :: head"></head>
-<body>
+  <head th:replace="fragments/head-page :: head"></head>
+  <body>
 
+    <div class="container-principal">
+      <header th:replace="fragments/header :: header"></header>
 
-
-<th:block th:replace="fragments/head-page :: body-final"></th:block>
-
-</body>
+    </div>
+    <th:block th:replace="fragments/head-page :: body-final"></th:block>
+    <div class="row m-0">
+      <article class="" th:replace="this :: content"></article>
+    </div>
+  </body>
 </html>

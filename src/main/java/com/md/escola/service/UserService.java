@@ -1,8 +1,10 @@
 package com.md.escola.service;
 
 
+import com.md.escola.models.Pessoa;
 import com.md.escola.models.Role;
 import com.md.escola.models.User;
+import com.md.escola.repository.PessoaRepository;
 import com.md.escola.repository.RoleRepository;
 import com.md.escola.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -18,6 +21,8 @@ public class UserService {
     private UsuarioRepository userRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private PessoaService pessoaService;
 
     @Autowired
     public UserService(UsuarioRepository userRepository,
@@ -36,9 +41,21 @@ public class UserService {
         return userRepository.findByUserName(userName);
     }
 
+    public Boolean confirmarSenha(String senha, String repetirSenha){
+        if(senha.equals(repetirSenha)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public User saveUser(User user) {
         user.setSenha(bCryptPasswordEncoder.encode(user.getSenha()));
+        user.setRepetirSenha(bCryptPasswordEncoder.encode(user.getRepetirSenha()));
+
         user.setActive(true);
+        Pessoa pessoa = user.getPessoa();
+        pessoaService.insert(pessoa);
         Role userRole = user.getRole();
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         return userRepository.save(user);

@@ -16,7 +16,7 @@ public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     String matriculaGeral;
 
     @OneToOne

@@ -19,7 +19,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Size(min=2, max=30)
@@ -31,6 +31,11 @@ public class User {
 
     @NotBlank
     private String senha;
+
+    @NotBlank
+    private String repetirSenha;
+
+
     private Boolean active;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -40,9 +45,9 @@ public class User {
     Role role;
 
     // para primeira parte do projeto focado no logine cadastro de usuários, deixaremos omitido o cadastro de Pessoa
-//    @OneToOne
-//    @JoinColumn(name = "pessoa_id")
-//    Pessoa pessoa;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "pessoa_id")
+    Pessoa pessoa;
 
 
 }
