@@ -66,8 +66,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/registration")
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid User user, Pessoa pessoa, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("usuario", user);
             modelAndView.setViewName("cadastro");
