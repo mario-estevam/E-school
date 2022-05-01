@@ -4,7 +4,6 @@ import com.md.escola.models.Pessoa;
 import com.md.escola.models.Professor;
 import com.md.escola.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 @Service
