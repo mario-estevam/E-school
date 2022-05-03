@@ -46,6 +46,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cadastro-professor").permitAll()
                 .antMatchers("/buscar-professor").permitAll()
                 .antMatchers("/salvar-professor").permitAll()
+                .antMatchers("/cadastro-disciplina").permitAll()
+                .antMatchers("/salvar-disciplina").permitAll()
                 .antMatchers("/save").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/pessoa/cadastro").permitAll()
