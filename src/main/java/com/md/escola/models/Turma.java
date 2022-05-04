@@ -6,27 +6,41 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class Turma  {
+public class Turma {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @NotEmpty
+    @NotBlank
     String nome;
 
     @OneToOne
     @JoinColumn(name = "disciplina_id")
     Disciplina disciplina;
 
+//    [ ] Uma turma tem várias disciplinas
+//    @OneToMany
+//    @JoinColumn(name = "disciplina_id")
+//    List<Disciplina> disciplinas
+
     String turno;
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
+
+//    [ ] Uma turma tem vários professores
+//    @OneToMany
+//    @JoinColumn(name = "professor_id")
+//    private List<Professor> professores;
 
     public Professor getProfessor() {
         return professor;
