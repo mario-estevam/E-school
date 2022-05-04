@@ -6,10 +6,13 @@ import com.md.escola.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProfessorService {
 
     ProfessorRepository repository;
+
     @Autowired
     private PessoaService pessoaService;
 
@@ -22,7 +25,12 @@ public class ProfessorService {
         return repository.save(professor);
     }
 
+    public List<Professor> getAll(){
+        return repository.findAll();
+    }
 
-
+    public Professor getId(Long id){
+        return repository.getById(id);
+    }
 
 }
