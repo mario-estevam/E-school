@@ -37,8 +37,22 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Boolean findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user ==null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Boolean findUserUsernameBoolean(String userName){
+        User user = userRepository.findByUserName(userName);
+        if(user ==null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public User findUserByUserName(String userName) {
@@ -75,3 +89,14 @@ public class UserService {
         return userRepository.save(user);
     }
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -33,12 +33,14 @@
                     <label for="inputEmail4" class="form-label required" >Email</label>
                     <input type="email"  th:field="*{usuario.email}" class="form-control" id="inputEmail4" required>
                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                    <span class="text-danger" th:utext="${email}"></span>
                   </div>
 
                   <div class="form-group col-md-6 has-validation">
                     <label  for="cpf" class="form-label required">CPF</label>
                     <input id="cpf" type="text" th:field="${usuario.pessoa.cpf}" class="form-control cpf2" required minlength="4" >
                     <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                    <span class="text-danger" th:utext="${erroCpf}"></span>
                   </div>
 
                   <div class="form-group col-md-6 has-validation">
@@ -51,15 +53,15 @@
                       <label for="userName" class="form-label required">Usuário</label>
                       <input  id="userName" type="text" th:field="${usuario.userName}" class="form-control" required minlength="6">
                       <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                  <span class="text-danger" th:utext="${userName}"></span>
                 </div>
 
                 <div class="form-group col-md-4">
                   <label for="senha" class="form-label required">Senha</label>
                   <input  id="senha"  type="password" th:field="*{usuario.senha}" class="form-control" required minlength="8" >
                   <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                  <span class="text-danger" th:utext="${senhas}"></span>
                 </div>
-                  <h4><span class="text-danger" th:utext="${senhas}"></span></h4>
-                  <h2><span class="text-danger" th:utext="${erroCpf}"></span></h2>
                 <div class="form-group col-md-4">
                   <label for="confirmSenha" class="form-label">Repetir senha</label>
                   <input  id="confirmSenha"  type="password" th:field="*{usuario.repetirSenha}" class="form-control" required minlength="8" >
