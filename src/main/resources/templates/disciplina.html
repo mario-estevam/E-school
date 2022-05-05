@@ -21,10 +21,9 @@
                 <form class="my-4"  action="#" th:action="@{/salvar-disciplina}"
                       method="post" autocomplete="off" role="form">
                     <div class="row">
-                        <div class="form-group col-md-6 has-validation">
+                        <div class="form-group col-md-12 has-validation">
                             <label for="nome" class="form-label required" required >Nome </label>
-                            <input id="nome" type="text" th:field="${disciplina.nome}" class="form-control">
-
+                            <input id="nome" type="text" th:field="${disciplina.nome}" class="form-control" required>
                             <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
                         </div>
 
