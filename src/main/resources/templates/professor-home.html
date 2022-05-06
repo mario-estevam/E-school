@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-  <h1>HOME DE PROFESSOR</h1>
-</body>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layouts/layout-base :: page">
+
+<main class="container" th:fragment="content">
+
+    <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page_link=''
+
+            )">
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Periodo</th>
+                        <th scope="col">Disciplina</th>
+                        <th scope="col">Professor</th>
+                        <th scope="col">Turno</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="turma : ${turmas}">
+                        <td th:text="${turma.id}">ID</td>
+                        <td th:text="${turma.periodo.nome}">Nome</td>
+                        <td th:text="${turma.disciplina.nome}">Nome</td>
+                        <td th:text="${turma.professor.pessoa.nome}">Nome</td>
+                        <td th:text="${turma.turno}">Nome</td>
+                        <td><a class="btn btn-warning" role="button" th:href="@{'/deletar-discplina/'}">Deletar </a></td>
+                        <td><a class="btn btn-info"  role="button" th:href="@{'/editar-discplina/'}">Editar </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<script>
+
+</script>
 </html>

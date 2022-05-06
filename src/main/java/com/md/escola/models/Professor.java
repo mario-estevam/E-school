@@ -21,4 +21,5 @@ public class Professor  {
     @JoinColumn(name = "pessoa_id")
     Pessoa pessoa;
 
+
 }

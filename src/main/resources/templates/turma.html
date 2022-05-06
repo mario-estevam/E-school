@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-group col-md-6 has-validation">
-              <label for="disciplinaId" class="form-label required" required >Turno da turma</label>
+              <label for="disciplinaId" class="form-label required" required >Disciplina</label>
               <select class="form-select" id="disciplinaId" required th:field="*{turma.disciplina}">
                 <option th:each="disciplina:${disciplinas}" th:text="${disciplina.nome}" th:value="${disciplina.id}"></option>
               </select>

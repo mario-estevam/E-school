@@ -29,6 +29,10 @@ public class TurmaService {
         return repository.save(turma);
     }
 
+    public List<Turma> getTurmasByProfessor(Professor professor){
+        return repository.findByProfessor(professor);
+    }
+
     public List<Turma> getAll(){
         return repository.findAll();
     }
