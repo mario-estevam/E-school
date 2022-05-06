@@ -22,6 +22,15 @@ public class DisciplinaService {
         return repository.save(disciplina);
     }
 
+    public Boolean findByName(String nome){
+        Disciplina disciplina = repository.findByNome(nome);
+        if(disciplina==null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public List<Disciplina> getAll(){
         return repository.findAll();
     }

@@ -14,7 +14,7 @@
 
 <ul>
     <li th:if="${usuario.getRole().getId() == 1}" > <a th:href="@{/admin/home}"> ADMIN </a>  </li>
-    <li th:if="${usuario.getRole().getId() == 2}" > <a th:href="@{/professor/home}"> PROFESSOR </a>  </li>
+    <li th:if="${usuario.getRole().getId() == 2}" > <a href="/professor-home"> PROFESSOR </a>  </li>
 </ul>
 
 <div style="padding-left: 40%; padding-top: 8%">

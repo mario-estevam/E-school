@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class DisciplinaController {
@@ -20,23 +21,42 @@ public class DisciplinaController {
     @GetMapping(value = "/cadastro-disciplina")
     public ModelAndView createDisciplina(){
         ModelAndView modelAndView = new ModelAndView("disciplina");
+        List<Disciplina> disciplinas = disciplinaService.getAll();
+        modelAndView.addObject("disciplinas", disciplinas);
         Disciplina disciplina = new Disciplina();
         modelAndView.addObject("disciplina", disciplina);
         return modelAndView;
     }
 
-    @PostMapping(value = "/salvar-disciplina")
+    @GetMapping(value = "/listar-disciplinas")
+    public ModelAndView listDiscplinas(){
+        ModelAndView modelAndView = new ModelAndView("listar-disciplina");
+        List<Disciplina> disciplinas = disciplinaService.getAll();
+        modelAndView.addObject("disciplinas", disciplinas);
+        return modelAndView;
+    }
+
+
+    @PostMapping(value = "/cadastro-disciplina")
     public ModelAndView createNewDiscipline(@Valid Disciplina disciplina, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
         if(bindingResult.hasErrors()){
             modelAndView.addObject("disciplina", disciplina);
             modelAndView.setViewName("disciplina");
-            return modelAndView;
+            return  modelAndView;
         }
-        disciplinaService.insert(disciplina);
-        modelAndView.addObject("successMessage", "Disciplina cadastrada com sucesso");;
-        modelAndView.addObject("disciplina", disciplina);
-        modelAndView.setViewName("disciplina");
+        Boolean confirm = disciplinaService.findByName(disciplina.getNome());
+        if(!confirm){
+            modelAndView.addObject("disciplinaValidate","Esta disciplina já foi cadastrada");
+            modelAndView.addObject("disciplina", disciplina);
+            modelAndView.setViewName("disciplina");
+        }else{
+            disciplinaService.insert(disciplina);
+            modelAndView.addObject("successMessage", "Disciplina cadastrada com sucesso");;
+            modelAndView.addObject("disciplina", disciplina);
+            modelAndView.setViewName("disciplina");
+
+        }
         return modelAndView;
     }
 }

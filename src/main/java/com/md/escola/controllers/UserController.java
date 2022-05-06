@@ -32,16 +32,26 @@ public class UserController {
     @GetMapping(value={"/index"})
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView();
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+        System.out.println(user.getRole().getRole());
+        //FALTA IMPLEMENTAR O REDIRECIONAMENTO POR TIPO DE USUÁRIO
+        //esse código abaixo não está funcionando
         if(user != null){
             modelAndView.addObject("usuario", user);
 
         }else{
             modelAndView.addObject("userName", "Nenhum usuário logado no sistema");
         }
+        if(user.getRole().equals("ADMIN")){
+            modelAndView.setViewName("/admin/home");
+        } else if(user.getRole().getRole().equals("PROFESSOR)")){
+            modelAndView.setViewName("professor-home");
+        } else if(user.getRole().equals("ALUNO")){
+            modelAndView.setViewName("aluno-home");
+        }
 
-        modelAndView.setViewName("index");
         return modelAndView;
     }
 
@@ -56,7 +66,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/registration")
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {

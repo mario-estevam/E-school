@@ -24,6 +24,6 @@ public class Matricula {
     @JoinColumn(name = "turma_id")
     Turma turma;
 
-    Integer ano;
+
 
 }

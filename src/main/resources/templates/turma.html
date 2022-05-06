@@ -22,11 +22,16 @@
         <form class="my-4"  action="#" th:action="@{/salvar-turma}"
               method="post" autocomplete="off"  role="form">
           <div class="row">
+
+
             <div class="form-group col-md-6 has-validation">
-              <label for="nome" class="form-label required" required >Nome da turma</label>
-              <input id="nome" type="text" th:field="${turma.nome}" class="form-control" required>
+              <label for="periodoId" class="form-label required" required >Selecione o periodo</label>
+              <select class="form-select" id="periodoId" name="professor" required th:field="*{turma.periodo}">
+                <option th:each="periodo:${periodos}" th:text="${periodo.nome}" th:value="${periodo.id}"></option>
+              </select>
               <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
             </div>
+
 
             <div class="form-group col-md-6 has-validation">
               <label for="turno" class="form-label required" required >Turno da turma</label>

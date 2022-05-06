@@ -18,9 +18,9 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @NotEmpty
-    @NotBlank
-    String nome;
+    @OneToOne
+    @JoinColumn(name = "periodo_id")
+    Periodo periodo;
 
     @OneToOne
     @JoinColumn(name = "disciplina_id")
