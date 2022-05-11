@@ -1,0 +1,23 @@
+.cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.card{
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 30px 20px;
+}
+
+
+.card span{
+    display: block;
+    margin-top: 4px;
+}
+
+.btn-secondary{
+    border: none;
+    background-color: var(--color-primary) !important;
+}

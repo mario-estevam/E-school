@@ -37,4 +37,18 @@ public class ProfessorService {
         return repository.getById(id);
     }
 
+    public Boolean ProfessorIsExist(int siape){
+        Professor professor = repository.findProfessorBySiape(siape);
+
+       if(professor == null){
+           return false;
+       }else{
+           return true;
+       }
+
+
+    }
+
+
+
 }

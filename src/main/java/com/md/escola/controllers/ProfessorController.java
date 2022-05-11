@@ -1,9 +1,7 @@
 package com.md.escola.controllers;
 
-import com.md.escola.models.Pessoa;
-import com.md.escola.models.Professor;
-import com.md.escola.models.Turma;
-import com.md.escola.models.User;
+import com.md.escola.models.*;
+import com.md.escola.repository.RoleRepository;
 import com.md.escola.service.PessoaService;
 import com.md.escola.service.ProfessorService;
 import com.md.escola.service.TurmaService;
@@ -34,23 +32,43 @@ public class ProfessorController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    RoleRepository roleRepository;
+
+
     @GetMapping(value = "/cadastro-professor")
     public ModelAndView createProfessor(){
+
+        Role role = roleRepository.findByRole("PROFESSOR");
+
         ModelAndView modelAndView = new ModelAndView();
         Professor professor = new Professor();
-        List<Pessoa> pessoas = pessoaService.getAll();
+        List<User> usuarios = userService.getUsersByRole(role);
         modelAndView.addObject("professor", professor);
-        modelAndView.addObject("pessoas", pessoas);
+        modelAndView.addObject("usuarios", usuarios);
         modelAndView.setViewName("professor");
         return modelAndView;
     }
 
-    @PostMapping(value = "/salvar-professor")
+    @PostMapping(value = "/cadastro-professor")
     public ModelAndView getProfessor(Professor professor){
         ModelAndView modelAndView = new ModelAndView();
-        professorService.insert(professor, professor.getPessoa().getCpf());
-        modelAndView.addObject("professor", professor);
-        modelAndView.setViewName("professor");
+        Boolean professorExist = professorService.ProfessorIsExist(professor.getSiape());
+        System.out.println(professorExist);
+
+        if(professorExist){
+            modelAndView.addObject("avisoProfessor", "Professor já cadastrado no sistema!");
+            modelAndView.setViewName("professor");
+
+
+        }else{
+            professorService.insert(professor, professor.getPessoa().getCpf());
+            modelAndView.addObject("professor", professor);
+            modelAndView.setViewName("professor");
+
+
+        }
+
         return modelAndView;
     }
 
@@ -68,10 +86,5 @@ public class ProfessorController {
         modelAndView.setViewName("professor-home");
         return modelAndView;
     }
-
-
-
-
-
 
 }

@@ -1,5 +1,22 @@
 :root{
     --color-text-primary: #495057;
-    --color-primary: #3D98A7;
+    --color-primary: #3F72AF;
     --color-white: #fff;
+    --color-green: #23BE86;
+    --color-blue: #46A1D0;
+    --color-blue-dark: #257A90;
+    --color-background: #f5f5f5;
+
+}
+
+.green{
+    background-color: var(--color-green);
+}
+
+.blue{
+    background-color: var(--color-blue);
+}
+
+.blue-dark{
+    background-color: var(--color-blue-dark);
 }

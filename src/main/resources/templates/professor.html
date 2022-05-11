@@ -11,7 +11,7 @@
               link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
               page_home='Home',
               previous_page_link='',
-              previous_page='Usuários',
+              previous_page='Professores',
               current_page='Cadastro'
 
 
@@ -19,21 +19,28 @@
             </div>
             <span class="mt-4">Cadastro de Professores</span>
             <article class="form-cadastro-user border mw-50  mt-2 container-fluid  content-container">
-                <form class="my-4"  action="#" th:action="@{/salvar-professor}"
+                <form class="my-4"  action="#" th:action="@{/cadastro-professor}"
                       method="post" autocomplete="off"  role="form">
                     <div class="row">
                         <div class="form-group col-md-6 has-validation">
                             <label class="form-label required" required >Selecione o usuário</label>
                             <select  class="form-select"  th:field="*{professor.pessoa.cpf}"  required>
-                                <option th:each="pessoa:${pessoas}" th:text="${pessoa.cpf}"  th:value="${pessoa.cpf}" ></option>
+                                <option th:each="usuario:${usuarios}" th:text="${usuario.pessoa.nome}"  th:value="${usuario.pessoa.cpf}" ></option>
                             </select>
                             <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            <span class="text-danger" th:utext="${avisoProfessor}"></span>
+
                         </div>
 
 
                         <div class="form-group col-md-6 has-validation">
                             <label for="data-admissao" class="form-label required" required >Data de admissão</label>
-                            <input id="data-admissao" type="text" th:field="${professor.data_admissao}" class="form-control date" required minlength="4">
+                            <input id="data-admissao" type="date" th:field="${professor.data_admissao}" class="form-control" required>
+                            <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                        </div>
+                        <div class="form-group col-md-6 has-validation">
+                            <label for="siape" class="form-label required" required >Número Siape</label>
+                            <input id="siape" type="number" th:field="${professor.siape}" class="form-control" required>
                             <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
                         </div>
 

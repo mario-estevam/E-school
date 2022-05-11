@@ -1,7 +1,6 @@
 package com.md.escola.controllers;
 
 
-
 import com.md.escola.models.User;
 import com.md.escola.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -44,11 +44,12 @@ public class UserController {
         }else{
             modelAndView.addObject("userName", "Nenhum usuário logado no sistema");
         }
-        if(user.getRole().equals("ADMIN")){
+        if(user.getRole().getRole().equals("ADMIN")){
             modelAndView.setViewName("/admin/home");
-        } else if(user.getRole().getRole().equals("PROFESSOR)")){
+        } else if(user.getRole().getRole().equals("PROFESSOR")){
             modelAndView.setViewName("professor-home");
-        } else if(user.getRole().equals("ALUNO")){
+        } else if(user.getRole().getRole().equals("ALUNO")){
+
             modelAndView.setViewName("aluno-home");
         }
 
@@ -67,7 +68,8 @@ public class UserController {
     }
 
     @PostMapping(value = "/registration")
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult, @RequestParam(value="action",required=true) String action) {
+
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("usuario", user);
@@ -91,10 +93,27 @@ public class UserController {
                 modelAndView.addObject("usuario", user);
                 modelAndView.setViewName("cadastro");
             } else {
-                userService.saveUser(user);
-                modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
-                modelAndView.addObject("usuario", new User());
-                modelAndView.setViewName("cadastro");
+                if(action.equals("cancelar")){
+                    modelAndView.setViewName("login");
+
+
+                }else{
+                    userService.saveUser(user);
+                    modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
+                    modelAndView.addObject("usuario", new User());
+                    if (action.equals("submit")) {
+                        modelAndView.setViewName("login");
+                    }
+
+                    if (action.equals("salvarAndAdd")) {
+                        modelAndView.setViewName("cadastro");
+                    }
+
+                }
+
+
+
+
             }
 
         }catch (Exception e){
@@ -104,6 +123,14 @@ public class UserController {
         }
 
         return modelAndView;
+    }
+
+    @PostMapping(value = "/cancelar")
+    public ModelAndView cancelarSubmit(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
+        return  modelAndView;
+
     }
 
     @GetMapping(value="/admin/home")

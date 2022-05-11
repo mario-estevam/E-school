@@ -3,42 +3,98 @@
         xmlns:th="http://www.thymeleaf.org"
         th:replace="layouts/layout-base :: page">
 
-<main class="container" th:fragment="content">
+<main class="container " th:fragment="content">
 
     <div class="row my-4 container-md">
         <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
               link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
               page_home='Home',
-              previous_page_link=''
+              previous_page='',
+              previous_page_link='',
+              current_page=''
 
             )">
             </div>
-            <div>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Periodo</th>
-                        <th scope="col">Disciplina</th>
-                        <th scope="col">Professor</th>
-                        <th scope="col">Turno</th>
+            <article class="align-items-center">
+                <section class="cards mb-4">
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="turma : ${turmas}">
-                        <td th:text="${turma.id}">ID</td>
-                        <td th:text="${turma.periodo.nome}">Nome</td>
-                        <td th:text="${turma.disciplina.nome}">Nome</td>
-                        <td th:text="${turma.professor.pessoa.nome}">Nome</td>
-                        <td th:text="${turma.turno}">Nome</td>
-                        <td><a class="btn btn-warning" role="button" th:href="@{'/deletar-discplina/'}">Deletar </a></td>
-                        <td><a class="btn btn-info"  role="button" th:href="@{'/editar-discplina/'}">Editar </a></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <div class="card green ">
+                        <div class="d-flex justify-content-between">
+                            <span>Alunos</span>
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span>1273</span>
+
+
+                    </div>
+
+                    <div class="card blue">
+                        <div class="d-flex justify-content-between">
+                            <span>Disciplinas</span>
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span>4</span>
+
+                    </div>
+                    <div class="card blue-dark">
+                        <div class="d-flex justify-content-between">
+                            <span>Turmas</span>
+                            <span>Icone</span>
+                        </div>
+                        <span >4</span>
+
+                    </div>
+                </section>
+                <article class="conteudo-principal  mw-50  mt-2 align-items-center  ">
+                    <div class="conteudo-principal-header px-2">
+                        <h1 class="my-4 ">Minhas Turmas</h1>
+                    </div>
+                    <div class="conteudo-principal-content container-fluid mb-4">
+
+                        <table
+                          data-toggle="table"
+                          data-show-columns="true"
+                          data-pagination="true"
+                          data-side-pagination="server"
+                          data-page-list="[10, 25, 50, 100, 200, All]"
+                          class="mt-4 table table-striped "
+                        >
+                            <thead>
+                            <tr>
+                                <th data-field="periodo">Periodo</th>
+                                <th data-field="disciplina">Disciplina</th>
+                                <th data-field="professor">Professor</th>
+                                <th data-field="turno">Turno</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="turma : ${turmas}">
+                                <td th:text="${turma.id}">ID</td>
+                                <td th:text="${turma.periodo.nome}">Nome</td>
+                                <td th:text="${turma.disciplina.nome}">Nome</td>
+                                <td th:text="${turma.professor.pessoa.nome}">Nome</td>
+                                <td th:text="${turma.turno}">Nome</td>
+                                <td><a class="btn btn-warning" role="button" th:href="@{'/deletar-discplina/'}">Deletar </a></td>
+                                <td><a class="btn btn-info"  role="button" th:href="@{'/editar-discplina/'}">Editar </a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </article>
+
+            </article>
+
+
+
+
+
         </div>
     </div>
 

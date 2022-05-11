@@ -16,3 +16,10 @@ label.required::after {
     font-weight: 400;
 }
 
+.invalid-feedback, text-danger{
+    font-size: .7rem !important;
+}
+
+.button-add{
+    background-color: var(--color-primary);
+}
