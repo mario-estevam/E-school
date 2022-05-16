@@ -1,19 +1,24 @@
 package com.md.escola.controllers;
 
 
+import com.fasterxml.jackson.databind.util.ArrayBuilders;
+import com.md.escola.models.Disciplina;
 import com.md.escola.models.User;
 import com.md.escola.service.UserService;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -125,12 +130,20 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping(value = "/editar-usuario/{id}")
+    public ModelAndView updateUser(@PathVariable("id") Long id){
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.findUserById(id);
+        modelAndView.addObject("usuario", user);
+        modelAndView.setViewName("atualizar-usuario");
+        return modelAndView;
+    }
+
     @PostMapping(value = "/cancelar")
     public ModelAndView cancelarSubmit(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return  modelAndView;
-
     }
 
     @GetMapping(value="/admin/home")
@@ -146,6 +159,23 @@ public class UserController {
             modelAndView.setViewName("admin/home");
         }
         modelAndView.setViewName("admin/home");
+        return modelAndView;
+    }
+
+//  Apenas os admins podem ter acesso a listagem de usuarios
+    @GetMapping(value = "/listar-usuarios")
+    public ModelAndView listUsers(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user.getRole().getId() != 1) {
+            modelAndView.setViewName("error");
+        }else{
+            List<User> usuarios = userService.findAllUsers();
+            modelAndView.addObject("usuarios", usuarios);
+            modelAndView.setViewName("listar-usuarios");
+        }
+        modelAndView.setViewName("listar-usuarios");
         return modelAndView;
     }
 

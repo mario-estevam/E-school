@@ -60,6 +60,14 @@ public class UserService {
         return userRepository.findByUserName(userName);
     }
 
+    public User findUserById(Long id){
+        return userRepository.getById(id);
+    }
+
+    public List<User> findAllUsers(){
+        return userRepository.findAll();
+    }
+
     public Boolean confirmarSenha(String senha, String repetirSenha){
         if(senha.equals(repetirSenha)){
             return true;
