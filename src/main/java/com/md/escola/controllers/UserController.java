@@ -3,7 +3,9 @@ package com.md.escola.controllers;
 
 import com.fasterxml.jackson.databind.util.ArrayBuilders;
 import com.md.escola.models.Disciplina;
+import com.md.escola.models.Pessoa;
 import com.md.escola.models.User;
+import com.md.escola.service.PessoaService;
 import com.md.escola.service.UserService;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,6 +26,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PessoaService pessoaService;
 
     @GetMapping(value={"/", "/login"})
     public ModelAndView login(){
@@ -40,9 +43,7 @@ public class UserController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        System.out.println(user.getRole().getRole());
-        //FALTA IMPLEMENTAR O REDIRECIONAMENTO POR TIPO DE USUÁRIO
-        //esse código abaixo não está funcionando
+
         if(user != null){
             modelAndView.addObject("usuario", user);
 
@@ -116,9 +117,6 @@ public class UserController {
 
                 }
 
-
-
-
             }
 
         }catch (Exception e){
@@ -129,6 +127,26 @@ public class UserController {
 
         return modelAndView;
     }
+
+
+
+
+
+
+
+    @PostMapping(value = "/admin/usuario/salvar")
+    public String editSave(@ModelAttribute User user, RedirectAttributes redirectAttributes){
+       User senha = userService.findUserById(user.getId());
+       user.setSenha(senha.getSenha());
+       user.setRepetirSenha(senha.getRepetirSenha());
+       userService.saveUser(user);
+       redirectAttributes.addAttribute("msg", "Usuário atualizado com sucesso");
+       return "redirect:/listar-usuarios";
+    }
+
+
+
+
 
     @GetMapping(value = "/editar-usuario/{id}")
     public ModelAndView updateUser(@PathVariable("id") Long id){
