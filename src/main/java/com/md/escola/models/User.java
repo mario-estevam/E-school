@@ -9,6 +9,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -34,6 +36,8 @@ public class User {
 
     @NotBlank
     private String repetirSenha;
+
+    private Date delete;
 
 
     private Boolean active;

@@ -2,17 +2,14 @@ package com.md.escola.service;
 
 
 import com.md.escola.models.*;
-import com.md.escola.repository.PessoaRepository;
 import com.md.escola.repository.RoleRepository;
 import com.md.escola.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -65,7 +62,15 @@ public class UserService {
     }
 
     public List<User> findAllUsers(){
-        return userRepository.findAll();
+        return userRepository.findAllByDeleteIsNull();
+    }
+
+    public void delete(Long id){
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        User user = userRepository.getById(id);
+        user.setDelete(date);
+        userRepository.save(user);
     }
 
     public Boolean confirmarSenha(String senha, String repetirSenha){

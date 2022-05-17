@@ -144,10 +144,6 @@ public class UserController {
        return "redirect:/listar-usuarios";
     }
 
-
-
-
-
     @GetMapping(value = "/editar-usuario/{id}")
     public ModelAndView updateUser(@PathVariable("id") Long id){
         ModelAndView modelAndView = new ModelAndView();
@@ -163,6 +159,14 @@ public class UserController {
         modelAndView.setViewName("index");
         return  modelAndView;
     }
+
+    @RequestMapping("/admin/deletar/{id}")
+    public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
+        userService.delete(id);
+        redirectAttributes.addAttribute("msg", "Deletado com sucesso");
+        return "redirect:/listar-usuarios";
+    }
+
 
     @GetMapping(value="/admin/home")
     public ModelAndView home(){
@@ -207,7 +211,7 @@ public class UserController {
         }else{
             modelAndView.addObject("usuario", user);
             modelAndView.addObject("adminMessage","Conteúdo disponível apenas para usuários com função de administrador");
-            modelAndView.setViewName("professor/home");
+            modelAndView.setViewName("professor-home");
         }
         return modelAndView;
     }

@@ -32,7 +32,7 @@
                         <td th:text="${usuario.pessoa.nome.toUpperCase()}">Nome</td>
                         <td th:text="${usuario.getUserName()}">Usuário</td>
                         <td th:text="${usuario.getEmail()}">E-Mail</td>
-                        <td><a class="btn btn-warning" role="button" th:href="@{/deletar-usuario/{id}(id=${usuario.id})}">Deletar </a></td>
+                        <td><a class="btn btn-warning" role="button" th:href="@{/admin/deletar/{id}(id=${usuario.id})}">Deletar </a></td>
                         <td><a class="btn btn-info"  role="button" th:href="@{/editar-usuario/{id}(id=${usuario.id})}">Editar </a></td>
                     </tr>
                     </tbody>
