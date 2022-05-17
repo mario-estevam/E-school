@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,6 +23,8 @@ public class Disciplina  {
     @NotBlank
     @Column(unique=true)
     String nome;
+
+    private Date delete;
 
 
 

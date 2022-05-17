@@ -1,13 +1,14 @@
 package com.md.escola.controllers;
 
 import com.md.escola.models.Disciplina;
+import com.md.escola.models.User;
 import com.md.escola.service.DisciplinaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -34,6 +35,30 @@ public class DisciplinaController {
         List<Disciplina> disciplinas = disciplinaService.getAll();
         modelAndView.addObject("disciplinas", disciplinas);
         return modelAndView;
+    }
+
+    @GetMapping(value = "/admin/editar-disciplina/{id}")
+    public ModelAndView updateDisciplina(@PathVariable("id") Long id){
+        ModelAndView modelAndView = new ModelAndView();
+        Disciplina disciplina = disciplinaService.findById(id);
+        modelAndView.addObject("disciplina", disciplina);
+        modelAndView.setViewName("atualizar-disciplina");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/admin/atualizar-disciplina")
+    public String editSave(@ModelAttribute Disciplina disciplina, RedirectAttributes redirectAttributes){
+        disciplinaService.insert(disciplina);
+        redirectAttributes.addAttribute("msg", "Disciplina atualizada com sucesso");
+        return "redirect:/listar-disciplina";
+    }
+
+
+    @RequestMapping("/admin/deletar-disciplina/{id}")
+    public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
+        disciplinaService.delete(id);
+        redirectAttributes.addAttribute("msg", "Deletada com sucesso");
+        return "redirect:/listar-disciplinas";
     }
 
 
