@@ -54,14 +54,13 @@
 
                         <table
                           data-toggle="table"
-                          data-show-columns="true"
-                          data-pagination="true"
-                          data-side-pagination="server"
                           data-page-list="[10, 25, 50, 100, 200, All]"
-                          class="mt-4 table table-striped "
+                          class="mt-4 table table-striped display"
+                          id="table-disciplinas"
                         >
                             <thead>
                             <tr>
+
                                 <th data-field="periodo">Periodo</th>
                                 <th data-field="disciplina">Disciplina</th>
                                 <th data-field="professor">Professor</th>
@@ -71,30 +70,18 @@
                             </thead>
                             <tbody>
                             <tr th:each="turma : ${turmas}">
-                                <td th:text="${turma.id}">ID</td>
-                                <td th:text="${turma.periodo.nome}">Nome</td>
-                                <td th:text="${turma.disciplina.nome}">Nome</td>
-                                <td th:text="${turma.professor.pessoa.nome}">Nome</td>
-                                <td th:text="${turma.turno}">Nome</td>
-                                <td><a class="btn btn-warning" role="button" th:href="@{'/deletar-discplina/'}">Deletar </a></td>
-                                <td><a class="btn btn-info"  role="button" th:href="@{'/editar-discplina/'}">Editar </a></td>
+                                <td th:text="${turma.periodo.nome}"></td>
+                                <td th:text="${turma.disciplina.nome}"></td>
+                                <td th:text="${turma.professor.pessoa.nome}"></td>
+                                <td th:text="${turma.turno}"></td>
                             </tr>
-
-
                             </tbody>
                         </table>
 
                     </div>
-
-
                 </article>
 
             </article>
-
-
-
-
-
         </div>
     </div>
 

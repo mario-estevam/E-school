@@ -30,39 +30,46 @@ public class UserController {
     @Autowired
     private PessoaService pessoaService;
 
-    @GetMapping(value={"/", "/login"})
-    public ModelAndView login(){
+    @GetMapping(value = {"/", "/login"})
+    public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @GetMapping(value={"/index"})
-    public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView();
+    @GetMapping(value = {"/index"})
+    public String index(RedirectAttributes redirectAttributes) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
 
-        if(user != null){
-            modelAndView.addObject("usuario", user);
+        if (user != null) {
+            redirectAttributes.addAttribute("usuario", user);
+
+        } else {
+            redirectAttributes.addAttribute("userName", "Nenhum usuário logado no sistema");
+        }
+        if (user.getRole().getRole().equals("ADMIN")) {
+            return "redirect:/home-admin";
+        } else if (user.getRole().getRole().equals("PROFESSOR")) {
+            return "redirect:/home-professor";
 
         }else{
-            modelAndView.addObject("userName", "Nenhum usuário logado no sistema");
-        }
-        if(user.getRole().getRole().equals("ADMIN")){
-            modelAndView.setViewName("/admin/home");
-        } else if(user.getRole().getRole().equals("PROFESSOR")){
-            modelAndView.setViewName("professor-home");
-        } else if(user.getRole().getRole().equals("ALUNO")){
+            return "redirect:/login";
 
-            modelAndView.setViewName("aluno-home");
         }
-
-        return modelAndView;
     }
 
 
+
+
+    @GetMapping(value="/home-admin")
+    public ModelAndView homeAdmin(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("home-admin");
+        return  modelAndView;
+
+    }
 
     @GetMapping(value="/registration")
     public ModelAndView registration(){
@@ -193,7 +200,7 @@ public class UserController {
             modelAndView.addObject("usuarios", usuarios);
             modelAndView.setViewName("listar-usuarios");
         }
-        modelAndView.setViewName("listar-usuarios");
+//        modelAndView.setViewName("listar-usuarios");
         return modelAndView;
     }
 

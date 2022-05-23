@@ -21,3 +21,7 @@
     border: none;
     background-color: var(--color-primary) !important;
 }
+
+.fixed-table-toolbar{
+    margin-top: 20px;
+}

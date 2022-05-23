@@ -47,6 +47,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/home-professor").permitAll()
                 .antMatchers("/buscar-professor").permitAll()
                 .antMatchers("/salvar-professor").permitAll()
+                .antMatchers("/listar-professores").permitAll()
+                .antMatchers("/atualizar-professor").permitAll()
+                .antMatchers("/professor/editar").permitAll()
+                .antMatchers("/save-atualizar-professor").permitAll()
+
                 .antMatchers("/editar/usuario/salvar").permitAll()
                 .antMatchers("/cadastro-disciplina").permitAll()
                 .antMatchers("/listar-disciplinas").permitAll()

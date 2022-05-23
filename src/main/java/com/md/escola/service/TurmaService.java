@@ -25,6 +25,7 @@ public class TurmaService {
 
     public Turma insert(Turma turma, Long id){
         Professor professor = professorService.getId(id);
+        System.out.println(professor);
         turma.setProfessor(professor);
         return repository.save(turma);
     }

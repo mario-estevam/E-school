@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="layouts/layout-base :: page">
+
+<main class="container " th:fragment="content">
+
+  <div class="row my-4 container-md">
+    <div class="col-12">
+      <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page='Professores',
+              previous_page_link='',
+              current_page=''
+
+            )">
+      </div>
+      <article class="align-items-center">
+        <section class="cards mb-4">
+
+          <div class="card green ">
+            <div class="d-flex justify-content-between">
+              <span>Alunos</span>
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span>1273</span>
+
+
+          </div>
+
+          <div class="card blue">
+            <div class="d-flex justify-content-between">
+              <span>Disciplinas</span>
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span>4</span>
+
+          </div>
+          <div class="card blue-dark">
+            <div class="d-flex justify-content-between">
+              <span>Turmas</span>
+              <span>Icone</span>
+            </div>
+            <span >4</span>
+
+          </div>
+        </section>
+        <article class="conteudo-principal  mw-50  mt-2 align-items-center  ">
+          <div class="conteudo-principal-header px-2">
+            <h1 class="my-4 ">Professores</h1>
+          </div>
+          <div class="conteudo-principal-content container-fluid mb-4">
+            <span th:if="${#request.getParameter('validacaoCpf')} !=null" class="alert alert-primary par" role="alert" th:text="${#request.getParameter('validacaoCpf')}"></span>
+
+
+            <table
+              data-toggle="table"
+              data-page-list="[10, 25, 50, 100, 200, All]"
+              class="mt-4 table table-striped display"
+              id="table-disciplinas"
+            >
+              <thead>
+              <tr>
+                <th data-field="Nome">Nome</th>
+                <th data-field="DataAdmissão">Data de Admissão</th>
+                <th data-field="siape">Siape</th>
+                <th data-field="sexo">Sexo</th>
+                <th data-field="rg">RG</th>
+                <th data-field="cpf">CPF</th>
+                <th data-field="action">Açãos</th>
+
+              </tr>
+              </thead>
+              <tbody>
+                <tr th:each="professor : ${professores}">
+                  <td th:text="${professor.pessoa.nome}"></td>
+                  <td th:text="${professor.data_admissao}"></td>
+                  <td th:text="${professor.siape}"></td>
+                  <td th:text="${professor.pessoa.sexo}"></td>
+                  <td th:text="${professor.pessoa.rg}"></td>
+                  <td th:text="${professor.pessoa.cpf}"></td>
+                  <td><a class="btn btn-info"  role="button" th:href="@{'/admin/professor/editar/' + ${professor.id}}">Editar </a></td>
+
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </article>
+
+      </article>
+    </div>
+  </div>
+
+
+
+</main>
+<script>
+
+</script>
+</html>

@@ -22,7 +22,7 @@ public class ProfessorService {
     public Professor insert(Professor professor, String cpf){
         Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
         professor.setPessoa(pessoa);
-        return repository.save(professor);
+        return repository.saveAndFlush(professor);
     }
 
     public List<Professor> getAll(){
@@ -37,6 +37,8 @@ public class ProfessorService {
         return repository.getById(id);
     }
 
+
+
     public Boolean ProfessorIsExist(int siape){
         Professor professor = repository.findProfessorBySiape(siape);
 
@@ -45,7 +47,6 @@ public class ProfessorService {
        }else{
            return true;
        }
-
 
     }
 
