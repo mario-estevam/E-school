@@ -143,8 +143,10 @@ public class UserController {
        user.setSenha(senha.getSenha());
        user.setRepetirSenha(senha.getRepetirSenha());
        userService.saveUser(user);
+       Pessoa pessoa = user.getPessoa();
+       pessoaService.update(pessoa);
        redirectAttributes.addAttribute("msg", "Usuário atualizado com sucesso");
-       return "redirect:/listar-usuarios";
+       return "redirect:/admin/listar-usuarios";
     }
 
     @GetMapping(value = "/editar-usuario/{id}")
@@ -167,7 +169,7 @@ public class UserController {
     public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
         userService.delete(id);
         redirectAttributes.addAttribute("msg", "Deletado com sucesso");
-        return "redirect:/listar-usuarios";
+        return "redirect:/admin/listar-usuarios";
     }
 
 
@@ -187,8 +189,7 @@ public class UserController {
         return modelAndView;
     }
 
-//  Apenas os admins podem ter acesso a listagem de usuarios
-    @GetMapping(value = "/listar-usuarios")
+    @GetMapping(value = "/admin/listar-usuarios")
     public ModelAndView listUsers(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
