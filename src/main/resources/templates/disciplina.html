@@ -21,6 +21,7 @@
                 <form class="my-4"  action="#" th:action="@{/cadastro-disciplina}"
                       method="post" autocomplete="off" role="form">
                     <div class="row">
+                        <span class="text-success" th:utext="${successMessage}"></span>
                         <div class="form-group col-md-12 has-validation">
                             <label for="nome" class="form-label required" required >Nome </label>
                             <input id="nome" type="text" th:field="${disciplina.nome}" class="form-control" required>
@@ -33,7 +34,6 @@
                         </div>
                     </div>
                 </form>
-                <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
             </article>
         </div>
 

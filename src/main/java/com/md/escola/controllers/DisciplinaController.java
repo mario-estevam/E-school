@@ -50,7 +50,7 @@ public class DisciplinaController {
     public String editSave(@ModelAttribute Disciplina disciplina, RedirectAttributes redirectAttributes){
         disciplinaService.insert(disciplina);
         redirectAttributes.addAttribute("msg", "Disciplina atualizada com sucesso");
-        return "redirect:/listar-disciplina";
+        return "redirect:/listar-disciplinas";
     }
 
 
@@ -77,10 +77,10 @@ public class DisciplinaController {
             modelAndView.setViewName("disciplina");
         }else{
             disciplinaService.insert(disciplina);
-            modelAndView.addObject("successMessage", "Disciplina cadastrada com sucesso");;
-            modelAndView.addObject("disciplina", disciplina);
+            modelAndView.addObject("successMessage", "Disciplina cadastrada com sucesso");
+            Disciplina disciplina1 = new Disciplina();
+            modelAndView.addObject("disciplina", disciplina1);
             modelAndView.setViewName("disciplina");
-
         }
         return modelAndView;
     }
