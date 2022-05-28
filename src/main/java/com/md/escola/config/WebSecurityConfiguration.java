@@ -52,7 +52,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/professor/editar").permitAll()
                 .antMatchers("/save-atualizar-professor").permitAll()
                 .antMatchers("/admin/atualizar-disciplina").permitAll()
-
                 .antMatchers("/editar/usuario/salvar").permitAll()
                 .antMatchers("/cadastro-disciplina").permitAll()
                 .antMatchers("/listar-disciplinas").permitAll()
@@ -63,6 +62,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/save").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/pessoa/cadastro").permitAll()
+                .antMatchers("/aluno/listar-matriculas").permitAll()
+                .antMatchers("/aluno/visualizar-nota/{id}").permitAll()
                 .antMatchers("/professor/**").hasAuthority("PROFESSOR")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest()

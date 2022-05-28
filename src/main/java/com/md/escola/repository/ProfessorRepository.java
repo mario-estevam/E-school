@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ProfessorRepository extends JpaRepository<Professor,Long> {
-    Professor findByPessoaId(Long id);
+    Professor findProfessorByPessoa(Pessoa pessoa);
     Professor findProfessorBySiape(int siape);
+
 }

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 public class Turma {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @OneToOne

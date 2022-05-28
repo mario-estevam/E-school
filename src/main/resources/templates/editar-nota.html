@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layouts/layout-base :: page">
+
+<main class="container" th:fragment="content">
+
+    <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page_link='',
+              previous_page='Professores',
+              current_page='Notas'
+
+
+            )">
+            </div>
+            <span class="mt-4">Notas</span>
+            <article class="form-cadastro-user border mw-50  mt-2 container-fluid  content-container">
+                <form class="my-4"  action="#" th:action="@{/salvar-nota}"
+                      method="post" autocomplete="off"  role="form">
+                    <div class="row">
+                        <div class="form-group col-md-6 has-validation">
+                            <input type="hidden" th:field="*{matricula.id}">
+                            <input type="hidden" th:field="*{matricula.turma.id}">
+                            <input type="hidden" th:field="*{matricula.aluno.id}">
+                            <label class="form-label "  >Nota 1</label>
+                            <input id="data-admissao" type="number" th:field="${matricula.nota.nota1}" class="form-control" >
+                        </div>
+                        <div class="form-group col-md-6 has-validation">
+                            <label for="nota" class="form-label "  >Nota 2</label>
+                            <input id="nota" type="number" th:field="${matricula.nota.nota2}" class="form-control" >
+                        </div>
+
+                        <div class="form-group col-md-6 has-validation">
+                            <label for="nota" class="form-label "  >Nota 3</label>
+                            <input id="nota3" type="number" th:field="${matricula.nota.nota3}" class="form-control" >
+                        </div>
+
+                        <div class="form-group col-md-6 has-validation">
+                            <label for="rec" class="form-label"  >Recuperação</label>
+                            <input id="rec" type="number" th:field="${matricula.nota.rec}" class="form-control" >
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
+                        </div>
+
+                    </div>
+                </form>
+            </article>
+
+
+        </div>
+    </div>
+</main>
+<script>
+
+</script>
+</html>

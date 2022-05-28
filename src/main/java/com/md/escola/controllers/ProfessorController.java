@@ -2,10 +2,7 @@ package com.md.escola.controllers;
 
 import com.md.escola.models.*;
 import com.md.escola.repository.RoleRepository;
-import com.md.escola.service.PessoaService;
-import com.md.escola.service.ProfessorService;
-import com.md.escola.service.TurmaService;
-import com.md.escola.service.UserService;
+import com.md.escola.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,6 +34,9 @@ public class ProfessorController {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    private MatriculaService matriculaService;
 
 
     @GetMapping(value = "/cadastro-professor")
@@ -102,9 +102,7 @@ public class ProfessorController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        System.out.println(user);
-        Long id = user.getPessoa().getId();
-        Professor professor = professorService.getId(id);
+        Professor professor = professorService.getPessoa(user.getPessoa());
         List<Turma> turmas = turmaService.getTurmasByProfessor(professor);
         System.out.println(turmas);
         modelAndView.addObject("turmas", turmas);
@@ -136,6 +134,17 @@ public class ProfessorController {
         Professor professor = professorService.getId(id);
         modelAndView.addObject("professor",professor);
         modelAndView.setViewName("atualizar-professor");
+        return  modelAndView;
+    }
+
+
+    @GetMapping(value = "/professor/visualizar-matriculas/{id}")
+    public ModelAndView findMatriculasByTurma(@PathVariable("id") Long id){
+        ModelAndView modelAndView = new ModelAndView();
+        Turma turma = turmaService.findById(id);
+        List<Matricula> matriculas = matriculaService.findMatriculaByTurma(turma);
+        modelAndView.addObject("matriculas",matriculas);
+        modelAndView.setViewName("professor-matriculas");
         return  modelAndView;
     }
 

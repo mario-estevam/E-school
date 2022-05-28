@@ -47,15 +47,14 @@ public class UserController {
             redirectAttributes.addAttribute("usuario", user);
 
         } else {
-            redirectAttributes.addAttribute("userName", "Nenhum usuário logado no sistema");
+            return "redirect:/login";
         }
         if (user.getRole().getRole().equals("ADMIN")) {
             return "redirect:/home-admin";
         } else if (user.getRole().getRole().equals("PROFESSOR")) {
             return "redirect:/home-professor";
-
         }else{
-            return "redirect:/login";
+            return "redirect:/aluno/listar-matriculas";
 
         }
     }

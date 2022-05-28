@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layouts/layout-base :: page">
+
+<main class="container" th:fragment="content">
+
+    <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page_link=''
+
+            )">
+            </div>
+            <span th:if="${#request.getParameter('msg')} !=null" class="alert alert-primary par" role="alert" th:text="${#request.getParameter('msg')}"></span>
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Minhas Notas</h1>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary text-dark">Notas</h6>
+                        <hr/>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            <p class="text-dark">Disciplina:</p>
+                        <h5 class="text-danger text-center" th:text="${matricula.turma.disciplina.nome}"> </h5>
+                        </p>
+                        <p>
+                            <p class="text-dark">Professor:</p>
+                        <h5 class="text-danger text-center" th:text="${matricula.turma.professor.pessoa.nome}"> </h5>
+                        </p>
+                        <p>
+                            <p class="text-dark">Periodo:</p>
+                        <h5 class="text-danger text-center" th:text="${matricula.turma.periodo.nome}"> </h5>
+                        </p>
+                        <p>
+                            <p class="text-dark">Nota unidade 1:</p>
+                        <h5 class="text-danger text-center" th:text="${matricula.nota.nota1}"> </h5>
+                        </p>
+                        <p>
+                            <p class="text-dark">Nota unidade 2:</p>
+                        <h5 class="text-danger text-center" th:text="${matricula.nota.nota2}"> </h5>
+                        </p>
+                        <p>
+                            <p class="text-dark">Nota unidade 3:</p>
+                        <h5 class="text-danger text-center" th:text="${matricula.nota.nota3}"> </h5>
+                        </p>
+                        <p>
+                            <p class="text-dark">Recuperação:</p>
+                        <h5  class="text-danger text-center" th:text="${matricula.nota.rec}"> </h5>
+                        </p>
+                    </div>
+                    <a class="btn btn-warning" role="button" href="/aluno/listar-matriculas">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+
+</script>
+</html>

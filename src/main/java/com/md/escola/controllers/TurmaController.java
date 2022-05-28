@@ -1,9 +1,6 @@
 package com.md.escola.controllers;
 
-import com.md.escola.models.Disciplina;
-import com.md.escola.models.Periodo;
-import com.md.escola.models.Pessoa;
-import com.md.escola.models.Turma;
+import com.md.escola.models.*;
 import com.md.escola.service.DisciplinaService;
 import com.md.escola.service.PeriodoService;
 import com.md.escola.service.ProfessorService;
@@ -41,10 +38,8 @@ public class TurmaController {
         Turma turma = new Turma();
         List<Periodo> periodos = periodoService.getAll();
         List<Disciplina> disciplinas = disciplinaService.getAll();
-        List<Pessoa> professores = new ArrayList<>();
-        professorService.getAll().forEach(professor -> {
-            professores.add(professor.getPessoa());
-        });
+        List<Professor> professores = professorService.getAll();
+
         modelAndView.addObject("turma", turma);
         modelAndView.addObject("professores", professores);
         modelAndView.addObject("periodos", periodos);
@@ -65,17 +60,9 @@ public class TurmaController {
 
 
     @PostMapping(value = "/salvar-turma")
-    public String createNewTurma(@Valid Turma turma, BindingResult bindingResult){
-        ModelAndView modelAndView = new ModelAndView();
-        if(bindingResult.hasErrors()){
-            modelAndView.addObject("turma", turma);
-            modelAndView.setViewName("turma");
-            return "redirect:/cadastro-turma";
-        }
-        turmaService.insert(turma, turma.getProfessor().getId());
-        modelAndView.addObject("successMessage", "A turma foi cadastrada com sucesso");
-        modelAndView.addObject("turma", turma);
-        modelAndView.setViewName("turma");
+    public String createNewTurma(Turma turma){
+
+        turmaService.insert(turma);
 
         return "redirect:/cadastro-turma";
     }

@@ -52,7 +52,7 @@
             <div class="form-group col-md-6 has-validation">
               <label for="professorId" class="form-label required" required >Selecione o professor</label>
               <select class="form-select" id="professorId" name="professor" required th:field="*{turma.professor}">
-                <option th:each="professor:${professores}" th:text="${professor.nome}" th:value="${professor.id}"></option>
+                <option th:each="professor:${professores}" th:text="${professor.pessoa.nome}" th:value="${professor.id}"></option>
               </select>
               <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
             </div>

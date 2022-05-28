@@ -16,9 +16,6 @@ public class Nota  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "matricula_id")
-    Matricula matricula;
 
     double nota1;
     double nota2;

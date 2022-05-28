@@ -29,8 +29,12 @@ public class ProfessorService {
         return repository.findAll();
     }
 
-    public Professor getPessoa(Long id){
-        return repository.findByPessoaId(id);
+    public Professor findById(Long id){
+        return repository.getById(id);
+    }
+
+    public Professor getPessoa(Pessoa pessoa){
+        return repository.findProfessorByPessoa(pessoa);
     }
 
     public Professor getId(Long id){
