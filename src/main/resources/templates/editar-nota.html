@@ -24,8 +24,10 @@
                     <div class="row">
                         <div class="form-group col-md-6 has-validation">
                             <input type="hidden" th:field="*{matricula.id}">
-                            <input type="hidden" th:field="*{matricula.turma.id}">
-                            <input type="hidden" th:field="*{matricula.aluno.id}">
+                            <input type="hidden" th:field="*{matricula.turma}">
+                            <input type="hidden" th:field="*{matricula.aluno}">
+
+
                             <label class="form-label "  >Nota 1</label>
                             <input id="data-admissao" type="number" th:field="${matricula.nota.nota1}" class="form-control" >
                         </div>
