@@ -36,6 +36,23 @@ public class MatriculaService {
     }
 
     public  Matricula update(Matricula matricula){
+        double media = (matricula.getNota().getNota1() +  matricula.getNota().getNota2() +  matricula.getNota().getNota3())/3;
+        if(media < 7){
+            double rec = 21 - media;
+            Nota nota = new Nota();
+            nota.setNota1(matricula.getNota().getNota1());
+            nota.setNota2(matricula.getNota().getNota2());
+            nota.setNota3(matricula.getNota().getNota3());
+            nota.setRec(rec);
+            matricula.setNota(nota);
+        } else if( media > 7){
+            Nota nota = new Nota();
+            nota.setNota1(matricula.getNota().getNota1());
+            nota.setNota2(matricula.getNota().getNota2());
+            nota.setNota3(matricula.getNota().getNota3());
+            nota.setRec(0.0);
+            matricula.setNota(nota);
+        }
 
         return repository.save(matricula);
     }
