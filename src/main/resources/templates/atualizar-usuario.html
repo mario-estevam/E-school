@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layouts/layout-base :: page">
+
+<main class="container" th:fragment="content">
+
+    <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page_link='',
+              previous_page='Usuários',
+              current_page='Editar'
+
+
+            )">
+            </div>
+
+            <article class="conteudo-principal  mw-50  mt-2  ">
+                <div class="conteudo-principal-header px-2">
+                    <h1 class="my-4 ">Editar Usuário</h1>
+                </div>
+                <div class="conteudo-principal-content container-fluid">
+                    <form class="my-4"  th:action="@{/admin/usuario/salvar}" th:object="${usuario}"
+                          method="post" autocomplete="off"  role="form">
+                        <div class="row">
+                            <input type="hidden" th:field="*{id}">
+                            <input type="hidden" th:field="*{pessoa.id}">
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="nomeCompleto" class="form-label required">Nome completo</label>
+                                <input id="nomeCompleto" type="text" th:field="*{pessoa.nome}" class="form-control mb-2" required minlength="4">
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4" class="form-label required" >Email</label>
+                                <input type="email" th:field="*{email}" class="form-control mb-2" id="inputEmail4" readonly required >
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+<!--                                <span class="text-danger" th:utext="${email}"></span>-->
+                            </div>
+
+                            <div class="form-group col-md-6 has-validation">
+                                <label  for="cpf" class="form-label required">CPF</label>
+                                <input id="cpf" type="text" th:field="*{pessoa.cpf}" class="form-control cpf2 mb-2" required minlength="4" >
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+<!--                                <span class="text-danger" th:utext="${erroCpf}"></span>-->
+                            </div>
+
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="rg" class="form-label required">RG</label>
+                                <input  id="rg" type="text" th:field="*{pessoa.rg}" class="form-control rg mb-2" required minlength="9" maxlength="9">
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
+
+                            <div class="form-group col-md-4 has-validation">
+                                <label for="userName" class="form-label required">Usuário</label>
+                                <input  id="userName" type="text" th:field="*{userName}" readonly class="form-control mb-2" required  minlength="6">
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+<!--                                <span class="text-danger" th:utext="${userName}"></span>-->
+                            </div>
+
+
+                            <div class="form-group col-md-4 has-validation">
+                                <label  for="dataNascimento" class="form-label required">Data de Nascimento</label>
+                                <input id="dataNascimento" type="date" th:field="*{pessoa.dataNascimento}"  required class="form-control mb-2">
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
+
+                            <div class="form-group col-md-4 has-validation">
+                                <label for="sexo" class="form-label required">Sexo</label>
+                                <select  class="form-select mb-2" id="sexo" th:field="*{pessoa.sexo}" required>
+                                    <option th:value="Masculino">Masculino</option>
+                                    <option th:value="Feminino">Feminino</option>
+                                </select>
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
+
+                            <div class="form-group col-md-4 has-validation">
+                                <label for="role" class="form-label required">Tipo de usuário</label>
+                                <select  class="form-select mb-2" id="role" th:field="*{role}" required>
+                                    <option th:value="1">Administrador</option>
+                                    <option th:value="2">Professor</option>
+                                    <option th:value="3">Aluno</option>
+                                </select>
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
+
+                        </div>
+                        <div class="col-12 d-flex justify-content-between">
+                            <div>
+                                <button type="submit" name="action" value="updateAndList" class="btn  mt-4 btn-success submit-form-user" >Atualizar</button>
+                            </div>
+
+                            <a th:href="@{/admin/listar-usuarios}" class="btn mt-4 btn-danger text-white" >
+                                Cancelar
+                            </a>
+
+
+
+                        </div>
+
+
+                    </form>
+<!--                    <h2><span class="text-success" th:utext="${successMessage}"></span></h2>-->
+
+                </div>
+
+
+            </article>
+
+        </div>
+    </div>
+</main>
+
+</html>

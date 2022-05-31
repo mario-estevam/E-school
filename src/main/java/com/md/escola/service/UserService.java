@@ -2,16 +2,14 @@ package com.md.escola.service;
 
 
 import com.md.escola.models.*;
-import com.md.escola.repository.PessoaRepository;
 import com.md.escola.repository.RoleRepository;
 import com.md.escola.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -37,12 +35,42 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Boolean findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user ==null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Boolean findUserUsernameBoolean(String userName){
+        User user = userRepository.findByUserName(userName);
+        if(user ==null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public User findUserByUserName(String userName) {
         return userRepository.findByUserName(userName);
+    }
+
+    public User findUserById(Long id){
+        return userRepository.getById(id);
+    }
+
+    public List<User> findAllUsers(){
+        return userRepository.findAllByDeleteIsNull();
+    }
+
+    public void delete(Long id){
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        User user = userRepository.getById(id);
+        user.setDelete(date);
+        userRepository.save(user);
     }
 
     public Boolean confirmarSenha(String senha, String repetirSenha){
@@ -74,4 +102,20 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public List<User> getUsersByRole(Role role){
+        return userRepository.findUsersByRole(role);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+

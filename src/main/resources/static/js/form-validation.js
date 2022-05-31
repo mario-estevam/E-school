@@ -1,9 +1,10 @@
 
-const buttonSubmitUser = document.querySelector('.submit-form-user');
+const buttonSubmitUser = document.querySelectorAll('.submit-form-user');
 
 
-
-buttonSubmitUser.addEventListener('click', validate)
+buttonSubmitUser.forEach((button)=>{
+    button.addEventListener('click', validate)
+})
 
 function validate(e){
     // e.preventDefault();

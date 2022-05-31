@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layouts/layout-base :: page">
+
+<main class="container" th:fragment="content">
+
+    <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page_link='',
+              previous_page='Matricula',
+              current_page='Cadastro'
+
+            )">
+            </div>
+            <span class="mt-4">Matricula</span>
+            <article class="form-cadastro-disciplina border mw-50 mt-2 container-fluid content-container">
+                <form class="my-4"  action="#" th:action="@{/admin/matricula-salvar}"
+                      method="post" autocomplete="off" role="form">
+                    <div class="row">
+                        <span class="text-success" th:utext="${successMessage}"></span>
+                        <div class="form-group col-md-6 has-validation">
+                            <label for="turmaId" class="form-label required" required >Selecione a turma</label>
+                            <select class="form-select" id="turmaId" name="professor" required th:field="*{matricula.turma}">
+                                <option th:each="turma:${turmas}" th:text="${turma.disciplina.nome}" th:value="${turma.id}"></option>
+                            </select>
+                            <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                        </div>
+                        <div class="form-group col-md-6 has-validation">
+                            <label for="alunoId" class="form-label required" required >Selecione o aluno</label>
+                            <select class="form-select" id="alunoId"  required th:field="*{matricula.aluno}">
+                                <option th:each="aluno:${alunos}" th:text="${aluno.pessoa.nome}"  th:value="${aluno.id}"></option>
+                            </select>
+                            <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </article>
+        </div>
+
+    </div>
+
+
+
+
+</main>
+<script>
+
+</script>
+</html>

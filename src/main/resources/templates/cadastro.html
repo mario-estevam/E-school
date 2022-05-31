@@ -17,90 +17,112 @@
 
             )">
             </div>
-            <span class="mt-4">Cadastro de Usuários</span>
-            <article class="form-cadastro-user border mw-50  mt-2 container-fluid  content-container">
 
-              <form class="my-4"  action="#" th:action="@{/save}"
-                    method="post" autocomplete="off"  role="form">
-                <div class="row">
-                  <div class="form-group col-md-6 has-validation">
-                    <label for="nomeCompleto" class="form-label required" required >Nome completo</label>
-                    <input   id="nomeCompleto" type="text" th:field="${usuario.pessoa.nome}" class="form-control" required minlength="4">
-                    <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="inputEmail4" class="form-label required" >Email</label>
-                    <input type="email"  th:field="*{usuario.email}" class="form-control" id="inputEmail4" required>
-                     <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                  </div>
-
-                  <div class="form-group col-md-6 has-validation">
-                    <label  for="cpf" class="form-label required">CPF</label>
-                    <input id="cpf" type="text" th:field="${usuario.pessoa.cpf}" class="form-control cpf2" required minlength="4" >
-                    <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                  </div>
-
-                  <div class="form-group col-md-6 has-validation">
-                    <label for="rg" class="form-label required">RG</label>
-                    <input  id="rg" type="text" th:field="${usuario.pessoa.rg}" class="form-control rg" required minlength="9" maxlength="9">
-                    <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                  </div>
-
-                <div class="form-group col-md-4 has-validation">
-                      <label for="userName" class="form-label required">Usuário</label>
-                      <input  id="userName" type="text" th:field="${usuario.userName}" class="form-control" required minlength="6">
+            <article class="conteudo-principal  mw-50  mt-2  ">
+              <div class="conteudo-principal-header px-2">
+                <h1 class="my-4 ">Cadastro de Usuários</h1>
+              </div>
+              <div class="conteudo-principal-content container-fluid">
+                <form class="my-4"  action="#" th:action="@{/registration}"
+                      method="post" autocomplete="off"  role="form">
+                  <div class="row">
+                    <div class="form-group col-md-6 has-validation">
+                      <label for="nomeCompleto" class="form-label required" required >Nome completo</label>
+                      <input   id="nomeCompleto" type="text" th:field="${usuario.pessoa.nome}" class="form-control mb-2" required minlength="4">
                       <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                </div>
+                    </div>
 
-                <div class="form-group col-md-4">
-                  <label for="senha" class="form-label required">Senha</label>
-                  <input  id="senha"  type="password" th:field="*{usuario.senha}" class="form-control" required minlength="8" >
-                  <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                </div>
-                  <h4><span class="text-danger" th:utext="${senhas}"></span></h4>
-                  <h2><span class="text-danger" th:utext="${erroCpf}"></span></h2>
-                <div class="form-group col-md-4">
-                  <label for="confirmSenha" class="form-label">Repetir senha</label>
-                  <input  id="confirmSenha"  type="password" th:field="*{usuario.repetirSenha}" class="form-control" required minlength="8" >
-                  <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4" class="form-label required" >Email</label>
+                      <input type="email"  th:field="*{usuario.email}" class="form-control mb-2" id="inputEmail4" required>
+                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                      <span class="text-danger" th:utext="${email}"></span>
+                    </div>
 
-                <div class="form-group col-md-4 has-validation">
-                  <label  for="idade" class="form-label required">Idade</label>
-                  <input id="idade" type="text" th:field="${usuario.pessoa.idade}" class="form-control" required minlength="1" maxlength="3">
-                  <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                </div>
+                    <div class="form-group col-md-6 has-validation">
+                      <label  for="cpf" class="form-label required">CPF</label>
+                      <input id="cpf" type="text" th:field="${usuario.pessoa.cpf}" class="form-control cpf2 mb-2" required minlength="4" >
+                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                      <span class="text-danger" th:utext="${erroCpf}"></span>
+                    </div>
 
-              <div class="form-group col-md-6 has-validation">
-                <label for="sexo" class="form-label required">Sexo</label>
-                <select  class="form-select" id="sexo" th:field="*{usuario.pessoa.sexo}" required>
-                  <option th:value="Masculino">Masculino</option>
-                  <option th:value="Feminino">Feminino</option>
-                </select>
-                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                    <div class="form-group col-md-6 has-validation">
+                      <label for="rg" class="form-label required">RG</label>
+                      <input  id="rg" type="text" th:field="${usuario.pessoa.rg}" class="form-control rg mb-2" required minlength="9" maxlength="9">
+                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                    </div>
+
+                    <div class="form-group col-md-4 has-validation">
+                      <label for="userName" class="form-label required">Usuário</label>
+                      <input  id="userName" type="text" th:field="${usuario.userName}" class="form-control mb-2" required minlength="6">
+                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                      <span class="text-danger" th:utext="${userName}"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="senha" class="form-label required">Senha</label>
+                      <input  id="senha"  type="password" th:field="*{usuario.senha}" class="form-control mb-2" required minlength="8" >
+                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                      <span class="text-danger" th:utext="${senhas}"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="confirmSenha" class="form-label required">Confirmação de Senha</label>
+                      <input  id="confirmSenha"  type="password" th:field="*{usuario.repetirSenha}" class="form-control mb-2" required minlength="8" >
+                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                    </div>
+
+                    <div class="form-group col-md-4 has-validation">
+                      <label  for="dataNascimento" class="form-label required">Data de Nascimento</label>
+                      <input id="dataNascimento" type="date" th:field="${usuario.pessoa.dataNascimento}"  required class="form-control mb-2">
+                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                    </div>
+
+                    <div class="form-group col-md-4 has-validation">
+                      <label for="sexo" class="form-label required">Sexo</label>
+                      <select  class="form-select mb-2" id="sexo" th:field="*{usuario.pessoa.sexo}" required>
+                        <option th:value="Masculino">Masculino</option>
+                        <option th:value="Feminino">Feminino</option>
+                      </select>
+                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                    </div>
+
+                    <div class="form-group col-md-4 has-validation">
+                      <label for="role" class="form-label required">Tipo de usuário</label>
+                      <select  class="form-select mb-2" id="role" th:field="*{usuario.role}" required>
+                        <option th:value="1">Administrador</option>
+                        <option th:value="2">Professor</option>
+                        <option th:value="3">Aluno</option>
+                      </select>
+                      <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                    </div>
+
+                  </div>
+                  <div class="col-12 d-flex justify-content-between">
+                    <div>
+                      <button type="submit" name="action" value="submit" class="btn  mt-4 btn-success submit-form-user" >Salvar</button>
+                      <button type="submit"  name="action" value="salvarAndAdd" class="btn  mt-4 button-add text-white submit-form-user" >Salvar e Adicionar outro</button>
+
+                    </div>
+
+                    <a th:href="@{/cancelar}" class="btn mt-4 btn-danger text-white" >
+                      Cancelar
+                    </a>
+
+
+
+                  </div>
+
+
+                </form>
+                <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+
               </div>
 
-              <div class="form-group col-md-6 has-validation">
-                <label for="role" class="form-label required">Tipo de usuário</label>
-                <select  class="form-select" id="role" th:field="*{usuario.role}" required>
-                  <option th:value="1">Administrador</option>
-                  <option th:value="2">Professor</option>
-                  <option th:value="3">Aluno</option>
-                </select>
-                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-              </div>
 
-              </div>
-              <div class="col-12">
-                <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
-              </div>
-
-            </form>
-              <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
             </article>
 
           </div>
         </div>
       </main>
+
 </html>

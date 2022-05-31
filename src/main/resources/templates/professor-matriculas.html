@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layouts/layout-base :: page">
+
+<main class="container" th:fragment="content">
+
+    <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page_link=''
+
+            )">
+            </div>
+            <span th:if="${#request.getParameter('msg')} !=null" class="alert alert-primary par" role="alert" th:text="${#request.getParameter('msg')}"></span>
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Aluno</th>
+                        <th scope="col">Disciplina</th>
+                        <th scope="col">Periodo</th>
+                        <th scope="col">Professor</th>
+                        <th scope="col">Nota 1</th>
+                        <th scope="col">Nota 2</th>
+                        <th scope="col">Nota 3</th>
+                        <th scope="col">Rec</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="matricula : ${matriculas}">
+                        <td th:text="${matricula.aluno.pessoa.nome}"></td>
+                        <td th:text="${matricula.turma.disciplina.nome}"></td>
+                        <td th:text="${matricula.turma.periodo.nome}"></td>
+                        <td th:text="${matricula.turma.professor.pessoa.nome}"></td>
+                        <td th:text="${matricula.nota.nota1}"></td>
+                        <td th:text="${matricula.nota.nota2}"></td>
+                        <td th:text="${matricula.nota.nota3}"></td>
+                        <td th:text="${matricula.nota.rec}"></td>
+                        <td><a class="btn btn-warning" role="button"  th:href="@{'/profesor/editar-nota/' + ${matricula.id}}">Editar Nota </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+</main>
+<script>
+
+</script>
+</html>

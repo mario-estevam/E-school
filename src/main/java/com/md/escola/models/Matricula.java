@@ -24,6 +24,9 @@ public class Matricula {
     @JoinColumn(name = "turma_id")
     Turma turma;
 
-    Integer ano;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nota_id")
+    Nota nota;
+
 
 }

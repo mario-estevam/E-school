@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="layouts/layout-base :: page">
+
+<main class="container" th:fragment="content">
+
+  <div class="row my-4 container-md">
+    <div class="col-12">
+      <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page_link='',
+              previous_page='Professores',
+              current_page='Cadastro'
+
+
+            )">
+      </div>
+      <span class="mt-4">Cadastro de Professores</span>
+      <article class="form-cadastro-user border mw-50  mt-2 container-fluid  content-container">
+        <form class="my-4"  action="#" th:action="@{/save-atualizar-professor}"
+              method="post" autocomplete="off"  role="form">
+          <div class="row">
+<!--            <div class="form-group col-md-6 has-validation">-->
+
+
+<!--              <label class="form-label required" required >Selecione o usuário</label>-->
+<!--              <select  class="form-select"  th:field="*{professor.pessoa.cpf}"  required>-->
+<!--                <option th:each="usuario:${usuarios}" th:text="${usuario.pessoa.nome}"  th:value="${usuario.pessoa.cpf}" ></option>-->
+<!--              </select>-->
+<!--              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>-->
+<!--              <span class="text-danger" th:utext="${avisoProfessor}"></span>-->
+
+<!--            </div>-->
+
+            <div class="form-group col-md-6 has-validation">
+              <input id="id" type="hidden" th:field="${professor.pessoa.id}" class="form-control" required>
+              <input id="idProfessor" type="hidden" th:field="${professor.id}" class="form-control" required>
+
+              <label for="data-admissao" class="form-label required" required >Data de admissão</label>
+              <input id="data-admissao" type="date" th:field="${professor.data_admissao}" class="form-control" required>
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+            </div>
+            <div class="form-group col-md-6 has-validation">
+              <label for="siape" class="form-label required" required >Número Siape</label>
+              <input id="siape" type="number" th:field="${professor.siape}" class="form-control" required>
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+            </div>
+            <div class="form-group col-md-6 has-validation">
+              <label for="cpf" class="form-label required" required >CPF</label>
+              <input id="cpf" type="text" th:field="${professor.pessoa.cpf}" class="form-control" required>
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+            </div>
+            <div class="form-group col-md-6 has-validation">
+              <label for="nome" class="form-label required" required >Nome</label>
+              <input id="nome" type="text" th:field="${professor.pessoa.nome}" class="form-control" required>
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+            </div>
+            <div class="form-group col-md-6 has-validation">
+              <label for="sexo" class="form-label required" required >Sexo</label>
+              <input id="sexo" type="text" th:field="${professor.pessoa.sexo}" class="form-control" required>
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+            </div>
+            <div class="form-group col-md-6 has-validation">
+              <label for="nascimento" class="form-label required" required >Sexo</label>
+              <input id="nascimento" type="date" th:field="${professor.pessoa.dataNascimento}" class="form-control" required>
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+            </div>
+            <div class="form-group col-md-6 has-validation">
+              <label for="rg" class="form-label required" required >Registro Geral</label>
+              <input id="rg" type="date" th:field="${professor.pessoa.rg}" class="form-control" required>
+              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+            </div>
+
+
+
+            <div class="col-12">
+              <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
+            </div>
+
+          </div>
+        </form>
+      </article>
+  </div>
+</main>
+<script>
+
+</script>
+</html>

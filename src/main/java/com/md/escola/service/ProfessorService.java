@@ -6,10 +6,13 @@ import com.md.escola.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProfessorService {
 
     ProfessorRepository repository;
+
     @Autowired
     private PessoaService pessoaService;
 
@@ -19,9 +22,37 @@ public class ProfessorService {
     public Professor insert(Professor professor, String cpf){
         Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
         professor.setPessoa(pessoa);
-        return repository.save(professor);
+        return repository.saveAndFlush(professor);
     }
 
+    public List<Professor> getAll(){
+        return repository.findAll();
+    }
+
+    public Professor findById(Long id){
+        return repository.getById(id);
+    }
+
+    public Professor getPessoa(Pessoa pessoa){
+        return repository.findProfessorByPessoa(pessoa);
+    }
+
+    public Professor getId(Long id){
+        return repository.getById(id);
+    }
+
+
+
+    public Boolean ProfessorIsExist(int siape){
+        Professor professor = repository.findProfessorBySiape(siape);
+
+       if(professor == null){
+           return false;
+       }else{
+           return true;
+       }
+
+    }
 
 
 

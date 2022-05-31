@@ -1,8 +1,10 @@
-<nav  class="mt-0" th:fragment="breadcrumb" aria-label="breadcrumb">
+<nav  style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="mt-0" th:fragment="breadcrumb" >
   <ol class="breadcrumb">
     <li class="breadcrumb-item active"><a th:href="${link_page_home}">Home</a></li>
-    <li class="breadcrumb-item active"><a th:href="${previous_page_link}" th:text="${previous_page}"></a></li>
 
-    <li class="breadcrumb-item "  th:text="${current_page}"aria-current="page"></li>
+    <li  th:if="${previous_page != ''}" class="breadcrumb-item active"><a th:href="${previous_page_link}" th:text="${previous_page}"></a></li>
+
+    <li  th:if="${current_page !=''}" class="breadcrumb-item "  th:text="${current_page}" aria-current="page"></li>
   </ol>
 </nav>
+

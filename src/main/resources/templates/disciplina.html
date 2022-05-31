@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layouts/layout-base :: page">
+
+<main class="container" th:fragment="content">
+
+    <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page_link='',
+              previous_page='Disciplinas',
+              current_page='Cadastro'
+
+            )">
+            </div>
+            <span class="mt-4">Cadastro de Disciplinas</span>
+            <article class="form-cadastro-disciplina border mw-50 mt-2 container-fluid content-container">
+                <form class="my-4"  action="#" th:action="@{/cadastro-disciplina}"
+                      method="post" autocomplete="off" role="form">
+                    <div class="row">
+                        <span class="text-success" th:utext="${successMessage}"></span>
+                        <div class="form-group col-md-12 has-validation">
+                            <label for="nome" class="form-label required" required >Nome </label>
+                            <input id="nome" type="text" th:field="${disciplina.nome}" class="form-control" required>
+                            <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            <span class="text-danger" th:utext="${disciplinaValidate}"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </article>
+        </div>
+
+    </div>
+
+
+
+
+</main>
+<script>
+
+</script>
+</html>
