@@ -1,7 +1,6 @@
 package com.md.escola.controllers;
 
 import com.md.escola.models.Disciplina;
-import com.md.escola.models.User;
 import com.md.escola.service.DisciplinaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class DisciplinaController {
 
     @GetMapping(value = "/cadastro-disciplina")
     public ModelAndView createDisciplina(){
-        ModelAndView modelAndView = new ModelAndView("disciplina");
+        ModelAndView modelAndView = new ModelAndView("/disciplina/disciplina");
         List<Disciplina> disciplinas = disciplinaService.getAll();
         modelAndView.addObject("disciplinas", disciplinas);
         Disciplina disciplina = new Disciplina();
@@ -31,7 +30,7 @@ public class DisciplinaController {
 
     @GetMapping(value = "/listar-disciplinas")
     public ModelAndView listDiscplinas(){
-        ModelAndView modelAndView = new ModelAndView("listar-disciplina");
+        ModelAndView modelAndView = new ModelAndView("/disciplina/listar-disciplina");
         List<Disciplina> disciplinas = disciplinaService.getAll();
         modelAndView.addObject("disciplinas", disciplinas);
         return modelAndView;
@@ -42,7 +41,7 @@ public class DisciplinaController {
         ModelAndView modelAndView = new ModelAndView();
         Disciplina disciplina = disciplinaService.findById(id);
         modelAndView.addObject("disciplina", disciplina);
-        modelAndView.setViewName("atualizar-disciplina");
+        modelAndView.setViewName("/disciplina/atualizar-disciplina");
         return modelAndView;
     }
 
@@ -67,20 +66,20 @@ public class DisciplinaController {
         ModelAndView modelAndView = new ModelAndView();
         if(bindingResult.hasErrors()){
             modelAndView.addObject("disciplina", disciplina);
-            modelAndView.setViewName("disciplina");
+            modelAndView.setViewName("/disciplina/disciplina");
             return  modelAndView;
         }
         Boolean confirm = disciplinaService.findByName(disciplina.getNome());
         if(!confirm){
             modelAndView.addObject("disciplinaValidate","Esta disciplina já foi cadastrada");
             modelAndView.addObject("disciplina", disciplina);
-            modelAndView.setViewName("disciplina");
+            modelAndView.setViewName("/disciplina/disciplina");
         }else{
             disciplinaService.insert(disciplina);
             modelAndView.addObject("successMessage", "Disciplina cadastrada com sucesso");
             Disciplina disciplina1 = new Disciplina();
             modelAndView.addObject("disciplina", disciplina1);
-            modelAndView.setViewName("disciplina");
+            modelAndView.setViewName("/disciplina/disciplina");
         }
         return modelAndView;
     }

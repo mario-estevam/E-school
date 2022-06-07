@@ -1,5 +1,6 @@
 package com.md.escola.service;
 
+import com.md.escola.models.Periodo;
 import com.md.escola.models.Professor;
 import com.md.escola.models.Turma;
 import com.md.escola.repository.TurmaRepository;
@@ -26,6 +27,9 @@ public class TurmaService {
         return repository.save(turma);
     }
 
+    public List<Turma> findByPeriodo(Periodo periodo){
+        return repository.findByPeriodo(periodo);
+    }
 
     public Turma findById(Long id){
         return repository.getById(id);

@@ -49,7 +49,7 @@ public class ProfessorController {
         List<User> usuarios = userService.getUsersByRole(role);
         modelAndView.addObject("professor", professor);
         modelAndView.addObject("usuarios", usuarios);
-        modelAndView.setViewName("professor");
+        modelAndView.setViewName("/professor/professor");
         return modelAndView;
     }
 
@@ -61,13 +61,13 @@ public class ProfessorController {
 
         if(professorExist){
             modelAndView.addObject("avisoProfessor", "Professor já cadastrado no sistema!");
-            modelAndView.setViewName("professor");
+            modelAndView.setViewName("/professor/professor");
 
 
         }else{
             professorService.insert(professor, professor.getPessoa().getCpf());
             modelAndView.addObject("professor", professor);
-            modelAndView.setViewName("professor");
+            modelAndView.setViewName("/professor/professor");
 
 
         }
@@ -106,7 +106,7 @@ public class ProfessorController {
         List<Turma> turmas = turmaService.getTurmasByProfessor(professor);
         System.out.println(turmas);
         modelAndView.addObject("turmas", turmas);
-        modelAndView.setViewName("professor-home");
+        modelAndView.setViewName("/professor/professor-home");
         return modelAndView;
     }
 
@@ -115,7 +115,7 @@ public class ProfessorController {
         ModelAndView modelAndView = new ModelAndView();
         List<Professor> listProfessores = professorService.getAll();
         modelAndView.addObject("professores", listProfessores);
-        modelAndView.setViewName("listar-professor");
+        modelAndView.setViewName("/professor/listar-professor");
 
         return  modelAndView;
     }
@@ -133,7 +133,7 @@ public class ProfessorController {
         ModelAndView modelAndView = new ModelAndView();
         Professor professor = professorService.getId(id);
         modelAndView.addObject("professor",professor);
-        modelAndView.setViewName("atualizar-professor");
+        modelAndView.setViewName("/professor/atualizar-professor");
         return  modelAndView;
     }
 
@@ -144,7 +144,7 @@ public class ProfessorController {
         Turma turma = turmaService.findById(id);
         List<Matricula> matriculas = matriculaService.findMatriculaByTurma(turma);
         modelAndView.addObject("matriculas",matriculas);
-        modelAndView.setViewName("professor-matriculas");
+        modelAndView.setViewName("/professor/professor-matriculas");
         return  modelAndView;
     }
 

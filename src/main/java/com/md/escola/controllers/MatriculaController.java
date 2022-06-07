@@ -3,6 +3,7 @@ package com.md.escola.controllers;
 import com.md.escola.models.*;
 import com.md.escola.service.AlunoService;
 import com.md.escola.service.MatriculaService;
+import com.md.escola.service.PeriodoService;
 import com.md.escola.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +27,39 @@ public class MatriculaController {
     @Autowired
     private MatriculaService matriculaService;
 
-    @GetMapping(value = "/admin/matricula")
+    @Autowired
+    private PeriodoService periodoService;
+
+
+    @GetMapping(value = "/admin/matricular")
+    public ModelAndView matricular(){
+        ModelAndView modelAndView = new ModelAndView("/matricula/matricula");
+        Matricula matricula = new Matricula();
+        List<Turma> turmas = turmaService.getAll();
+        List<Periodo> periodos = periodoService.getAll();
+        List<Aluno> alunos = alunoService.getAll();
+        modelAndView.addObject("matricula", matricula);
+        modelAndView.addObject("alunos", alunos);
+        modelAndView.addObject("periodos", periodos);
+        modelAndView.addObject("turmas", turmas);
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/admin/matricular-save")
+    public String matricularSave(Matricula matricula){
+        ModelAndView modelAndView = new ModelAndView();
+        matriculaService.inserirMatriculas(matricula);
+        modelAndView.addObject("successMessage", "Matricula realizada com sucesso");
+        Matricula matricula1 = new Matricula();
+        modelAndView.addObject("matricula", matricula1);
+
+        return "redirect:/admin/listar-matriculas";
+    }
+
+
+    @GetMapping(value = "/admin/matricula-dependencia")
     public ModelAndView createMatricula(){
-        ModelAndView modelAndView = new ModelAndView("matricula");
+        ModelAndView modelAndView = new ModelAndView("/matricula/matricula-dependencia");
         Matricula matricula = new Matricula();
         List<Turma> turmas = turmaService.getAll();
         List<Aluno> alunos = alunoService.getAll();
@@ -40,21 +71,21 @@ public class MatriculaController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/admin/matricula-salvar")
+    @PostMapping(value = "/admin/matricula-dependencia-salvar")
     public String createNewMatricula(Matricula matricula){
         ModelAndView modelAndView = new ModelAndView();
         matriculaService.insert(matricula);
         modelAndView.addObject("successMessage", "Matricula realizada com sucesso");
         Matricula matricula1 = new Matricula();
         modelAndView.addObject("matricula", matricula1);
-        modelAndView.setViewName("matricula");
+        modelAndView.setViewName("/matricula/matricula-dependencia");
         return "redirect:/admin/listar-matriculas";
     }
 
 
     @GetMapping(value = "/admin/listar-matriculas")
     public ModelAndView listMatriculas(){
-        ModelAndView modelAndView = new ModelAndView("listar-matricula");
+        ModelAndView modelAndView = new ModelAndView("/matricula/listar-matricula");
         List<Matricula> matriculas = matriculaService.getAll();
         modelAndView.addObject("matriculas", matriculas);
         return modelAndView;
@@ -64,7 +95,7 @@ public class MatriculaController {
 
     @GetMapping(value = "/profesor/editar-nota/{id}")
     public ModelAndView editNota(@PathVariable("id") Long id){
-        ModelAndView modelAndView = new ModelAndView("editar-nota");
+        ModelAndView modelAndView = new ModelAndView("/professor/editar-nota");
         Matricula matricula = matriculaService.findById(id);
         modelAndView.addObject("matricula", matricula);
         return modelAndView;
