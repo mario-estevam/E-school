@@ -39,41 +39,7 @@ public class ProfessorController {
     private MatriculaService matriculaService;
 
 
-    @GetMapping(value = "/cadastro-professor")
-    public ModelAndView createProfessor(){
 
-        Role role = roleRepository.findByRole("PROFESSOR");
-
-        ModelAndView modelAndView = new ModelAndView();
-        Professor professor = new Professor();
-        List<User> usuarios = userService.getUsersByRole(role);
-        modelAndView.addObject("professor", professor);
-        modelAndView.addObject("usuarios", usuarios);
-        modelAndView.setViewName("/professor/professor");
-        return modelAndView;
-    }
-
-    @PostMapping(value = "/cadastro-professor")
-    public ModelAndView getProfessor(Professor professor){
-        ModelAndView modelAndView = new ModelAndView();
-        Boolean professorExist = professorService.ProfessorIsExist(professor.getSiape());
-        System.out.println(professorExist);
-
-        if(professorExist){
-            modelAndView.addObject("avisoProfessor", "Professor já cadastrado no sistema!");
-            modelAndView.setViewName("/professor/professor");
-
-
-        }else{
-            professorService.insert(professor, professor.getPessoa().getCpf());
-            modelAndView.addObject("professor", professor);
-            modelAndView.setViewName("/professor/professor");
-
-
-        }
-
-        return modelAndView;
-    }
 
     @PostMapping(value = "/save-atualizar-professor")
     public String atualizarProfessor(Professor professor, RedirectAttributes redirectAttributes){

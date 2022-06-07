@@ -5,10 +5,12 @@ import com.md.escola.models.*;
 import com.md.escola.repository.RoleRepository;
 import com.md.escola.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -94,9 +96,19 @@ public class UserService {
         if(userRole.getRole().equals("ALUNO")){
             Aluno aluno = new Aluno();
             aluno.setPessoa(pessoa);
-            String matricula="10101010";
+            LocalDate date = LocalDate.now();
+            String matricula=date.toString();
             aluno.setMatriculaGeral(matricula);
             alunoService.saveAluno(aluno);
+        }else if(userRole.getRole().equals("PROFESSOR")){
+            Professor professor = new Professor();
+            professor.setPessoa(pessoa);
+            Random random = new Random();
+            int siape = random.nextInt(9999);
+            professor.setSiape(siape);
+            LocalDate date = LocalDate.now();
+            professor.setData_admissao(date);
+            professorService.salvar(professor);
         }
 
 
