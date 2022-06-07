@@ -96,8 +96,11 @@ public class UserService {
         if(userRole.getRole().equals("ALUNO")){
             Aluno aluno = new Aluno();
             aluno.setPessoa(pessoa);
+
             LocalDate date = LocalDate.now();
-            String matricula=date.toString();
+            Random random = new Random();
+            int number = random.nextInt(9999);
+            String matricula=date.toString()+number;
             aluno.setMatriculaGeral(matricula);
             alunoService.saveAluno(aluno);
         }else if(userRole.getRole().equals("PROFESSOR")){
