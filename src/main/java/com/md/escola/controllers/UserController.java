@@ -30,7 +30,7 @@ public class UserController {
     @GetMapping(value = {"/", "/login"})
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/usuario/login");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 
