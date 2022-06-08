@@ -13,6 +13,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Set;
 
+import static javax.persistence.GenerationType.*;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

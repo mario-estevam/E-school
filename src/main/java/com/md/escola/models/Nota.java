@@ -16,7 +16,6 @@ public class Nota  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-
     double nota1;
     double nota2;
     double nota3;
