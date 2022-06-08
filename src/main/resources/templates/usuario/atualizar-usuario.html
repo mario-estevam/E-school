@@ -22,8 +22,9 @@
                 <div class="conteudo-principal-header px-2">
                     <h1 class="my-4 ">Editar Usuário</h1>
                 </div>
+
                 <div class="conteudo-principal-content container-fluid">
-                    <form class="my-4"  th:action="@{/admin/usuario/salvar}" th:object="${usuario}"
+                    <form class="my-4"  th:action=" @{/admin/usuario/salvar}" th:object="${usuario}"
                           method="post" autocomplete="off"  role="form">
                         <div class="row">
                             <input type="hidden" th:field="*{id}">
