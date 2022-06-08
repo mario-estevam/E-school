@@ -194,6 +194,10 @@ public class UserController {
             modelAndView.setViewName("error");
         }else{
             List<User> usuarios = userService.findAllUsers();
+            List<User> professores = userService.findAllUsersProfessor();
+            List<User> alunos = userService.findAllUsersAluno();
+            modelAndView.addObject("alunos", alunos);
+            modelAndView.addObject("professores", professores);
             modelAndView.addObject("usuarios", usuarios);
             modelAndView.setViewName("/usuario/listar-usuarios");
         }
