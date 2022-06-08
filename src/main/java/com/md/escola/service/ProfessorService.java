@@ -25,6 +25,11 @@ public class ProfessorService {
         return repository.saveAndFlush(professor);
     }
 
+    public Professor salvar(Professor professor){
+        return repository.save(professor);
+    }
+
+
     public List<Professor> getAll(){
         return repository.findAll();
     }

@@ -39,41 +39,7 @@ public class ProfessorController {
     private MatriculaService matriculaService;
 
 
-    @GetMapping(value = "/cadastro-professor")
-    public ModelAndView createProfessor(){
 
-        Role role = roleRepository.findByRole("PROFESSOR");
-
-        ModelAndView modelAndView = new ModelAndView();
-        Professor professor = new Professor();
-        List<User> usuarios = userService.getUsersByRole(role);
-        modelAndView.addObject("professor", professor);
-        modelAndView.addObject("usuarios", usuarios);
-        modelAndView.setViewName("professor");
-        return modelAndView;
-    }
-
-    @PostMapping(value = "/cadastro-professor")
-    public ModelAndView getProfessor(Professor professor){
-        ModelAndView modelAndView = new ModelAndView();
-        Boolean professorExist = professorService.ProfessorIsExist(professor.getSiape());
-        System.out.println(professorExist);
-
-        if(professorExist){
-            modelAndView.addObject("avisoProfessor", "Professor já cadastrado no sistema!");
-            modelAndView.setViewName("professor");
-
-
-        }else{
-            professorService.insert(professor, professor.getPessoa().getCpf());
-            modelAndView.addObject("professor", professor);
-            modelAndView.setViewName("professor");
-
-
-        }
-
-        return modelAndView;
-    }
 
     @PostMapping(value = "/save-atualizar-professor")
     public String atualizarProfessor(Professor professor, RedirectAttributes redirectAttributes){
@@ -106,7 +72,7 @@ public class ProfessorController {
         List<Turma> turmas = turmaService.getTurmasByProfessor(professor);
         System.out.println(turmas);
         modelAndView.addObject("turmas", turmas);
-        modelAndView.setViewName("professor-home");
+        modelAndView.setViewName("/professor/professor-home");
         return modelAndView;
     }
 
@@ -115,7 +81,7 @@ public class ProfessorController {
         ModelAndView modelAndView = new ModelAndView();
         List<Professor> listProfessores = professorService.getAll();
         modelAndView.addObject("professores", listProfessores);
-        modelAndView.setViewName("listar-professor");
+        modelAndView.setViewName("/professor/listar-professor");
 
         return  modelAndView;
     }
@@ -133,7 +99,7 @@ public class ProfessorController {
         ModelAndView modelAndView = new ModelAndView();
         Professor professor = professorService.getId(id);
         modelAndView.addObject("professor",professor);
-        modelAndView.setViewName("atualizar-professor");
+        modelAndView.setViewName("/professor/atualizar-professor");
         return  modelAndView;
     }
 
@@ -144,7 +110,7 @@ public class ProfessorController {
         Turma turma = turmaService.findById(id);
         List<Matricula> matriculas = matriculaService.findMatriculaByTurma(turma);
         modelAndView.addObject("matriculas",matriculas);
-        modelAndView.setViewName("professor-matriculas");
+        modelAndView.setViewName("/professor/professor-matriculas");
         return  modelAndView;
     }
 

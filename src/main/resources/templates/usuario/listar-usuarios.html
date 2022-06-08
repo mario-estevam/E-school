@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="layouts/layout-base :: page">
+
+<main class="container " th:fragment="content">
+
+    <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              page_home='Home',
+              previous_page='',
+              previous_page_link='',
+              current_page=''
+
+            )">
+            </div>
+            <span th:if="${#request.getParameter('msg')} !=null" class="alert alert-primary par" role="alert" th:text="${#request.getParameter('msg')}"></span>
+            <article class="align-items-center">
+                <section class="cards mb-4">
+                    <div class="card green ">
+                        <div class="d-flex justify-content-between">
+                            <span>Alunos</span>
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span>1273</span>
+
+
+                    </div>
+
+                    <div class="card blue">
+                        <div class="d-flex justify-content-between">
+                            <span>Professores</span>
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span>4</span>
+
+                    </div>
+
+
+                    <div class="card blue-dark">
+                        <div class="d-flex justify-content-between">
+                            <span>Disciplinas</span>
+                            <span>Icone</span>
+                        </div>
+                        <span >4</span>
+                    </div>
+                </section>
+                <article class="conteudo-principal  mw-50  mt-2 align-items-center  ">
+                    <div class="conteudo-principal-header px-2">
+                        <h1 class="my-4 ">Usuários do sistema</h1>
+                    </div>
+                    <div class="conteudo-principal-content container-fluid mb-4">
+
+                        <table
+                          data-toggle="table"
+                          data-page-list="[10, 25, 50, 100, 200, All]"
+                          class="mt-4 table table-striped display"
+                          id="table-usuario"
+                        >
+                            <thead>
+                                <tr>
+                                    <th data-field="nome">Nome</th>
+                                    <th data-field="usuario">Usuário</th>
+                                    <th data-field="email">E-mail</th>
+                                    <th data-field="editar">Editar</th>
+                                    <th data-field="excluir">Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="usuario : ${usuarios}">
+                                    <td th:text="${usuario.pessoa.nome.toUpperCase()}">Nome</td>
+                                    <td th:text="${usuario.getUserName()}">Usuário</td>
+                                    <td th:text="${usuario.getEmail()}">E-Mail</td>
+                                    <td><a  role="button" th:href="@{/editar-usuario/{id}(id=${usuario.id})}"><i class="bi bi-pencil-square"></i></a></td>
+                                    <td><a role="button" th:href="@{/admin/deletar/{id}(id=${usuario.id})}"><i class="bi bi-trash"></i>
+                                    </a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </article>
+
+                <article class="conteudo-principal  mw-50  mt-2 align-items-center  ">
+                    <div class="conteudo-principal-header px-2">
+                        <h1 class="my-4 ">Professores do Sistema</h1>
+                    </div>
+                    <div class="conteudo-principal-content container-fluid mb-4">
+
+                        <table
+                          data-toggle="table"
+                          data-page-list="[10, 25, 50, 100, 200, All]"
+                          class="mt-4 table table-striped display"
+                          id="table-professor"
+                        >
+                            <thead>
+                            <tr>
+                                <th data-field="nome">Nome</th>
+                                <th data-field="usuario">Usuário</th>
+                                <th data-field="email">E-mail</th>
+                                <th>Editar</th>
+                                <th>Excluir</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="usuario : ${usuarios}">
+                                <td th:text="${usuario.pessoa.nome.toUpperCase()}">Nome</td>
+                                <td th:text="${usuario.getUserName()}">Usuário</td>
+                                <td th:text="${usuario.getEmail()}">E-Mail</td>
+                                <td><a role="button" th:href="@{/editar-usuario/{id}(id=${usuario.id})}"><i class="bi bi-pencil-square"></i> </a></td>
+                                <td><a role="button" th:href="@{/admin/deletar/{id}(id=${usuario.id})}"><i class="bi bi-trash"></i>
+                                </a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </article>
+
+                <article class="conteudo-principal  mw-50  mt-2 align-items-center  ">
+                    <div class="conteudo-principal-header px-2">
+                        <h1 class="my-4 ">Alunos do Sistema</h1>
+                    </div>
+                    <div class="conteudo-principal-content container-fluid mb-4">
+
+                        <table
+                          data-toggle="table"
+                          data-page-list="[10, 25, 50, 100, 200, All]"
+                          class="mt-4 table table-striped display"
+                          id="table-professor"
+                        >
+                            <thead>
+                            <tr>
+                                <th data-field="nome">Nome</th>
+                                <th data-field="usuario">Usuário</th>
+                                <th data-field="email">E-mail</th>
+                                <th>Editar</th>
+                                <th>Excluir</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="usuario : ${usuarios}">
+                                <td th:text="${usuario.pessoa.nome.toUpperCase()}">Nome</td>
+                                <td th:text="${usuario.getUserName()}">Usuário</td>
+                                <td th:text="${usuario.getEmail()}">E-Mail</td>
+                                <td><a role="button" th:href="@{/editar-usuario/{id}(id=${usuario.id})}"><i class="bi bi-pencil-square"></i></a></td>
+                                <td><a role="button" th:href="@{/admin/deletar/{id}(id=${usuario.id})}"><i class="bi bi-trash"></i>
+                                </a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </article>
+
+            </article>
+        </div>
+    </div>
+
+
+
+</main>
+<script>
+
+</script>
+</html>

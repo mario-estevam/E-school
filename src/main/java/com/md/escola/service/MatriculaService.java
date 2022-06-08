@@ -6,6 +6,7 @@ import com.md.escola.repository.MatriculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,11 +22,14 @@ public class MatriculaService {
     private TurmaService turmaService;
 
     @Autowired
+    private PeriodoService periodoService;
+
+    @Autowired
     private void setMatriculaRepository(MatriculaRepository repository){
         this.repository = repository;
     }
 
-    public  Matricula insert(Matricula matricula){
+    public Matricula insert(Matricula matricula){
         Nota nota = new Nota();
         nota.setNota1(0.0);
         nota.setNota2(0.0);
@@ -33,6 +37,10 @@ public class MatriculaService {
         nota.setRec(0.0);
         matricula.setNota(nota);
         return repository.save(matricula);
+    }
+
+    public List<Matricula> insertList(List<Matricula> matriculas){
+        return repository.saveAll(matriculas);
     }
 
     public  Matricula update(Matricula matricula){
@@ -74,5 +82,22 @@ public class MatriculaService {
     }
 
 
-
+    public void inserirMatriculas(Matricula matricula) {
+        Periodo periodo = periodoService.findById(matricula.getUtil());
+        ArrayList<Matricula> matriculas = new ArrayList<>();
+        List<Turma> turmas = turmaService.findByPeriodo(periodo);
+        for (Turma turma : turmas) {
+            Matricula matricula1 = new Matricula();
+            matricula1.setTurma(turma);
+            matricula1.setAluno(matricula.getAluno());
+            Nota nota = new Nota();
+            nota.setNota1(0.0);
+            nota.setNota2(0.0);
+            nota.setNota3(0.0);
+            nota.setRec(0.0);
+            matricula1.setNota(nota);
+            matriculas.add(matricula1);
+        }
+        insertList(matriculas);
+    }
 }

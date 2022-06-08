@@ -31,7 +31,7 @@ public class AlunoController {
 
     @GetMapping(value = "/aluno/listar-matriculas")
     public ModelAndView listMatriculas(){
-        ModelAndView modelAndView = new ModelAndView("aluno-matriculas");
+        ModelAndView modelAndView = new ModelAndView("/aluno/aluno-matriculas");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         Aluno aluno = alunoService.findByPessoa(user.getPessoa());
@@ -43,7 +43,7 @@ public class AlunoController {
 
     @GetMapping(value = "/aluno/visualizar-nota/{id}")
     public ModelAndView listNotasByMatricula(@PathVariable("id") Long id){
-        ModelAndView modelAndView = new ModelAndView("aluno-notas");
+        ModelAndView modelAndView = new ModelAndView("/aluno/aluno-notas");
         Matricula matricula = matriculaService.findById(id);
         modelAndView.addObject("matricula", matricula);
         return modelAndView;

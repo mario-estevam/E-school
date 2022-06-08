@@ -26,4 +26,8 @@ public class PeriodoService {
     public List<Periodo> getAll(){
         return repository.findAll();
     }
+
+    public  Periodo findById(Long id){
+        return repository.getById(id);
+    }
 }

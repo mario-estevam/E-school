@@ -1,13 +1,10 @@
 package com.md.escola.controllers;
 
 
-import com.fasterxml.jackson.databind.util.ArrayBuilders;
-import com.md.escola.models.Disciplina;
 import com.md.escola.models.Pessoa;
 import com.md.escola.models.User;
 import com.md.escola.service.PessoaService;
 import com.md.escola.service.UserService;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,7 +30,7 @@ public class UserController {
     @GetMapping(value = {"/", "/login"})
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("/usuario/login");
         return modelAndView;
     }
 
@@ -65,7 +62,7 @@ public class UserController {
     @GetMapping(value="/home-admin")
     public ModelAndView homeAdmin(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home-admin");
+        modelAndView.setViewName("/admin/home-admin");
         return  modelAndView;
 
     }
@@ -75,7 +72,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("usuario", user);
-        modelAndView.setViewName("cadastro");
+        modelAndView.setViewName("/usuario/cadastro");
         return modelAndView;
     }
 
@@ -85,7 +82,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("usuario", user);
-            modelAndView.setViewName("cadastro");
+            modelAndView.setViewName("/usuario/cadastro");
             return modelAndView;
         }
         try {
@@ -95,18 +92,18 @@ public class UserController {
             if(!confirm){
                 modelAndView.addObject("senhas","as senhas não coincidem");
                 modelAndView.addObject("usuario", user);
-                modelAndView.setViewName("cadastro");
+                modelAndView.setViewName("/usuario/cadastro");
             } else if(!userNameConfirm){
                 modelAndView.addObject("userName","Este nome de usuário já existe");
                 modelAndView.addObject("usuario", user);
-                modelAndView.setViewName("cadastro");
+                modelAndView.setViewName("/usuario/cadastro");
             } else if(!emailConfirm){
                 modelAndView.addObject("email","Este email já foi cadastrado");
                 modelAndView.addObject("usuario", user);
-                modelAndView.setViewName("cadastro");
+                modelAndView.setViewName("/usuario/cadastro");
             } else {
                 if(action.equals("cancelar")){
-                    modelAndView.setViewName("login");
+                    modelAndView.setViewName("/usuario/login");
 
 
                 }else{
@@ -114,11 +111,11 @@ public class UserController {
                     modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
                     modelAndView.addObject("usuario", new User());
                     if (action.equals("submit")) {
-                        modelAndView.setViewName("login");
+                        modelAndView.setViewName("/usuario/login");
                     }
 
                     if (action.equals("salvarAndAdd")) {
-                        modelAndView.setViewName("cadastro");
+                        modelAndView.setViewName("/usuario/cadastro");
                     }
 
                 }
@@ -128,7 +125,7 @@ public class UserController {
         }catch (Exception e){
             modelAndView.addObject("erroCpf", "Este CPF já foi cadastrado");
             modelAndView.addObject("usuario", user);
-            modelAndView.setViewName("cadastro");
+            modelAndView.setViewName("/usuario/cadastro");
         }
 
         return modelAndView;
@@ -153,7 +150,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.findUserById(id);
         modelAndView.addObject("usuario", user);
-        modelAndView.setViewName("atualizar-usuario");
+        modelAndView.setViewName("/usuario/atualizar-usuario");
         return modelAndView;
     }
 
@@ -198,7 +195,7 @@ public class UserController {
         }else{
             List<User> usuarios = userService.findAllUsers();
             modelAndView.addObject("usuarios", usuarios);
-            modelAndView.setViewName("listar-usuarios");
+            modelAndView.setViewName("/usuario/listar-usuarios");
         }
 //        modelAndView.setViewName("listar-usuarios");
         return modelAndView;
@@ -214,7 +211,7 @@ public class UserController {
         }else{
             modelAndView.addObject("usuario", user);
             modelAndView.addObject("adminMessage","Conteúdo disponível apenas para usuários com função de administrador");
-            modelAndView.setViewName("professor-home");
+            modelAndView.setViewName("/professor/professor-home");
         }
         return modelAndView;
     }

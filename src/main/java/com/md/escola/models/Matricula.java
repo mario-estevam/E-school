@@ -28,5 +28,7 @@ public class Matricula {
     @JoinColumn(name = "nota_id")
     Nota nota;
 
+    Long util;
+
 
 }
