@@ -1,74 +1,69 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        th:replace="layouts/layout-base :: page">
-
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layouts/layout-base :: page">
 <main class="container" th:fragment="content">
-
-  <div class="row my-4 container-md">
-    <div class="col-12">
-      <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
-              page_home='Home',
-              previous_page_link='',
-              previous_page='Usuários',
-              current_page='Cadastro'
-
-
-            )">
-      </div>
-      <span class="mt-4">Cadastro de Turma</span>
-      <article class="form-cadastro-user border mw-50  mt-2 container-fluid  content-container">
-        <form class="my-4"  action="#" th:action="@{/salvar-turma}"
-              method="post" autocomplete="off"  role="form">
-          <div class="row">
-
-
-            <div class="form-group col-md-6 has-validation">
-              <label for="periodoId" class="form-label required" required >Selecione o periodo</label>
-              <select class="form-select" id="periodoId" name="professor" required th:field="*{turma.periodo}">
-                <option th:each="periodo:${periodos}" th:text="${periodo.nome}" th:value="${periodo.id}"></option>
-              </select>
-              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+    <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+                link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+                page_home='Home',
+                previous_page_link='',
+                previous_page='Turma',
+                current_page='Cadastro'
+                )">
             </div>
 
+            <article class="conteudo-principal  mw-50  mt-2">
+                <div class="conteudo-principal-header px-2">
+                    <h1 class="my-4 ">Cadastro de Turma</h1>
+                </div>
 
-            <div class="form-group col-md-6 has-validation">
-              <label for="turno" class="form-label required" required >Turno da turma</label>
-              <select class="form-select" id="turno" required th:field="*{turma.turno}">
-                <option value="Manhã">Manhã</option>
-                <option value="Tarde">Tarde</option>
-              </select>
-            </div>
+                <div class="conteudo-principal-content container-fluid">
+                    <form class="my-4"  action="#" th:action="@{/salvar-turma}"
+                          method="post" autocomplete="off"  role="form">
 
-            <div class="form-group col-md-6 has-validation">
-              <label for="disciplinaId" class="form-label required" required >Disciplina</label>
-              <select class="form-select" id="disciplinaId" required th:field="*{turma.disciplina}">
-                <option th:each="disciplina:${disciplinas}" th:text="${disciplina.nome}" th:value="${disciplina.id}"></option>
-              </select>
-              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-            </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="periodoId" class="form-label required" required >Selecione o periodo</label>
+                                <select class="form-select" id="periodoId" name="professor" required th:field="*{turma.periodo}">
+                                    <option th:each="periodo:${periodos}" th:text="${periodo.nome}" th:value="${periodo.id}"></option>
+                                </select>
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
 
-            <div class="form-group col-md-6 has-validation">
-              <label for="professorId" class="form-label required" required >Selecione o professor</label>
-              <select class="form-select" id="professorId" name="professor" required th:field="*{turma.professor}">
-                <option th:each="professor:${professores}" th:text="${professor.pessoa.nome}" th:value="${professor.id}"></option>
-              </select>
-              <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-            </div>
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="turno" class="form-label required" required >Turno da turma</label>
+                                <select class="form-select" id="turno" required th:field="*{turma.turno}">
+                                    <option value="Manhã">Manhã</option>
+                                    <option value="Tarde">Tarde</option>
+                                </select>
+                            </div>
 
-            <div class="col-12">
-              <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
-            </div>
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="disciplinaId" class="form-label required" required >Disciplina</label>
+                                <select class="form-select" id="disciplinaId" required th:field="*{turma.disciplina}">
+                                    <option th:each="disciplina:${disciplinas}" th:text="${disciplina.nome}" th:value="${disciplina.id}"></option>
+                                </select>
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
 
-          </div>
-        </form>
-      </article>
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="professorId" class="form-label required" required >Selecione o professor</label>
+                                <select class="form-select" id="professorId" name="professor" required th:field="*{turma.professor}">
+                                    <option th:each="professor:${professores}" th:text="${professor.pessoa.nome}" th:value="${professor.id}"></option>
+                                </select>
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
 
+                            <div class="col-12">
+                                <button type="submit" class="btn  mt-4 btn-success submit-form-user">Salvar</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </article>
+
+        </div>
     </div>
-  </div>
 </main>
-<script>
-
-</script>
 </html>

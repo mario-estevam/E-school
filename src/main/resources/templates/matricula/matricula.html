@@ -16,30 +16,36 @@
 
             )">
             </div>
-            <span class="mt-4">Matricula</span>
-            <article class="form-cadastro-disciplina border mw-50 mt-2 container-fluid content-container">
-                <form class="my-4"  action="#" th:action="@{/admin/matricular-save}"
-                      method="post" autocomplete="off" role="form">
-                    <div class="row">
-                        <div class="form-group col-md-6 has-validation">
-                            <label for="turmaId" class="form-label required" required >Selecione a turma</label>
-                            <select class="form-select" id="turmaId" name="professor" required th:field="*{matricula.util}">
-                                <option th:each="periodo:${periodos}" th:text="${periodo.nome}" th:value="${periodo.id}"></option>
-                            </select>
-                            <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+
+            <article class="conteudo-principal  mw-50  mt-2">
+                <div class="conteudo-principal-header px-2">
+                    <h1 class="my-4 ">Cadastro de Matricula</h1>
+                </div>
+
+                <div class="conteudo-principal-content container-fluid">
+                    <form class="my-4"  action="#" th:action="@{/admin/matricular-save}"
+                          method="post" autocomplete="off" role="form">
+                        <div class="row">
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="turmaId" class="form-label required" required >Selecione a turma</label>
+                                <select class="form-select" id="turmaId" name="professor" required th:field="*{matricula.util}">
+                                    <option th:each="periodo:${periodos}" th:text="${periodo.nome}" th:value="${periodo.id}"></option>
+                                </select>
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="alunoId" class="form-label required" required >Selecione o aluno</label>
+                                <select class="form-select" id="alunoId"  required th:field="*{matricula.aluno}">
+                                    <option th:each="aluno:${alunos}" th:text="${aluno.pessoa.nome}"  th:value="${aluno.id}"></option>
+                                </select>
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn  mt-4 btn-success submit-form-user">Salvar</button>
+                            </div>
                         </div>
-                        <div class="form-group col-md-6 has-validation">
-                            <label for="alunoId" class="form-label required" required >Selecione o aluno</label>
-                            <select class="form-select" id="alunoId"  required th:field="*{matricula.aluno}">
-                                <option th:each="aluno:${alunos}" th:text="${aluno.pessoa.nome}"  th:value="${aluno.id}"></option>
-                            </select>
-                            <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </article>
         </div>
 

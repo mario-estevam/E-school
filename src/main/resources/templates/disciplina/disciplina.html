@@ -16,24 +16,30 @@
 
             )">
             </div>
-            <span class="mt-4">Cadastro de Disciplinas</span>
-            <article class="form-cadastro-disciplina border mw-50 mt-2 container-fluid content-container">
-                <form class="my-4"  action="#" th:action="@{/cadastro-disciplina}"
-                      method="post" autocomplete="off" role="form">
-                    <div class="row">
-                        <span class="text-success" th:utext="${successMessage}"></span>
-                        <div class="form-group col-md-12 has-validation">
-                            <label for="nome" class="form-label required" required >Nome </label>
-                            <input id="nome" type="text" th:field="${disciplina.nome}" class="form-control" required>
-                            <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                            <span class="text-danger" th:utext="${disciplinaValidate}"></span>
-                        </div>
 
-                        <div class="col-12">
-                            <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
+            <article class="conteudo-principal  mw-50  mt-2">
+                <div class="conteudo-principal-header px-2">
+                    <h1 class="my-4 ">Cadastro de Disciplina</h1>
+                </div>
+
+                <div class="conteudo-principal-content container-fluid">
+                    <form class="my-4"  action="#" th:action="@{/cadastro-disciplina}"
+                          method="post" autocomplete="off" role="form">
+                        <div class="row">
+                            <span class="text-success" th:utext="${successMessage}"></span>
+                            <div class="form-group col-md-12 has-validation">
+                                <label for="nome" class="form-label required" required >Nome da disciplina</label>
+                                <input id="nome" type="text" th:field="${disciplina.nome}" class="form-control" required>
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                                <span class="text-danger" th:utext="${disciplinaValidate}"></span>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn  mt-4 btn-success submit-form-user">Salvar</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </article>
         </div>
 
