@@ -72,7 +72,7 @@ public class ProfessorController {
         List<Turma> turmas = turmaService.getTurmasByProfessor(professor);
         System.out.println(turmas);
         modelAndView.addObject("turmas", turmas);
-        modelAndView.setViewName("/professor/professor-home");
+        modelAndView.setViewName("professor-home");
         return modelAndView;
     }
 
@@ -81,7 +81,7 @@ public class ProfessorController {
         ModelAndView modelAndView = new ModelAndView();
         List<Professor> listProfessores = professorService.getAll();
         modelAndView.addObject("professores", listProfessores);
-        modelAndView.setViewName("/professor/listar-professor");
+        modelAndView.setViewName("listar-professor");
 
         return  modelAndView;
     }
@@ -99,7 +99,7 @@ public class ProfessorController {
         ModelAndView modelAndView = new ModelAndView();
         Professor professor = professorService.getId(id);
         modelAndView.addObject("professor",professor);
-        modelAndView.setViewName("/professor/atualizar-professor");
+        modelAndView.setViewName("atualizar-professor");
         return  modelAndView;
     }
 
@@ -110,7 +110,7 @@ public class ProfessorController {
         Turma turma = turmaService.findById(id);
         List<Matricula> matriculas = matriculaService.findMatriculaByTurma(turma);
         modelAndView.addObject("matriculas",matriculas);
-        modelAndView.setViewName("/professor/professor-matriculas");
+        modelAndView.setViewName("professor-matriculas");
         return  modelAndView;
     }
 

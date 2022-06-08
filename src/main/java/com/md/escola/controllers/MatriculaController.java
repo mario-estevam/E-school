@@ -33,7 +33,7 @@ public class MatriculaController {
 
     @GetMapping(value = "/admin/matricular")
     public ModelAndView matricular(){
-        ModelAndView modelAndView = new ModelAndView("/matricula/matricula");
+        ModelAndView modelAndView = new ModelAndView("matricula");
         Matricula matricula = new Matricula();
         List<Turma> turmas = turmaService.getAll();
         List<Periodo> periodos = periodoService.getAll();
@@ -59,7 +59,7 @@ public class MatriculaController {
 
     @GetMapping(value = "/admin/matricula-dependencia")
     public ModelAndView createMatricula(){
-        ModelAndView modelAndView = new ModelAndView("/matricula/matricula-dependencia");
+        ModelAndView modelAndView = new ModelAndView("matricula-dependencia");
         Matricula matricula = new Matricula();
         List<Turma> turmas = turmaService.getAll();
         List<Aluno> alunos = alunoService.getAll();
@@ -78,14 +78,14 @@ public class MatriculaController {
         modelAndView.addObject("successMessage", "Matricula realizada com sucesso");
         Matricula matricula1 = new Matricula();
         modelAndView.addObject("matricula", matricula1);
-        modelAndView.setViewName("/matricula/matricula-dependencia");
+        modelAndView.setViewName("matricula-dependencia");
         return "redirect:/admin/listar-matriculas";
     }
 
 
     @GetMapping(value = "/admin/listar-matriculas")
     public ModelAndView listMatriculas(){
-        ModelAndView modelAndView = new ModelAndView("/matricula/listar-matricula");
+        ModelAndView modelAndView = new ModelAndView("listar-matricula");
         List<Matricula> matriculas = matriculaService.getAll();
         modelAndView.addObject("matriculas", matriculas);
         return modelAndView;
@@ -95,7 +95,7 @@ public class MatriculaController {
 
     @GetMapping(value = "/profesor/editar-nota/{id}")
     public ModelAndView editNota(@PathVariable("id") Long id){
-        ModelAndView modelAndView = new ModelAndView("/professor/editar-nota");
+        ModelAndView modelAndView = new ModelAndView("editar-nota");
         Matricula matricula = matriculaService.findById(id);
         modelAndView.addObject("matricula", matricula);
         return modelAndView;

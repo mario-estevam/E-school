@@ -20,7 +20,7 @@ public class DisciplinaController {
 
     @GetMapping(value = "/cadastro-disciplina")
     public ModelAndView createDisciplina(){
-        ModelAndView modelAndView = new ModelAndView("/disciplina/disciplina");
+        ModelAndView modelAndView = new ModelAndView("disciplina");
         List<Disciplina> disciplinas = disciplinaService.getAll();
         modelAndView.addObject("disciplinas", disciplinas);
         Disciplina disciplina = new Disciplina();
@@ -41,7 +41,7 @@ public class DisciplinaController {
         ModelAndView modelAndView = new ModelAndView();
         Disciplina disciplina = disciplinaService.findById(id);
         modelAndView.addObject("disciplina", disciplina);
-        modelAndView.setViewName("/disciplina/atualizar-disciplina");
+        modelAndView.setViewName("atualizar-disciplina");
         return modelAndView;
     }
 
@@ -66,20 +66,20 @@ public class DisciplinaController {
         ModelAndView modelAndView = new ModelAndView();
         if(bindingResult.hasErrors()){
             modelAndView.addObject("disciplina", disciplina);
-            modelAndView.setViewName("/disciplina/disciplina");
+            modelAndView.setViewName("disciplina");
             return  modelAndView;
         }
         Boolean confirm = disciplinaService.findByName(disciplina.getNome());
         if(!confirm){
             modelAndView.addObject("disciplinaValidate","Esta disciplina já foi cadastrada");
             modelAndView.addObject("disciplina", disciplina);
-            modelAndView.setViewName("/disciplina/disciplina");
+            modelAndView.setViewName("disciplina");
         }else{
             disciplinaService.insert(disciplina);
             modelAndView.addObject("successMessage", "Disciplina cadastrada com sucesso");
             Disciplina disciplina1 = new Disciplina();
             modelAndView.addObject("disciplina", disciplina1);
-            modelAndView.setViewName("/disciplina/disciplina");
+            modelAndView.setViewName("disciplina");
         }
         return modelAndView;
     }

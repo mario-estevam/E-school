@@ -31,7 +31,7 @@ public class TurmaController {
 
     @GetMapping(value = "/cadastro-turma")
     public ModelAndView createTurma(){
-        ModelAndView modelAndView = new ModelAndView("/turma/turma");
+        ModelAndView modelAndView = new ModelAndView("turma");
         Turma turma = new Turma();
         List<Periodo> periodos = periodoService.getAll();
         List<Disciplina> disciplinas = disciplinaService.getAll();
@@ -47,7 +47,7 @@ public class TurmaController {
 
     @GetMapping(value = "/listar-turmas")
     public ModelAndView listDiscplinas(){
-        ModelAndView modelAndView = new ModelAndView("/turma/listar-turmas");
+        ModelAndView modelAndView = new ModelAndView("listar-turmas");
         List<Turma> turmas = turmaService.getAll();
         modelAndView.addObject("turmas", turmas);
         return modelAndView;
