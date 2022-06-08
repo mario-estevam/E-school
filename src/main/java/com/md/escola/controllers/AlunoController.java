@@ -34,7 +34,9 @@ public class AlunoController {
         ModelAndView modelAndView = new ModelAndView("aluno-matriculas");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+        modelAndView.addObject("usuario", user);
         Aluno aluno = alunoService.findByPessoa(user.getPessoa());
+        modelAndView.addObject("aluno", aluno);
         List<Matricula> matriculas = matriculaService.findByAluno(aluno);
         modelAndView.addObject("matriculas", matriculas);
         return modelAndView;

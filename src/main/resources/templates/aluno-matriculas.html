@@ -25,13 +25,13 @@
                         </div>
                         <div class="conteudo-principal-content container-fluid mb-4">
                             <ul class="mt-4">
-                                <li class="my-2"> Nome: <span> Josefa Dalania da Silva</span></li>
-                                <li class="my-2"> Matricula: <span>202255554</span></li>
+                                <li class="my-2"> Nome: <span th:text="${usuario.pessoa.nome}"> </span></li>
+                                <li class="my-2"> Matricula: <span th:text="${aluno.matriculaGeral}"></span></li>
                                 <li class="my-2"> Nível: <span>Fundamental</span></li>
-                                <li class="my-2"> Email <span>jdalaniasilva@gmail.com</span></li>
-                                <li class="my-2">Data de Nascimento <span>22/04/1999</span></li>
-                                <li class="my-2">Cpf <span>70671759418</span></li>
-                                <li class="my-2">RG: <span>003093176</span></li>
+                                <li class="my-2"> Email <span th:text="${usuario.email}"></span></li>
+                                <li class="my-2">Data de Nascimento <span th:text="${usuario.pessoa.dataNascimento}"></span></li>
+                                <li class="my-2">Cpf <span th:text="${usuario.pessoa.cpf}"></span></li>
+                                <li class="my-2">RG: <span th:text="${usuario.pessoa.rg}"></span></li>
                             </ul>
                         </div>
                     </article>
@@ -75,11 +75,10 @@
                             </thead>
                             <tbody>
                             <tr th:each="matricula : ${matriculas}">
-                                <td th:text="${matricula.aluno.pessoa.nome}"></td>
                                 <td th:text="${matricula.turma.disciplina.nome}"></td>
                                 <td th:text="${matricula.turma.periodo.nome}"></td>
                                 <td th:text="${matricula.turma.professor.pessoa.nome}"></td>
-                                <td><a th:href="@{'/aluno/visualizar-nota/' + ${matricula.id}}"><i class="bi bi-box-arrow-in-up-left"></i></a>aaa</td>
+                                <td><a th:href="@{'/aluno/visualizar-nota/' + ${matricula.id}}"><i class="bi bi-box-arrow-in-up-left"></i></a></td>
                             </tr>
                             </tbody>
                     </table>
