@@ -2,24 +2,25 @@
 
   <nav  class="navbar navbar-expand-lg  d-flex align-items-center justify-content-between" aria-label="primary">
     <h1>E-School</h1>
-    <ul class="">
+    <ul class=  "">
       <li>
-        <a href="">Alunos</a>
+        <a href="/admin/listar-usuarios">Alunos</a>
       </li>
       <li>
-        <a href="">Cordenadores</a>
+        <a href="/admin/listar-professores">Professores</a>
+      </li>
+      <li>
+        <a href="/listar-turmas">Turmas</a>
       </li>
       <li>
         <a href="/listar-disciplinas">Disciplinas</a>
       </li>
       <li>
-        <a href="">Professores</a>
+        <a href="/admin/listar-matriculas">Matriculas</a>
       </li>
       <li>
-        <a href="">Matriculas</a>
-      </li>
-      <li>
-        <a href="">Turmas</a>
+        <!--    Falta colocar um ícone ao invés no nome "logout"    -->
+        <a class="btn-md" th:href="@{/logout}">Logout</a>
       </li>
     </ul>
   </nav>
