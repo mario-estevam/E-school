@@ -108,7 +108,7 @@ public class MatriculaController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/profesor/editar-nota/{id}")
+    @GetMapping(value = "/professor/editar-nota/{id}")
     public ModelAndView editNota(@PathVariable("id") Long id){
         ModelAndView modelAndView = new ModelAndView("editar-nota");
         Matricula matricula = matriculaService.findById(id);
