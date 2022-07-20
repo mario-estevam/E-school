@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layouts/layout-base :: page">
+  <main class="container" th:fragment="content">
+    <div class="row my-4 container-md">
+      <div class="col-12">
+        <div th:replace="fragments/breadcrumb :: breadcrumb(
+                link_page_home='/admin/home',
+                page_home='Home',
+                previous_page_link='/admin/listar-matriculas',
+                previous_page='Matriculas',
+                current_page='Editar'
+
+              )">
+        </div>
+
+        <article class="conteudo-principal  mw-50  mt-2">
+          <div class="conteudo-principal-header px-2">
+            <h1 class="my-4 ">Editar Matricula</h1>
+          </div>
+
+          <form class="my-4"  action="#" th:action="@{/admin/matricular-save}"
+                method="post" autocomplete="off" role="form">
+            <div class="row">
+              <div class="form-group col-md-6 has-validation">
+                <label for="turmaId" class="form-label required" required >Selecione a turma</label>
+                <select class="form-select" id="turmaId" name="professor" required th:field="*{matricula.util}">
+                  <option th:each="periodo:${periodos}" th:text="${periodo.nome}" th:value="${periodo.id}"></option>
+                </select>
+                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+              </div>
+              <div class="form-group col-md-6 has-validation">
+                <label for="alunoId" class="form-label required" required >Selecione o aluno</label>
+                <select class="form-select" id="alunoId"  required th:field="*{matricula.aluno}">
+                  <option th:each="aluno:${alunos}" th:text="${aluno.pessoa.nome}"  th:value="${aluno.id}"></option>
+                </select>
+                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+              </div>
+              <div class="col-12 d-flex justify-content-between">
+                <button type="submit" class="btn mt-4 btn-success submit-form-user">Atualizar</button>
+                <a th:href="@{/admin/listar-matriculas}" class="btn mt-4 btn-outline-danger" >
+                  Cancelar
+                </a>
+              </div>
+            </div>
+          </form>
+        </article>
+      </div>
+    </div>
+  </main>
+</html>
