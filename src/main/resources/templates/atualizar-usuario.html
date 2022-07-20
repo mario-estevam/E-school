@@ -8,9 +8,9 @@
     <div class="row my-4 container-md">
         <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              link_page_home='/home-admin',
               page_home='Home',
-              previous_page_link='',
+              previous_page_link='/admin/listar-usuarios',
               previous_page='Usuários',
               current_page='Editar'
 
@@ -93,7 +93,7 @@
                                 <button type="submit" name="action" value="updateAndList" class="btn  mt-4 btn-success submit-form-user" >Atualizar</button>
                             </div>
 
-                            <a th:href="@{/admin/listar-usuarios}" class="btn mt-4 btn-danger text-white" >
+                            <a th:href="@{/admin/listar-usuarios}" class="btn mt-4 btn-outline-danger" >
                                 Cancelar
                             </a>
 
