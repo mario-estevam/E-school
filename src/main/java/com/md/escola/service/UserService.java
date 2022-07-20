@@ -67,6 +67,17 @@ public class UserService {
         return userRepository.findAllByDeleteIsNull();
     }
 
+    public List<User> findAllUsersProfessor(){
+        Role role = roleRepository.findByRole("PROFESSOR");
+        return this.getUsersByRole(role);
+    }
+
+    public List<User> findAllUsersAluno(){
+        Role role = roleRepository.findByRole("ALUNO");
+        return this.getUsersByRole(role);
+    }
+
+
     public void delete(Long id){
         SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();

@@ -43,4 +43,7 @@ public class TurmaService {
         return repository.findAll();
     }
 
+    public void delete(Long id) {
+//        TO DO
+    }
 }

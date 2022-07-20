@@ -81,7 +81,6 @@ public class MatriculaService {
         return repository.findAll();
     }
 
-
     public void inserirMatriculas(Matricula matricula) {
         Periodo periodo = periodoService.findById(matricula.getUtil());
         ArrayList<Matricula> matriculas = new ArrayList<>();
@@ -99,5 +98,9 @@ public class MatriculaService {
             matriculas.add(matricula1);
         }
         insertList(matriculas);
+    }
+
+    public void delete(Long id) {
+//        TO DO
     }
 }
