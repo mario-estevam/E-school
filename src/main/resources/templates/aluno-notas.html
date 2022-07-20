@@ -8,15 +8,16 @@
     <div class="row my-4 container-md">
         <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              link_page_home='/aluno/listar-matriculas',
               page_home='Home',
-              previous_page_link=''
+              previous_page_link='',
+              previous_page='',
+              current_page='Minhas notas'
 
             )">
             </div>
             <span th:if="${#request.getParameter('msg')} !=null" class="alert alert-primary par" role="alert" th:text="${#request.getParameter('msg')}"></span>
             <div class="container-fluid">
-
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Minhas Notas</h1>

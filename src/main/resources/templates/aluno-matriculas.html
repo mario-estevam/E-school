@@ -8,30 +8,30 @@
     <div class="row my-4 container-md">
         <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              link_page_home='/aluno/listar-matriculas',
               page_home='Home',
               previous_page='',
               previous_page_link='',
-              current_page='Minhas Disciplinas'
+              current_page=''
 
             )">
             </div>
 
             <div class="row">
                 <div class="col-6">
-                    <article class="conteudo-principal  mw-50  mt-2 align-items-center  ">
+                    <article class="conteudo-principal mw-50 mt-2 align-items-center  ">
                         <div class="conteudo-principal-header px-2">
                             <h1 class="my-4 ">Meus dados pessoais</h1>
                         </div>
                         <div class="conteudo-principal-content container-fluid mb-4">
                             <ul class="mt-4">
-                                <li class="my-2"> Nome: <span th:text="${usuario.pessoa.nome}"> </span></li>
-                                <li class="my-2"> Matricula: <span th:text="${aluno.matriculaGeral}"></span></li>
-                                <li class="my-2"> Nível: <span>Fundamental</span></li>
-                                <li class="my-2"> Email <span th:text="${usuario.email}"></span></li>
-                                <li class="my-2">Data de Nascimento <span th:text="${usuario.pessoa.dataNascimento}"></span></li>
-                                <li class="my-2">Cpf <span th:text="${usuario.pessoa.cpf}"></span></li>
-                                <li class="my-2">RG: <span th:text="${usuario.pessoa.rg}"></span></li>
+                                <li class="my-2"> <b>Nome:</b> <span th:text="${usuario.pessoa.nome}"> </span></li>
+                                <li class="my-2"> <b>Matricula:</b> <span th:text="${aluno.matriculaGeral}"></span></li>
+                                <li class="my-2"> <b>Nível:</b> <span>Fundamental</span></li>
+                                <li class="my-2"> <b>Email:</b> <span th:text="${usuario.email}"></span></li>
+                                <li class="my-2"> <b>Data de Nascimento:</b> <span th:text="${usuario.pessoa.dataNascimento}"></span></li>
+                                <li class="my-2"> <b>CPF:</b> <span th:text="${usuario.pessoa.cpf}"></span></li>
+                                <li class="my-2"> <b>RG:</b> <span th:text="${usuario.pessoa.rg}"></span></li>
                             </ul>
                         </div>
                     </article>
@@ -43,45 +43,41 @@
                         </div>
                         <div class="conteudo-principal-content container-fluid mb-4">
                             <ul class="mt-4">
-                                <li class="my-2"> Instituição de Ensino: <span> Escola Agricola de Jundiai</span></li>
-                                <li class="my-2"> Ano de entrada: <span>2020</span></li>
-                                <li class="my-2"> Status do Aluno: <span>Ativo</span></li>
-                                <li class="my-2"> Coordenador Geral: <span>Carla Fernandes melhor professora <3</span></li>
-
+                                <li class="my-2"> <b>Instituição de Ensino:</b> <span> Escola Agricola de Jundiai</span></li>
+                                <li class="my-2"> <b>Ano de entrada:</b> <span>2020</span></li>
+                                <li class="my-2"> <b>Status do Aluno:</b> <span>Ativo</span></li>
+                                <li class="my-2"> <b>Coordenador Geral:</b> <span>Carla Fernandes melhor professora <3</span></li>
                             </ul>
                         </div>
                     </article>
                 </div>
             </div>
-
                 <article class="conteudo-principal  mw-50  mt-2 align-items-center  ">
                     <div class="conteudo-principal-header px-2">
-                        <h1 class="my-4 ">Minhas Disciplinas(5)</h1>
+                        <h1 class="my-4 ">Minhas Turmas</h1>
                     </div>
                     <div class="conteudo-principal-content container-fluid mb-4">
-
                         <table
                           data-toggle="table"
-                          data-page-list="[10, 25, 50, 100, 200, All]"
-                          class="mt-4 table table-striped display"
+                          class="mt-2 table table-striped display"
                           id="table-disciplinas">
                             <thead>
                                 <tr>
-                                    <th scope="col">Componente curricular</th>
-                                    <th scope="col">Periodo</th>
-                                    <th scope="col">Professor</th>
+                                    <th>Componente curricular</th>
+                                    <th>Periodo</th>
+                                    <th>Professor(a)</th>
                                     <th>Ver Disciplina</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="matricula : ${matriculas}">
-                                <td th:text="${matricula.turma.disciplina.nome}"></td>
-                                <td th:text="${matricula.turma.periodo.nome}"></td>
-                                <td th:text="${matricula.turma.professor.pessoa.nome}"></td>
-                                <td><a th:href="@{'/aluno/visualizar-nota/' + ${matricula.id}}"><i class="bi bi-box-arrow-in-up-left"></i></a></td>
-                            </tr>
+                                <tr th:each="matricula:${matriculas}">
+                                    <td th:text="${matricula.turma.disciplina.nome}"></td>
+                                    <td th:text="${matricula.turma.periodo.nome}"></td>
+                                    <td th:text="${matricula.turma.professor.pessoa.nome}"></td>
+                                    <td ><a th:href="@{'/aluno/visualizar-nota/' + ${matricula.id}}"><i class="bi bi-box-arrow-in-up-left"></i> Visualizar </a></td>
+                                </tr>
                             </tbody>
-                    </table>
+                        </table>
                     </div>
                 </article>
 
