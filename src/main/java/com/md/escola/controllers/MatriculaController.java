@@ -7,11 +7,9 @@ import com.md.escola.service.PeriodoService;
 import com.md.escola.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -56,6 +54,26 @@ public class MatriculaController {
         return "redirect:/admin/listar-matriculas";
     }
 
+    @GetMapping(value = "/admin/editar-matricula/{id}")
+    public ModelAndView editMatricula(@PathVariable("id") Long id){
+        ModelAndView modelAndView = new ModelAndView("atualizar-matricula");
+        Matricula matricula = matriculaService.findById(id);
+        List<Turma> turmas = turmaService.getAll();
+        List<Periodo> periodos = periodoService.getAll();
+        List<Aluno> alunos = alunoService.getAll();
+        modelAndView.addObject("matricula", matricula);
+        modelAndView.addObject("alunos", alunos);
+        modelAndView.addObject("periodos", periodos);
+        modelAndView.addObject("turmas", turmas);
+        return modelAndView;
+    }
+
+    @RequestMapping("/admin/deletar-matricula/{id}")
+    public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
+        matriculaService.delete(id);
+        redirectAttributes.addAttribute("msg", "Matricula removida com sucesso");
+        return "redirect:/admin/listar-matriculas";
+    }
 
     @GetMapping(value = "/admin/matricula-dependencia")
     public ModelAndView createMatricula(){
@@ -82,7 +100,6 @@ public class MatriculaController {
         return "redirect:/admin/listar-matriculas";
     }
 
-
     @GetMapping(value = "/admin/listar-matriculas")
     public ModelAndView listMatriculas(){
         ModelAndView modelAndView = new ModelAndView("listar-matricula");
@@ -90,8 +107,6 @@ public class MatriculaController {
         modelAndView.addObject("matriculas", matriculas);
         return modelAndView;
     }
-
-
 
     @GetMapping(value = "/profesor/editar-nota/{id}")
     public ModelAndView editNota(@PathVariable("id") Long id){

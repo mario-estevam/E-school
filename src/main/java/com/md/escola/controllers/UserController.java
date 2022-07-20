@@ -47,7 +47,7 @@ public class UserController {
             return "redirect:/login";
         }
         if (user.getRole().getRole().equals("ADMIN")) {
-            return "redirect:/home-admin";
+            return "redirect:/admin/home";
         } else if (user.getRole().getRole().equals("PROFESSOR")) {
             return "redirect:/home-professor";
         }else{
@@ -56,18 +56,15 @@ public class UserController {
         }
     }
 
-
-
-
-    @GetMapping(value="/home-admin")
+    @GetMapping(value="/admin/home-admin")
     public ModelAndView homeAdmin(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/admin/home-admin");
+        modelAndView.setViewName("home");
         return  modelAndView;
 
     }
 
-    @GetMapping(value="/registration")
+    @GetMapping(value="/admin/registration")
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
@@ -76,7 +73,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/registration")
+    @PostMapping(value = "/admin/registration")
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult, @RequestParam(value="action",required=true) String action) {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -142,10 +139,10 @@ public class UserController {
        Pessoa pessoa = user.getPessoa();
        pessoaService.update(pessoa);
        redirectAttributes.addAttribute("msg", "Usuário atualizado com sucesso");
-       return "redirect:/admin/listar-usuarios";
+       return "redirect:/listar-usuarios";
     }
 
-    @GetMapping(value = "/editar-usuario/{id}")
+    @GetMapping(value = "/admin/editar-usuario/{id}")
     public ModelAndView updateUser(@PathVariable("id") Long id){
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.findUserById(id);
@@ -157,7 +154,7 @@ public class UserController {
     @PostMapping(value = "/cancelar")
     public ModelAndView cancelarSubmit(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("home");
         return  modelAndView;
     }
 
@@ -165,7 +162,7 @@ public class UserController {
     public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
         userService.delete(id);
         redirectAttributes.addAttribute("msg", "Deletado com sucesso");
-        return "redirect:/admin/listar-usuarios";
+        return "redirect:/listar-usuarios";
     }
 
 
@@ -179,9 +176,9 @@ public class UserController {
         }else{
             modelAndView.addObject("usuario", user);
             modelAndView.addObject("adminMessage","Conteúdo disponível apenas para usuários com função de administrador");
-            modelAndView.setViewName("admin/home");
+            modelAndView.setViewName("home");
         }
-        modelAndView.setViewName("admin/home");
+        modelAndView.setViewName("home");
         return modelAndView;
     }
 
@@ -194,10 +191,13 @@ public class UserController {
             modelAndView.setViewName("error");
         }else{
             List<User> usuarios = userService.findAllUsers();
+            List<User> professores = userService.findAllUsersProfessor();
+            List<User> alunos = userService.findAllUsersAluno();
+            modelAndView.addObject("alunos", alunos);
+            modelAndView.addObject("professores", professores);
             modelAndView.addObject("usuarios", usuarios);
             modelAndView.setViewName("listar-usuarios");
         }
-//        modelAndView.setViewName("listar-usuarios");
         return modelAndView;
     }
 
@@ -215,10 +215,4 @@ public class UserController {
         }
         return modelAndView;
     }
-
-
-
 }
-
-
-

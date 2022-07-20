@@ -18,7 +18,7 @@ public class DisciplinaController {
     @Autowired
     private DisciplinaService disciplinaService;
 
-    @GetMapping(value = "/cadastro-disciplina")
+    @GetMapping(value = "/admin/cadastro-disciplina")
     public ModelAndView createDisciplina(){
         ModelAndView modelAndView = new ModelAndView("disciplina");
         List<Disciplina> disciplinas = disciplinaService.getAll();
@@ -30,7 +30,7 @@ public class DisciplinaController {
 
     @GetMapping(value = "/listar-disciplinas")
     public ModelAndView listDiscplinas(){
-        ModelAndView modelAndView = new ModelAndView("/disciplina/listar-disciplina");
+        ModelAndView modelAndView = new ModelAndView("listar-disciplina");
         List<Disciplina> disciplinas = disciplinaService.getAll();
         modelAndView.addObject("disciplinas", disciplinas);
         return modelAndView;
@@ -56,12 +56,11 @@ public class DisciplinaController {
     @RequestMapping("/admin/deletar-disciplina/{id}")
     public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
         disciplinaService.delete(id);
-        redirectAttributes.addAttribute("msg", "Deletada com sucesso");
+        redirectAttributes.addAttribute("msg", "Disciplina deletada com sucesso");
         return "redirect:/listar-disciplinas";
     }
 
-
-    @PostMapping(value = "/cadastro-disciplina")
+    @PostMapping(value = "/admin/cadastro-disciplina")
     public ModelAndView createNewDiscipline(@Valid Disciplina disciplina, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
         if(bindingResult.hasErrors()){
