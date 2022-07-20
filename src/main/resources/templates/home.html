@@ -25,6 +25,15 @@
                 <span th:utext="${usuario.getUserName()}"></span>
             </div>
             <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+            <div class="actions">
+                <a th:href="@{/admin/registration}">Cadastrar usuário</a>
+                <a th:href="@{/admin/cadastro-disciplina}">Cadastrar disciplina</a>
+                <a th:href="@{/admin/cadastro-turma}">Cadastrar turma</a>
+                <a th:href="@{/admin/matricular}">Matricular aluno</a>
+            </div>
+            <div>
+
+            </div>
         </div>
     </div>
 

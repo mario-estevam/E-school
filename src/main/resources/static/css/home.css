@@ -1,0 +1,12 @@
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+.actions a {
+    padding: 1rem;
+}
+
+a {
+    text-decoration-line: none;
+}
