@@ -8,38 +8,38 @@
     <div class="row my-4 container-md">
         <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
-              page_home='Home',
-              previous_page_link=''
-
-            )">
+                  link_page_home='/admin/home',
+                  page_home='Home',
+                  previous_page_link='',
+                  previous_page='',
+                  current_page='Disciplinas'
+                )">
             </div>
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="disciplina : ${disciplinas}">
+                        <td th:text="${disciplina.id}">ID</td>
+                        <td th:text="${disciplina.nome}">Nome</td>
+                        <td><a role="button" th:href="@{'/admin/editar-disciplina/' + ${disciplina.id}}"><i class="bi bi-pencil-square"></i></a></td>
+                        <td><a role="button"  th:href="@{'/admin/deletar-disciplina/' + ${disciplina.id}}"><i class="bi bi-trash"></i></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="mt-4">
             <span th:if="${#request.getParameter('msg')} !=null" class="alert alert-primary par" role="alert" th:text="${#request.getParameter('msg')}"></span>
-        <div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="disciplina : ${disciplinas}">
-                    <td th:text="${disciplina.id}">ID</td>
-                    <td th:text="${disciplina.nome}">Nome</td>
-                    <td><a class="btn btn-warning" role="button"  th:href="@{'/admin/deletar-disciplina/' + ${disciplina.id}}">Deletar </a></td>
-                    <td><a class="btn btn-info"  role="button" th:href="@{'/admin/editar-disciplina/' + ${disciplina.id}}">Editar </a></td>
-                </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 
-
-
-
 </main>
-<script>
-
-</script>
 </html>
