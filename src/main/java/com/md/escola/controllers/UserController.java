@@ -72,11 +72,6 @@ public class UserController {
 
     @GetMapping(value="/home-admin")
     public ModelAndView homeAdmin(){
-        Integer qtdTurmas = turmaService.countTurmas();
-        Integer qtdAlunos = alunoService.countAlunos();
-        Integer qtdDisciplinas = disciplinaService.countDisciplinas();
-        Integer qtdProfessores = professorService.countProfessores();
-        Integer qtdUsuarios = pessoaService.countPessoas();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("qtdTurmas", 10);
         modelAndView.addObject("qtdDisciplinas", 10);
