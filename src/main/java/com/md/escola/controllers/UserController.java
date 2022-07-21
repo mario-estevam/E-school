@@ -73,7 +73,7 @@ public class UserController {
     @GetMapping(value="/home-admin")
     public ModelAndView homeAdmin(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home-admin");
+        modelAndView.setViewName("homeadmin");
         return  modelAndView;
 
     }
