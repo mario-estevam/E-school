@@ -73,12 +73,7 @@ public class UserController {
     @GetMapping(value="/home-admin")
     public ModelAndView homeAdmin(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("qtdTurmas", 10);
-        modelAndView.addObject("qtdDisciplinas", 10);
-        modelAndView.addObject("qtdAlunos", 10);
-        modelAndView.addObject("qtdProfessores", 10);
-        modelAndView.addObject("qtdUsuarios", 10);
-        modelAndView.setViewName("/home-admin");
+        modelAndView.setViewName("home-admin");
         return  modelAndView;
 
     }
