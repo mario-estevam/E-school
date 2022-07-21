@@ -26,10 +26,10 @@
                         <div class="conteudo-principal-content container-fluid mb-4">
                             <ul class="mt-4">
                                 <li class="my-2"> <b>Nome:</b> <span th:text="${usuario.pessoa.nome}"> </span></li>
-                                <li class="my-2"> <b>Matricula:</b> <span th:text="${aluno.matriculaGeral}"></span></li>
+                                <li class="my-2"> <b>Matricula:</b> <span th:text="${aluno.matriculaGeral.replace('-', '')}"></span></li>
                                 <li class="my-2"> <b>Nível:</b> <span>Fundamental</span></li>
                                 <li class="my-2"> <b>Email:</b> <span th:text="${usuario.email}"></span></li>
-                                <li class="my-2"> <b>Data de Nascimento:</b> <span th:text="${usuario.pessoa.dataNascimento}"></span></li>
+                                <li class="my-2"> <b>Data de Nascimento:</b> <span th:text="${#temporals.format(usuario.pessoa.dataNascimento, 'dd/MM/yyyy')}"></span></li>
                                 <li class="my-2"> <b>CPF:</b> <span th:text="${usuario.pessoa.cpf}"></span></li>
                                 <li class="my-2"> <b>RG:</b> <span th:text="${usuario.pessoa.rg}"></span></li>
                             </ul>
@@ -66,7 +66,7 @@
                                     <th>Componente curricular</th>
                                     <th>Periodo</th>
                                     <th>Professor(a)</th>
-                                    <th>Ver Disciplina</th>
+                                    <th>Notas</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,7 +74,7 @@
                                     <td th:text="${matricula.turma.disciplina.nome}"></td>
                                     <td th:text="${matricula.turma.periodo.nome}"></td>
                                     <td th:text="${matricula.turma.professor.pessoa.nome}"></td>
-                                    <td ><a th:href="@{'/aluno/visualizar-nota/' + ${matricula.id}}"><i class="bi bi-box-arrow-in-up-left"></i> Visualizar </a></td>
+                                    <td ><a th:href="@{'/aluno/visualizar-nota/' + ${matricula.id}}"><i class="bi bi-box-arrow-in-up-left"></i> Ver Notas</a></td>
                                 </tr>
                             </tbody>
                         </table>
