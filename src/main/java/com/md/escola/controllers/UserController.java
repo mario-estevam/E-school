@@ -78,11 +78,11 @@ public class UserController {
         Integer qtdProfessores = professorService.countProfessores();
         Integer qtdUsuarios = pessoaService.countPessoas();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("qtdTurmas", qtdTurmas);
-        modelAndView.addObject("qtdDisciplinas", qtdDisciplinas);
-        modelAndView.addObject("qtdAlunos", qtdAlunos);
-        modelAndView.addObject("qtdProfessores", qtdProfessores);
-        modelAndView.addObject("qtdUsuarios", qtdUsuarios);
+        modelAndView.addObject("qtdTurmas", 10);
+        modelAndView.addObject("qtdDisciplinas", 10);
+        modelAndView.addObject("qtdAlunos", 10);
+        modelAndView.addObject("qtdProfessores", 10);
+        modelAndView.addObject("qtdUsuarios", 10);
         modelAndView.setViewName("/home-admin");
         return  modelAndView;
 
