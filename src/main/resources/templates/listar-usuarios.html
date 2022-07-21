@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html
-  xmlns:th="http://www.thymeleaf.org"
-  th:replace="layouts/layout-base :: page">
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layouts/layout-base :: page">
 
 <main class="container " th:fragment="content">
 
     <div class="row my-4 container-md">
         <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              link_page_home='/admin/home',
               page_home='Home',
               previous_page='',
               previous_page_link='',
-              current_page=''
-
+              current_page='Usuários'
             )">
             </div>
             <span th:if="${#request.getParameter('msg')} !=null" class="alert alert-primary par" role="alert" th:text="${#request.getParameter('msg')}"></span>
@@ -25,17 +24,13 @@
                             <i class="fa-solid fa-graduation-cap"></i>
                         </div>
                         <span>1273</span>
-
-
                     </div>
-
                     <div class="card blue">
                         <div class="d-flex justify-content-between">
                             <span>Professores</span>
                             <i class="fa-solid fa-graduation-cap"></i>
                         </div>
                         <span>4</span>
-
                     </div>
 
 
@@ -44,7 +39,7 @@
                             <span>Disciplinas</span>
                             <span>Icone</span>
                         </div>
-                        <span >4</span>
+                        <span>4</span>
                     </div>
                 </section>
                 <article class="conteudo-principal  mw-50  mt-2 align-items-center  ">
@@ -54,29 +49,34 @@
                     <div class="conteudo-principal-content container-fluid mb-4">
 
                         <table
-                          data-toggle="table"
-                          data-page-list="[10, 25, 50, 100, 200, All]"
-                          class="mt-4 table table-striped display"
-                          id="table-usuario"
+                                data-toggle="table"
+                                data-page-list="[10, 25, 50, 100, 200, All]"
+                                class="mt-4 table table-striped display"
+                                id="table-usuario"
                         >
                             <thead>
-                                <tr>
-                                    <th data-field="nome">Nome</th>
-                                    <th data-field="usuario">Usuário</th>
-                                    <th data-field="email">E-mail</th>
-                                    <th data-field="editar">Editar</th>
-                                    <th data-field="excluir">Excluir</th>
-                                </tr>
+                            <tr>
+                                <th data-field="nome">Nome</th>
+                                <th data-field="usuario">Usuário</th>
+                                <th data-field="email">E-mail</th>
+                                <th data-field="dataNascimento">Data de nascimento</th>
+                                <th data-field="sexo">Sexo</th>
+                                <th data-field="role">Tipo de usuário</th>
+                                <th data-field="editar">Editar</th>
+                                <th data-field="excluir">Excluir</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="usuario : ${usuarios}">
-                                    <td th:text="${usuario.pessoa.nome.toUpperCase()}">Nome</td>
-                                    <td th:text="${usuario.getUserName()}">Usuário</td>
-                                    <td th:text="${usuario.getEmail()}">E-Mail</td>
-                                    <td><a  role="button" th:href="@{/editar-usuario/{id}(id=${usuario.id})}"><i class="bi bi-pencil-square"></i></a></td>
-                                    <td><a role="button" th:href="@{/admin/deletar/{id}(id=${usuario.id})}"><i class="bi bi-trash"></i>
-                                    </a></td>
-                                </tr>
+                            <tr th:each="usuario : ${usuarios}">
+                                <td th:text="${usuario.pessoa.nome.toUpperCase()}">Nome</td>
+                                <td th:text="${usuario.getUserName()}">Usuário</td>
+                                <td th:text="${usuario.getEmail()}">E-Mail</td>
+                                <td th:text="${#temporals.format(usuario.pessoa.dataNascimento, 'dd/MM/yyyy')}">Data de nascimento</td>
+                                <td th:text="${usuario.pessoa.sexo}">Sexo</td>
+                                <td th:text="${usuario.getRole().getRole()}">Tipo do usuário</td>
+                                <td><a  role="button" th:href="@{/admin/editar-usuario/{id}(id=${usuario.id})}"><i class="bi bi-pencil-square"></i></a></td>
+                                <td><a role="button" th:href="@{/admin/deletar/{id}(id=${usuario.id})}"><i class="bi bi-trash"></i></a></td>
+                            </tr>
                             </tbody>
                         </table>
 
@@ -90,27 +90,31 @@
                     <div class="conteudo-principal-content container-fluid mb-4">
 
                         <table
-                          data-toggle="table"
-                          data-page-list="[10, 25, 50, 100, 200, All]"
-                          class="mt-4 table table-striped display"
-                          id="table-professor"
+                                data-toggle="table"
+                                data-page-list="[10, 25, 50, 100, 200, All]"
+                                class="mt-4 table table-striped display"
+                                id="table-professor"
                         >
                             <thead>
                             <tr>
                                 <th data-field="nome">Nome</th>
                                 <th data-field="usuario">Usuário</th>
                                 <th data-field="email">E-mail</th>
+                                <th data-field="dataNascimento">Data de nascimento</th>
+                                <th data-field="sexo">Sexo</th>
                                 <th>Editar</th>
                                 <th>Excluir</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="usuario : ${usuarios}">
-                                <td th:text="${usuario.pessoa.nome.toUpperCase()}">Nome</td>
-                                <td th:text="${usuario.getUserName()}">Usuário</td>
-                                <td th:text="${usuario.getEmail()}">E-Mail</td>
-                                <td><a role="button" th:href="@{/editar-usuario/{id}(id=${usuario.id})}"><i class="bi bi-pencil-square"></i> </a></td>
-                                <td><a role="button" th:href="@{/admin/deletar/{id}(id=${usuario.id})}"><i class="bi bi-trash"></i>
+                            <tr th:each="professor : ${professores}">
+                                <td th:text="${professor.pessoa.nome.toUpperCase()}">Nome</td>
+                                <td th:text="${professor.getUserName()}">Usuário</td>
+                                <td th:text="${professor.getEmail()}">E-Mail</td>
+                                <td th:text="${#temporals.format(professor.pessoa.dataNascimento, 'dd/MM/yyyy')}">Data de nascimento</td>
+                                <td th:text="${professor.pessoa.sexo}">Sexo</td>
+                                <td><a role="button" th:href="@{/admin/editar-usuario/{id}(id=${professor.id})}"><i class="bi bi-pencil-square"></i> </a></td>
+                                <td><a role="button" th:href="@{/admin/deletar/{id}(id=${professor.id})}"><i class="bi bi-trash"></i>
                                 </a></td>
                             </tr>
                             </tbody>
@@ -126,27 +130,31 @@
                     <div class="conteudo-principal-content container-fluid mb-4">
 
                         <table
-                          data-toggle="table"
-                          data-page-list="[10, 25, 50, 100, 200, All]"
-                          class="mt-4 table table-striped display"
-                          id="table-professor"
+                                data-toggle="table"
+                                data-page-list="[10, 25, 50, 100, 200, All]"
+                                class="mt-4 table table-striped display"
+                                id="table-professor"
                         >
                             <thead>
                             <tr>
                                 <th data-field="nome">Nome</th>
                                 <th data-field="usuario">Usuário</th>
                                 <th data-field="email">E-mail</th>
+                                <th data-field="dataNascimento">Data de nascimento</th>
+                                <th data-field="sexo">Sexo</th>
                                 <th>Editar</th>
                                 <th>Excluir</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="usuario : ${usuarios}">
-                                <td th:text="${usuario.pessoa.nome.toUpperCase()}">Nome</td>
-                                <td th:text="${usuario.getUserName()}">Usuário</td>
-                                <td th:text="${usuario.getEmail()}">E-Mail</td>
-                                <td><a role="button" th:href="@{/editar-usuario/{id}(id=${usuario.id})}"><i class="bi bi-pencil-square"></i></a></td>
-                                <td><a role="button" th:href="@{/admin/deletar/{id}(id=${usuario.id})}"><i class="bi bi-trash"></i>
+                            <tr th:each="aluno : ${alunos}">
+                                <td th:text="${aluno.pessoa.nome.toUpperCase()}">Nome</td>
+                                <td th:text="${aluno.getUserName()}">Usuário</td>
+                                <td th:text="${aluno.getEmail()}">E-Mail</td>
+                                <td th:text="${#temporals.format(aluno.pessoa.dataNascimento, 'dd/MM/yyyy')}">Data de nascimento</td>
+                                <td th:text="${aluno.pessoa.sexo}">Sexo</td>
+                                <td><a role="button" th:href="@{/admin/editar-usuario/{id}(id=${aluno.id})}"><i class="bi bi-pencil-square"></i></a></td>
+                                <td><a role="button" th:href="@{/admin/deletar/{id}(id=${aluno.id})}"><i class="bi bi-trash"></i>
                                 </a></td>
                             </tr>
                             </tbody>

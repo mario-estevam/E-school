@@ -26,21 +26,11 @@ public class Turma {
     @JoinColumn(name = "disciplina_id")
     Disciplina disciplina;
 
-//    [ ] Uma turma tem várias disciplinas
-//    @OneToMany
-//    @JoinColumn(name = "disciplina_id")
-//    List<Disciplina> disciplinas
-
     String turno;
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
-
-//    [ ] Uma turma tem vários professores
-//    @OneToMany
-//    @JoinColumn(name = "professor_id")
-//    private List<Professor> professores;
 
     public Professor getProfessor() {
         return professor;

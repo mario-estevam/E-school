@@ -8,53 +8,60 @@
     <div class="row my-4 container-md">
         <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              link_page_home='/home-professor',
               page_home='Home',
-              previous_page_link='',
-              previous_page='Professores',
-              current_page='Notas'
+              previous_page_link=@{'/professor/visualizar-matriculas/' + ${matricula.turma.id}},
+              previous_page='Matriculas',
+              current_page='Editar'
 
 
             )">
             </div>
-            <span class="mt-4">Notas</span>
-            <article class="form-cadastro-user border mw-50  mt-2 container-fluid  content-container">
-                <form class="my-4"  action="#" th:action="@{/salvar-nota}"
-                      method="post" autocomplete="off"  role="form">
-                    <div class="row">
-                        <div class="form-group col-md-6 has-validation">
-                            <input type="hidden" th:field="*{matricula.id}">
-                            <input type="hidden" th:field="*{matricula.turma}">
-                            <input type="hidden" th:field="*{matricula.aluno}">
+
+            <article class="conteudo-principal mw-50 mt-2">
+                <div class="conteudo-principal-header px-2">
+                    <h1 class="my-4 ">Editar Nota</h1>
+                </div>
+
+                <div class="conteudo-principal-content container-fluid">
+                    <form class="my-4" action="#" th:action="@{/salvar-nota}"
+                          method="post" autocomplete="off"  role="form">
+                        <div class="row">
+                            <div class="form-group col-md-6 has-validation">
+                                <input type="hidden" th:field="*{matricula.id}">
+                                <input type="hidden" th:field="*{matricula.turma}">
+                                <input type="hidden" th:field="*{matricula.aluno}">
 
 
-                            <label class="form-label "  >Nota 1</label>
-                            <input id="data-admissao" type="number" th:field="${matricula.nota.nota1}" class="form-control" >
+                                <label class="form-label "  >Nota 1</label>
+                                <input id="data-admissao" type="number" th:field="${matricula.nota.nota1}" class="form-control" >
+                            </div>
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="nota" class="form-label "  >Nota 2</label>
+                                <input id="nota" type="number" th:field="${matricula.nota.nota2}" class="form-control" >
+                            </div>
+
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="nota" class="form-label "  >Nota 3</label>
+                                <input id="nota3" type="number" th:field="${matricula.nota.nota3}" class="form-control" >
+                            </div>
+
+                            <div class="form-group col-md-6 has-validation">
+                                <label for="rec" class="form-label"  >Recuperação</label>
+                                <input readonly id="rec" type="number" th:field="${matricula.nota.rec}" class="form-control" >
+                            </div>
+
+                            <div class="col-12 d-flex justify-content-between">
+                                <button type="submit" class="btn  mt-4 btn-success submit-form-user">Salvar</button>
+                                <a th:href="@{'/professor/visualizar-matriculas/' + ${matricula.turma.id}}" class="btn mt-4 btn-outline-danger" >
+                                    Cancelar
+                                </a>
+                            </div>
+
                         </div>
-                        <div class="form-group col-md-6 has-validation">
-                            <label for="nota" class="form-label "  >Nota 2</label>
-                            <input id="nota" type="number" th:field="${matricula.nota.nota2}" class="form-control" >
-                        </div>
-
-                        <div class="form-group col-md-6 has-validation">
-                            <label for="nota" class="form-label "  >Nota 3</label>
-                            <input id="nota3" type="number" th:field="${matricula.nota.nota3}" class="form-control" >
-                        </div>
-
-                        <div class="form-group col-md-6 has-validation">
-                            <label for="rec" class="form-label"  >Recuperação</label>
-                            <input readonly id="rec" type="number" th:field="${matricula.nota.rec}" class="form-control" >
-                        </div>
-
-                        <div class="col-12">
-                            <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
-                        </div>
-
-                    </div>
-                </form>
+                    </form>
+                </div>
             </article>
-
-
         </div>
     </div>
 </main>

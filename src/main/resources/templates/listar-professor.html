@@ -8,11 +8,11 @@
   <div class="row my-4 container-md">
     <div class="col-12">
       <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              link_page_home='/admin/home',
               page_home='Home',
-              previous_page='Professores',
+              previous_page='',
               previous_page_link='',
-              current_page=''
+              current_page='Professores'
 
             )">
       </div>
@@ -68,19 +68,19 @@
                 <th data-field="sexo">Sexo</th>
                 <th data-field="rg">RG</th>
                 <th data-field="cpf">CPF</th>
-                <th data-field="action">Açãos</th>
+                <th data-field="action">Editar</th>
 
               </tr>
               </thead>
               <tbody>
                 <tr th:each="professor : ${professores}">
                   <td th:text="${professor.pessoa.nome}"></td>
-                  <td th:text="${professor.data_admissao}"></td>
+                  <td th:text="${#temporals.format(professor.data_admissao, 'dd/MM/yyyy')}"></td>
                   <td th:text="${professor.siape}"></td>
                   <td th:text="${professor.pessoa.sexo}"></td>
                   <td th:text="${professor.pessoa.rg}"></td>
                   <td th:text="${professor.pessoa.cpf}"></td>
-                  <td><a class="btn btn-info"  role="button" th:href="@{'/admin/professor/editar/' + ${professor.id}}">Editar </a></td>
+                  <td><a role="button" th:href="@{'/admin/editar-professor/' + ${professor.id}}"><i class="bi bi-pencil-square"></i></a></td>
 
                 </tr>
               </tbody>
