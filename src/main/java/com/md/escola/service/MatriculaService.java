@@ -6,7 +6,9 @@ import com.md.escola.repository.MatriculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -99,5 +101,12 @@ public class MatriculaService {
             matriculas.add(matricula1);
         }
         insertList(matriculas);
+    }
+
+    public Integer countMatriculas(){ return repository.countMatriculas(); }
+
+    public void delete(Long id){
+        Matricula matricula = findById(id);
+        repository.delete(matricula);
     }
 }

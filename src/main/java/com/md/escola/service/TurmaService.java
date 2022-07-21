@@ -43,4 +43,6 @@ public class TurmaService {
         return repository.findAll();
     }
 
+    public Integer countTurmas(){ return repository.countTurmas();}
+
 }

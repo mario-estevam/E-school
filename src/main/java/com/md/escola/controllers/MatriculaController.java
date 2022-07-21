@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -109,5 +110,11 @@ public class MatriculaController {
         return "redirect:/home-professor";
     }
 
+    @RequestMapping("/admin/deletar-matricula/{id}")
+    public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
+        matriculaService.delete(id);
+        redirectAttributes.addAttribute("msg", "Deletada com sucesso");
+        return "redirect:/listar-matriculas";
+    }
 
 }

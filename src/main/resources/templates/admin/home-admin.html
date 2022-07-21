@@ -1,17 +1,81 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-  <meta charset="UTF-8">
-  <title>Home - public</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layouts/layout-base :: page">
 
-</head>
-<body>
-  <h1>Hello admin</h1>
+<main class="container " th:fragment="content">
 
-</body>
+  <div class="row my-4 container-md">
+    <div class="col-12">
+      <div th:replace="fragments/breadcrumb :: breadcrumb(
+              link_page_home='',
+              page_home='Home',
+              previous_page='',
+              previous_page_link='',
+              current_page=''
+
+            )">
+      </div>
+      <article class="align-items-center">
+        <section class="cards mb-4">
+
+          <div class="card green ">
+            <div class="d-flex justify-content-between">
+              <span>Alunos</span>
+              <i class="fa fa-solid fa-graduation-cap"></i>
+            </div>
+            <span th:text="${qtdAlunos}"></span>
+
+
+          </div>
+
+          <div class="card blue">
+            <div class="d-flex justify-content-between">
+              <span>Disciplinas</span>
+              <i class="fa fa-solid fa-file-text"></i>
+            </div>
+            <span th:text="${qtdDisciplinas}"></span>
+
+          </div>
+          <div class="card blue-dark">
+            <div class="d-flex justify-content-between">
+              <span>Turmas</span>
+              <i class="fa fa-solid fa-th"></i>
+
+            </div>
+            <span th:text="${qtdTurmas}"> </span>
+
+          </div>
+        </section>
+        <section class="cards mb-4">
+
+          <div class="card orange ">
+            <div class="d-flex justify-content-between">
+              <span>Professores</span>
+              <i class="fa fa-solid fa-id-badge"></i>
+            </div>
+            <span th:text="${qtdProfessores}"></span>
+
+
+          </div>
+
+          <div class="card medium-green">
+            <div class="d-flex justify-content-between">
+              <span>Usuarios</span>
+              <i class="fa fa-solid fa-user"></i>
+            </div>
+            <span th:text="${qtdUsuarios}"></span>
+
+          </div>
+        </section>
+      </article>
+    </div>
+  </div>
+
+
+
+</main>
+<script>
+
+</script>
 </html>

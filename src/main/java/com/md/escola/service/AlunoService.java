@@ -28,4 +28,7 @@ public class AlunoService {
   public List<Aluno> getAll(){
     return repository.findAll();
   }
+
+  public Integer countAlunos(){ return repository.countAlunos();}
+
 }

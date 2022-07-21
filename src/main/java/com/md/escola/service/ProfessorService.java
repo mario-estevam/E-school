@@ -59,6 +59,6 @@ public class ProfessorService {
 
     }
 
-
+    public Integer countProfessores(){return repository.countProfessores();}
 
 }

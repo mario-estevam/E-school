@@ -54,4 +54,6 @@ public class DisciplinaService {
         return repository.findAllByDeleteIsNull();
     }
 
+    public Integer countDisciplinas() { return repository.countDisciplinas();}
+
 }

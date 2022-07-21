@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @NoArgsConstructor
@@ -30,5 +31,6 @@ public class Matricula {
 
     Long util;
 
+    Date delete;
 
 }
