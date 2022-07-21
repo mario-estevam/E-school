@@ -21,10 +21,10 @@
 
           <div class="card green ">
             <div class="d-flex justify-content-between">
-              <span>Alunos</span>
+              <a href="/registration">Cadastrar usuarios</a>
+              <a href="/admin/listar-usuarios"">Listar usuarios</a>
               <i class="fa fa-solid fa-graduation-cap"></i>
             </div>
-            <span th:text="${qtdAlunos}"></span>
 
 
           </div>
@@ -34,8 +34,8 @@
               <span>Disciplinas</span>
               <i class="fa fa-solid fa-file-text"></i>
             </div>
-            <span th:text="${qtdDisciplinas}"></span>
-
+            <a href="/admin/cadastro-disciplina"> Cadastrar Disciplina </a>
+            <a href="/admin/listar-disciplinas"> Listar Disciplina </a>
           </div>
           <div class="card blue-dark">
             <div class="d-flex justify-content-between">
@@ -43,30 +43,13 @@
               <i class="fa fa-solid fa-th"></i>
 
             </div>
-            <span th:text="${qtdTurmas}"> </span>
-
+            <a href="/admin/cadastro-turma"> Cadastrar turma </a>
+            <a href="/admin/listar-turmas"> Listar turmas </a>
           </div>
         </section>
         <section class="cards mb-4">
 
-          <div class="card orange ">
-            <div class="d-flex justify-content-between">
-              <span>Professores</span>
-              <i class="fa fa-solid fa-id-badge"></i>
-            </div>
-            <span th:text="${qtdProfessores}"></span>
-
-
-          </div>
-
-          <div class="card medium-green">
-            <div class="d-flex justify-content-between">
-              <span>Usuarios</span>
-              <i class="fa fa-solid fa-user"></i>
-            </div>
-            <span th:text="${qtdUsuarios}"></span>
-
-          </div>
+         
         </section>
       </article>
     </div>
