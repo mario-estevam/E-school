@@ -67,9 +67,15 @@ public class UserController {
     @GetMapping(value="/admin/registration")
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("usuario", user);
-        modelAndView.setViewName("cadastro");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user.getRole().getId() != 1){
+            modelAndView.setViewName("error");
+        }else {
+            User newUser = new User();
+            modelAndView.addObject("usuario", newUser);
+            modelAndView.setViewName("cadastro");
+        }
         return modelAndView;
     }
 
@@ -101,8 +107,6 @@ public class UserController {
             } else {
                 if(action.equals("cancelar")){
                     modelAndView.setViewName("login");
-
-
                 }else{
                     userService.saveUser(user);
                     modelAndView.addObject("successMessage", "Usuario cadastrado com sucesso");
@@ -116,7 +120,6 @@ public class UserController {
                     }
 
                 }
-
             }
 
         }catch (Exception e){
@@ -139,7 +142,7 @@ public class UserController {
        Pessoa pessoa = user.getPessoa();
        pessoaService.update(pessoa);
        redirectAttributes.addAttribute("msg", "Usuário atualizado com sucesso");
-       return "redirect:/listar-usuarios";
+       return "redirect:/admin/listar-usuarios";
     }
 
     @GetMapping(value = "/admin/editar-usuario/{id}")
@@ -162,7 +165,7 @@ public class UserController {
     public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
         userService.delete(id);
         redirectAttributes.addAttribute("msg", "Deletado com sucesso");
-        return "redirect:/listar-usuarios";
+        return "redirect:/admin/listar-usuarios";
     }
 
 
