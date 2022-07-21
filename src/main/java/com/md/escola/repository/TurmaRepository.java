@@ -12,6 +12,7 @@ public interface TurmaRepository extends JpaRepository<Turma,Long> {
 
     List<Turma> findByProfessor(Professor professor);
     List<Turma> findByPeriodo(Periodo periodo);
+    List<Turma> findByDeleteIsNull();
 
     @Query(value = "SELECT count(t) FROM turma t", nativeQuery = true)
     Integer countTurmas();

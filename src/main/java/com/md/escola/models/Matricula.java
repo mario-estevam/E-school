@@ -31,6 +31,7 @@ public class Matricula {
 
     Long util;
 
-    Date delete;
+
+    private Date delete;
 
 }

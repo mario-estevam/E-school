@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,6 +28,8 @@ public class Turma {
     Disciplina disciplina;
 
     String turno;
+
+    private Date delete;
 
     @ManyToOne
     @JoinColumn(name = "professor_id")

@@ -80,7 +80,7 @@ public class MatriculaService {
     }
 
     public List<Matricula> getAll(){
-        return repository.findAll();
+        return repository.findAllByDeleteIsNull();
     }
 
 
@@ -107,6 +107,8 @@ public class MatriculaService {
 
     public void delete(Long id){
         Matricula matricula = findById(id);
-        repository.delete(matricula);
+        Date date = new Date();
+        matricula.setDelete(date);
+        repository.save(matricula);
     }
 }

@@ -2,7 +2,6 @@ package com.md.escola.controllers;
 
 
 import com.md.escola.models.Pessoa;
-import com.md.escola.models.Turma;
 import com.md.escola.models.User;
 import com.md.escola.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +83,7 @@ public class UserController {
         modelAndView.addObject("qtdAlunos", qtdAlunos);
         modelAndView.addObject("qtdProfessores", qtdProfessores);
         modelAndView.addObject("qtdUsuarios", qtdUsuarios);
-        modelAndView.setViewName("/admin/home-admin");
+        modelAndView.setViewName("/home-admin");
         return  modelAndView;
 
     }

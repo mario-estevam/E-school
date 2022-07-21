@@ -12,6 +12,7 @@ import java.util.List;
 public interface MatriculaRepository extends JpaRepository<Matricula,Long> {
     List<Matricula> findMatriculaByAluno(Aluno aluno);
     List<Matricula> findMatriculaByTurma(Turma turma);
+    List<Matricula> findAllByDeleteIsNull();
 
     @Query(value = "SELECT (m) FROM matricula m", nativeQuery = true)
     Integer countMatriculas();

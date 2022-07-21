@@ -131,11 +131,4 @@ public class MatriculaController {
         return "redirect:/home-professor";
     }
 
-    @RequestMapping("/admin/deletar-matricula/{id}")
-    public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
-        matriculaService.delete(id);
-        redirectAttributes.addAttribute("msg", "Deletada com sucesso");
-        return "redirect:/listar-matriculas";
-    }
-
 }
