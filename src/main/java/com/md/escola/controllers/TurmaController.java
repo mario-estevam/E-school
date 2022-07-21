@@ -1,11 +1,10 @@
 package com.md.escola.controllers;
 
 import com.md.escola.models.*;
-import com.md.escola.service.DisciplinaService;
-import com.md.escola.service.PeriodoService;
-import com.md.escola.service.ProfessorService;
-import com.md.escola.service.TurmaService;
+import com.md.escola.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +24,8 @@ public class TurmaController {
     @Autowired
     private ProfessorService professorService;
 
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private PeriodoService periodoService;
@@ -43,11 +44,17 @@ public class TurmaController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/listar-turmas")
+    @GetMapping(value = "/admin/listar-turmas")
     public ModelAndView listTurmas(){
         ModelAndView modelAndView = new ModelAndView("listar-turmas");
-        List<Turma> turmas = turmaService.getAll();
-        modelAndView.addObject("turmas", turmas);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user.getRole().getId() != 1){
+            modelAndView.setViewName("error");
+        }else {
+            List<Turma> turmas = turmaService.getAll();
+            modelAndView.addObject("turmas", turmas);
+        }
         return modelAndView;
     }
 

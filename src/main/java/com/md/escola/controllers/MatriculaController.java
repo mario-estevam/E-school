@@ -1,11 +1,10 @@
 package com.md.escola.controllers;
 
 import com.md.escola.models.*;
-import com.md.escola.service.AlunoService;
-import com.md.escola.service.MatriculaService;
-import com.md.escola.service.PeriodoService;
-import com.md.escola.service.TurmaService;
+import com.md.escola.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +27,8 @@ public class MatriculaController {
     @Autowired
     private PeriodoService periodoService;
 
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = "/admin/matricular")
     public ModelAndView matricular(){
@@ -103,8 +104,14 @@ public class MatriculaController {
     @GetMapping(value = "/admin/listar-matriculas")
     public ModelAndView listMatriculas(){
         ModelAndView modelAndView = new ModelAndView("listar-matricula");
-        List<Matricula> matriculas = matriculaService.getAll();
-        modelAndView.addObject("matriculas", matriculas);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user.getRole().getId() != 1) {
+            modelAndView.setViewName("error");
+        } else {
+            List<Matricula> matriculas = matriculaService.getAll();
+            modelAndView.addObject("matriculas", matriculas);
+        }
         return modelAndView;
     }
 

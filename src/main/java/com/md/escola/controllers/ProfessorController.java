@@ -79,10 +79,15 @@ public class ProfessorController {
     @GetMapping(value = "/admin/listar-professores")
     public ModelAndView listProfessores(){
         ModelAndView modelAndView = new ModelAndView();
-        List<Professor> listProfessores = professorService.getAll();
-        modelAndView.addObject("professores", listProfessores);
-        modelAndView.setViewName("listar-professor");
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user.getRole().getId() != 1){
+            modelAndView.setViewName("error");
+        }else {
+            List<Professor> listProfessores = professorService.getAll();
+            modelAndView.addObject("professores", listProfessores);
+            modelAndView.setViewName("listar-professor");
+        }
         return  modelAndView;
     }
 
