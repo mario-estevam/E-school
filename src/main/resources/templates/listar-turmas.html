@@ -8,9 +8,11 @@
     <div class="row my-4 container-md">
         <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              link_page_home='/admin/home',
               page_home='Home',
-              previous_page_link=''
+              previous_page_link='',
+              previous_page='',
+              current_page='Turmas'
 
             )">
             </div>
@@ -23,29 +25,27 @@
                         <th scope="col">Disciplina</th>
                         <th scope="col">Professor</th>
                         <th scope="col">Turno</th>
-
+                        <th scope="col">Editar</th>
+                        <th scope="col">Excluir</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="turma : ${turmas}">
                         <td th:text="${turma.id}">ID</td>
-                        <td th:text="${turma.periodo.nome}">Nome</td>
-                        <td th:text="${turma.disciplina.nome}">Nome</td>
-                        <td th:text="${turma.professor.pessoa.nome}">Nome</td>
-                        <td th:text="${turma.turno}">Nome</td>
-                        <td><a class="btn btn-warning" role="button" th:href="@{'/deletar-discplina/'}">Deletar </a></td>
-                        <td><a class="btn btn-info"  role="button" th:href="@{'/editar-discplina/'}">Editar </a></td>
+                        <td th:text="${turma.periodo.nome}">Periodo</td>
+                        <td th:text="${turma.disciplina.nome}">Disciplina</td>
+                        <td th:text="${turma.professor.pessoa.nome}">Nome professor</td>
+                        <td th:text="${turma.turno}">Turno</td>
+                        <td><a role="button" th:href="@{'/admin/editar-turma/' + ${turma.id}}"><i class="bi bi-pencil-square"></i></a></td>
+                        <td><a role="button" th:href="@{'/admin/deletar-turma/' + ${turma.id}}"><i class="bi bi-trash"></i></a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="col-md-4 mt-3">
+            <span th:if="${#request.getParameter('msg')} !=null" class="alert alert-primary par" role="alert" th:text="${#request.getParameter('msg')}"></span>
+        </div>
     </div>
-
-
-
 </main>
-<script>
-
-</script>
 </html>

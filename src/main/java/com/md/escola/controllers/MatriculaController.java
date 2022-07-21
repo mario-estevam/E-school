@@ -1,17 +1,14 @@
 package com.md.escola.controllers;
 
 import com.md.escola.models.*;
-import com.md.escola.service.AlunoService;
-import com.md.escola.service.MatriculaService;
-import com.md.escola.service.PeriodoService;
-import com.md.escola.service.TurmaService;
+import com.md.escola.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -30,6 +27,8 @@ public class MatriculaController {
     @Autowired
     private PeriodoService periodoService;
 
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = "/admin/matricular")
     public ModelAndView matricular(){
@@ -56,6 +55,26 @@ public class MatriculaController {
         return "redirect:/admin/listar-matriculas";
     }
 
+    @GetMapping(value = "/admin/editar-matricula/{id}")
+    public ModelAndView editMatricula(@PathVariable("id") Long id){
+        ModelAndView modelAndView = new ModelAndView("atualizar-matricula");
+        Matricula matricula = matriculaService.findById(id);
+        List<Turma> turmas = turmaService.getAll();
+        List<Periodo> periodos = periodoService.getAll();
+        List<Aluno> alunos = alunoService.getAll();
+        modelAndView.addObject("matricula", matricula);
+        modelAndView.addObject("alunos", alunos);
+        modelAndView.addObject("periodos", periodos);
+        modelAndView.addObject("turmas", turmas);
+        return modelAndView;
+    }
+
+    @RequestMapping("/admin/deletar-matricula/{id}")
+    public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
+        matriculaService.delete(id);
+        redirectAttributes.addAttribute("msg", "Matricula removida com sucesso");
+        return "redirect:/admin/listar-matriculas";
+    }
 
     @GetMapping(value = "/admin/matricula-dependencia")
     public ModelAndView createMatricula(){
@@ -82,18 +101,21 @@ public class MatriculaController {
         return "redirect:/admin/listar-matriculas";
     }
 
-
     @GetMapping(value = "/admin/listar-matriculas")
     public ModelAndView listMatriculas(){
         ModelAndView modelAndView = new ModelAndView("listar-matricula");
-        List<Matricula> matriculas = matriculaService.getAll();
-        modelAndView.addObject("matriculas", matriculas);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user.getRole().getId() != 1) {
+            modelAndView.setViewName("error");
+        } else {
+            List<Matricula> matriculas = matriculaService.getAll();
+            modelAndView.addObject("matriculas", matriculas);
+        }
         return modelAndView;
     }
 
-
-
-    @GetMapping(value = "/profesor/editar-nota/{id}")
+    @GetMapping(value = "/professor/editar-nota/{id}")
     public ModelAndView editNota(@PathVariable("id") Long id){
         ModelAndView modelAndView = new ModelAndView("editar-nota");
         Matricula matricula = matriculaService.findById(id);
@@ -108,6 +130,5 @@ public class MatriculaController {
 
         return "redirect:/home-professor";
     }
-
 
 }

@@ -39,4 +39,6 @@ public class PessoaService {
     public List<Pessoa> getAll(){
         return repository.findAll();
     }
+
+    public Integer countPessoas(){ return repository.countPessoas(); }
 }

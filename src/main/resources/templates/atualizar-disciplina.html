@@ -6,34 +6,46 @@
 <main class="container" th:fragment="content">
 
     <div class="row my-4 container-md">
+        <div class="col-12">
+            <div th:replace="fragments/breadcrumb :: breadcrumb(
+                      link_page_home='/admin/home',
+                      page_home='Home',
+                      previous_page_link='/admin/listar-disciplinas',
+                      previous_page='Disciplinas',
+                      current_page='Editar'
 
-            <span class="mt-4">Cadastro de Disciplinas</span>
-            <article class="form-cadastro-disciplina border mw-50 mt-2 container-fluid content-container">
-                <form class="my-4"  action="#" th:action="@{/admin/atualizar-disciplina}"
-                      method="post" autocomplete="off" role="form">
-                    <div class="row">
-                        <div class="form-group col-md-12 has-validation">
-                            <input type="hidden" th:field="*{disciplina.id}">
-                            <label for="nome" class="form-label required" required >Nome </label>
-                            <input id="nome" type="text" th:field="${disciplina.nome}" class="form-control" required>
-                            <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
-                            <span class="text-danger" th:utext="${disciplinaValidate}"></span>
-                        </div>
+                    )">
+            </div>
 
-                        <div class="col-12">
-                            <button type="submit" class="btn  mt-4 btn-primary submit-form-user">Salvar</button>
+            <article class="conteudo-principal  mw-50  mt-2">
+                <div class="conteudo-principal-header px-2">
+                    <h1 class="my-4 ">Editar Disciplina</h1>
+                </div>
+
+                <div class="conteudo-principal-content container-fluid">
+                    <form class="my-4"  action="#" th:action="@{/admin/atualizar-disciplina}"
+                          method="post" autocomplete="off" role="form">
+                        <div class="row">
+                            <div class="form-group col-md-12 has-validation">
+                                <input type="hidden" th:field="*{disciplina.id}">
+                                <label for="nome" class="form-label required" required >Nome da disciplina</label>
+                                <input id="nome" type="text" th:field="${disciplina.nome}" class="form-control" required>
+                                <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                                <span class="text-danger" th:utext="${disciplinaValidate}"></span>
+                            </div>
+                            <div class="col-12 d-flex justify-content-between">
+                                <button type="submit" class="btn  mt-4 btn-success submit-form-user">Atualizar</button>
+                                <a th:href="@{/listar-disciplinas}" class="btn mt-4 btn-outline-danger" >
+                                    Cancelar
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+                    </form>
+                    <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+                </div>
             </article>
         </div>
-
     </div>
-
-
-
-
 </main>
 <script>
 

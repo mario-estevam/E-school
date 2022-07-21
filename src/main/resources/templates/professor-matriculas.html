@@ -8,9 +8,11 @@
     <div class="row my-4 container-md">
         <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              link_page_home='/home-professor',
               page_home='Home',
-              previous_page_link=''
+              previous_page_link='',
+              previous_page='',
+              current_page='Matriculas'
 
             )">
             </div>
@@ -18,29 +20,30 @@
             <div>
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th scope="col">Aluno</th>
-                        <th scope="col">Disciplina</th>
-                        <th scope="col">Periodo</th>
-                        <th scope="col">Professor</th>
-                        <th scope="col">Nota 1</th>
-                        <th scope="col">Nota 2</th>
-                        <th scope="col">Nota 3</th>
-                        <th scope="col">Rec</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Aluno</th>
+                            <th scope="col">Disciplina</th>
+                            <th scope="col">Periodo</th>
+                            <th scope="col">Professor</th>
+                            <th scope="col">Nota 1</th>
+                            <th scope="col">Nota 2</th>
+                            <th scope="col">Nota 3</th>
+                            <th scope="col">Rec</th>
+                            <th scope="col">Editar</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="matricula : ${matriculas}">
-                        <td th:text="${matricula.aluno.pessoa.nome}"></td>
-                        <td th:text="${matricula.turma.disciplina.nome}"></td>
-                        <td th:text="${matricula.turma.periodo.nome}"></td>
-                        <td th:text="${matricula.turma.professor.pessoa.nome}"></td>
-                        <td th:text="${matricula.nota.nota1}"></td>
-                        <td th:text="${matricula.nota.nota2}"></td>
-                        <td th:text="${matricula.nota.nota3}"></td>
-                        <td th:text="${matricula.nota.rec}"></td>
-                        <td><a class="btn btn-warning" role="button"  th:href="@{'/profesor/editar-nota/' + ${matricula.id}}">Editar Nota </a></td>
-                    </tr>
+                        <tr th:each="matricula : ${matriculas}">
+                            <td th:text="${matricula.aluno.pessoa.nome}"></td>
+                            <td th:text="${matricula.turma.disciplina.nome}"></td>
+                            <td th:text="${matricula.turma.periodo.nome}"></td>
+                            <td th:text="${matricula.turma.professor.pessoa.nome}"></td>
+                            <td th:text="${matricula.nota.nota1}"></td>
+                            <td th:text="${matricula.nota.nota2}"></td>
+                            <td th:text="${matricula.nota.nota3}"></td>
+                            <td th:text="${matricula.nota.rec}"></td>
+                            <td><a role="button" th:href="@{'/professor/editar-nota/' + ${matricula.id}}"><i class="bi bi-pencil-square"></i></a></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -52,12 +52,12 @@ public class ProfessorController {
         if((professor.getPessoa().getCpf().equals(pessoa.getCpf())) || (pessoa.getCpf() == null)){
             System.out.println("entrou");
             professorService.insert(professor, professor.getPessoa().getCpf());
-            return "redirect:/listar-professores";
+            return "redirect:/admin/listar-professores";
 
 
         }else{
           redirectAttributes.addAttribute("validacaoCpf", "Cpf já cadastrado no sistema");
-         return "redirect:/listar-professores";
+         return "redirect:/admin/listar-professores";
       }
 
     }
@@ -76,13 +76,18 @@ public class ProfessorController {
         return modelAndView;
     }
 
-    @GetMapping(value = "listar-professores")
+    @GetMapping(value = "/admin/listar-professores")
     public ModelAndView listProfessores(){
         ModelAndView modelAndView = new ModelAndView();
-        List<Professor> listProfessores = professorService.getAll();
-        modelAndView.addObject("professores", listProfessores);
-        modelAndView.setViewName("listar-professor");
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user.getRole().getId() != 1){
+            modelAndView.setViewName("error");
+        }else {
+            List<Professor> listProfessores = professorService.getAll();
+            modelAndView.addObject("professores", listProfessores);
+            modelAndView.setViewName("listar-professor");
+        }
         return  modelAndView;
     }
 
@@ -90,15 +95,15 @@ public class ProfessorController {
     public String editSave(@ModelAttribute Professor professor, RedirectAttributes redirectAttributes){
         professorService.insert(professor, professor.getPessoa().getCpf());
         redirectAttributes.addAttribute("atualiza-professor", "Dados atualizados");
-        return "redirect:/listar-disciplina";
+        return "redirect:/admin/listar-professores";
     }
 
 
-    @GetMapping(value = "/admin/professor/editar/{id}")
+    @GetMapping(value = "/admin/editar-professor/{id}")
     public ModelAndView editUsuer(@PathVariable("id") Long id){
         ModelAndView modelAndView = new ModelAndView();
         Professor professor = professorService.getId(id);
-        modelAndView.addObject("professor",professor);
+        modelAndView.addObject("professor", professor);
         modelAndView.setViewName("atualizar-professor");
         return  modelAndView;
     }

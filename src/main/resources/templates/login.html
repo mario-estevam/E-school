@@ -11,24 +11,24 @@
       </div>
     </div>
 
+
     <form th:action="@{/login}"  method="post" class="form-login needs-validation">
 
-      <label for="usuario">Usuário</label>
+      <label for="user_name">Usuário</label>
       <input type="text" id="user_name" name="user_name" placeholder="insira o seu usuário" required>
 
-      <label for="usuario">Senha</label>
+      <label for="password">Senha</label>
       <input type="password"  id="password" name="password" placeholder="insira a sua senha" required>
       <div align="center" th:if="${param.error}">
-            <p style="font-size: 20px; color: #FF1C19;">User Name or Password invalid, please verify</p>
-        </div>
-<!--      <span  th:if="${param.error}" class="text-danger form-error">-->
-<!--        Credencias inválidas.-->
-<!--      </span>-->
+         <p style="font-size: 13px; color: #FF1C19;">Credenciais Inválidas</p>
+      </div>
+      <br/>
       <button type="Submit" name="Submit"  value="Login">Entrar</button>
 
     </form>
 
 
   </div>
+  </span>
 </body>
 </html>

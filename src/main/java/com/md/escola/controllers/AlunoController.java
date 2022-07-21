@@ -50,8 +50,4 @@ public class AlunoController {
         modelAndView.addObject("matricula", matricula);
         return modelAndView;
     }
-
-
-
-
 }

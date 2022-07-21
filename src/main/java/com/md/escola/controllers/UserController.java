@@ -3,8 +3,7 @@ package com.md.escola.controllers;
 
 import com.md.escola.models.Pessoa;
 import com.md.escola.models.User;
-import com.md.escola.service.PessoaService;
-import com.md.escola.service.UserService;
+import com.md.escola.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +25,18 @@ public class UserController {
 
     @Autowired
     private PessoaService pessoaService;
+
+    @Autowired
+    private TurmaService turmaService;
+
+    @Autowired
+    private DisciplinaService disciplinaService;
+
+    @Autowired
+    private AlunoService alunoService;
+
+    @Autowired
+    private ProfessorService professorService;
 
     @GetMapping(value = {"/", "/login"})
     public ModelAndView login() {
@@ -61,8 +72,18 @@ public class UserController {
 
     @GetMapping(value="/home-admin")
     public ModelAndView homeAdmin(){
+        Integer qtdTurmas = turmaService.countTurmas();
+        Integer qtdAlunos = alunoService.countAlunos();
+        Integer qtdDisciplinas = disciplinaService.countDisciplinas();
+        Integer qtdProfessores = professorService.countProfessores();
+        Integer qtdUsuarios = pessoaService.countPessoas();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/admin/home-admin");
+        modelAndView.addObject("qtdTurmas", qtdTurmas);
+        modelAndView.addObject("qtdDisciplinas", qtdDisciplinas);
+        modelAndView.addObject("qtdAlunos", qtdAlunos);
+        modelAndView.addObject("qtdProfessores", qtdProfessores);
+        modelAndView.addObject("qtdUsuarios", qtdUsuarios);
+        modelAndView.setViewName("/home-admin");
         return  modelAndView;
 
     }

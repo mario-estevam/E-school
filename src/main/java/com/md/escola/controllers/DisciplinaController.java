@@ -1,7 +1,11 @@
 package com.md.escola.controllers;
 
 import com.md.escola.models.Disciplina;
+import com.md.escola.models.User;
 import com.md.escola.service.DisciplinaService;
+import com.md.escola.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -18,7 +22,10 @@ public class DisciplinaController {
     @Autowired
     private DisciplinaService disciplinaService;
 
-    @GetMapping(value = "/cadastro-disciplina")
+    @Autowired
+    private UserService userService;
+
+    @GetMapping(value = "/admin/cadastro-disciplina")
     public ModelAndView createDisciplina(){
         ModelAndView modelAndView = new ModelAndView("disciplina");
         List<Disciplina> disciplinas = disciplinaService.getAll();
@@ -28,11 +35,17 @@ public class DisciplinaController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/listar-disciplinas")
+    @GetMapping(value = "/admin/listar-disciplinas")
     public ModelAndView listDiscplinas(){
-        ModelAndView modelAndView = new ModelAndView("/disciplina/listar-disciplina");
-        List<Disciplina> disciplinas = disciplinaService.getAll();
-        modelAndView.addObject("disciplinas", disciplinas);
+        ModelAndView modelAndView = new ModelAndView("listar-disciplina");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user.getRole().getId() != 1) {
+            modelAndView.setViewName("error");
+        } else {
+            List<Disciplina> disciplinas = disciplinaService.getAll();
+            modelAndView.addObject("disciplinas", disciplinas);
+        }
         return modelAndView;
     }
 
@@ -56,12 +69,11 @@ public class DisciplinaController {
     @RequestMapping("/admin/deletar-disciplina/{id}")
     public String doDelete(@PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes){
         disciplinaService.delete(id);
-        redirectAttributes.addAttribute("msg", "Deletada com sucesso");
+        redirectAttributes.addAttribute("msg", "Disciplina deletada com sucesso");
         return "redirect:/listar-disciplinas";
     }
 
-
-    @PostMapping(value = "/cadastro-disciplina")
+    @PostMapping(value = "/admin/cadastro-disciplina")
     public ModelAndView createNewDiscipline(@Valid Disciplina disciplina, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
         if(bindingResult.hasErrors()){

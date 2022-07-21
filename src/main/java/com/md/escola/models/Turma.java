@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,21 +27,13 @@ public class Turma {
     @JoinColumn(name = "disciplina_id")
     Disciplina disciplina;
 
-//    [ ] Uma turma tem várias disciplinas
-//    @OneToMany
-//    @JoinColumn(name = "disciplina_id")
-//    List<Disciplina> disciplinas
-
     String turno;
+
+    private Date delete;
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
-
-//    [ ] Uma turma tem vários professores
-//    @OneToMany
-//    @JoinColumn(name = "professor_id")
-//    private List<Professor> professores;
 
     public Professor getProfessor() {
         return professor;

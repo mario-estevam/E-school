@@ -3,10 +3,12 @@ package com.md.escola.service;
 import com.md.escola.models.Periodo;
 import com.md.escola.models.Professor;
 import com.md.escola.models.Turma;
+import com.md.escola.models.User;
 import com.md.escola.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +29,13 @@ public class TurmaService {
         return repository.save(turma);
     }
 
+    public void delete(Long id){
+        Date date = new Date();
+        Turma turma = repository.getById(id);
+        turma.setDelete(date);
+        repository.save(turma);
+    }
+
     public List<Turma> findByPeriodo(Periodo periodo){
         return repository.findByPeriodo(periodo);
     }
@@ -40,7 +49,9 @@ public class TurmaService {
     }
 
     public List<Turma> getAll(){
-        return repository.findAll();
+        return repository.findByDeleteIsNull();
     }
+
+    public Integer countTurmas(){ return repository.countTurmas();}
 
 }

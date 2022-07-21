@@ -8,7 +8,7 @@
         <div class="row my-4 container-md">
           <div class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
-              link_page_home='https://www.thymeleaf.org/doc/articles/standardurlsyntax.html',
+              link_page_home='',
               page_home='Home',
               previous_page_link='',
               previous_page='Usuários',
@@ -25,6 +25,7 @@
               <div class="conteudo-principal-content container-fluid">
                 <form class="my-4"  action="#" th:action="@{/registration}"
                       method="post"  role="form">
+                  <span class="text-success" th:utext="${successMessage}"></span>
                   <div class="row">
                     <div class="form-group col-md-6 has-validation">
                       <label for="nomeCompleto" class="form-label required" required >Nome completo</label>
@@ -114,7 +115,7 @@
 
 
                 </form>
-                <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+
 
               </div>
 

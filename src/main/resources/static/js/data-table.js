@@ -1,3 +1,8 @@
 $(document).ready( function () {
-    $('#table-disciplinas').DataTable();
+    $('#table-disciplinas').DataTable({
+        "paging": false,
+        "pageLength": 1,
+        "searching": false,
+        "info": false
+    });
 } );
