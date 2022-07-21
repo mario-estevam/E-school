@@ -6,61 +6,54 @@
 <main class="container" th:fragment="content">
 
     <div class="row my-4 container-md">
-        <div class="col-12">
+        <article class="col-12">
             <div th:replace="fragments/breadcrumb :: breadcrumb(
               link_page_home='/aluno/listar-matriculas',
               page_home='Home',
               previous_page_link='',
               previous_page='',
-              current_page='Minhas notas'
+              current_page='Notas'
 
             )">
             </div>
             <span th:if="${#request.getParameter('msg')} !=null" class="alert alert-primary par" role="alert" th:text="${#request.getParameter('msg')}"></span>
-            <div class="container-fluid">
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Minhas Notas</h1>
+            <!-- Page Headisxng -->
+            <article class="conteudo-principal  mw-50  mt-2 align-items-center  ">
+                <div class="conteudo-principal-header px-2">
+                    <h1 class="my-4">Minhas Notas</h1>
                 </div>
-
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary text-dark">Notas</h6>
-                        <hr/>
-                    </div>
-                    <div class="card-body">
-                        <p>
-                            <p class="text-dark">Disciplina:</p>
-                        <h5 class="text-danger text-center" th:text="${matricula.turma.disciplina.nome}"> </h5>
-                        </p>
-                        <p>
-                            <p class="text-dark">Professor:</p>
-                        <h5 class="text-danger text-center" th:text="${matricula.turma.professor.pessoa.nome}"> </h5>
-                        </p>
-                        <p>
-                            <p class="text-dark">Periodo:</p>
-                        <h5 class="text-danger text-center" th:text="${matricula.turma.periodo.nome}"> </h5>
-                        </p>
-                        <p>
-                            <p class="text-dark">Nota unidade 1:</p>
-                        <h5 class="text-danger text-center" th:text="${matricula.nota.nota1}"> </h5>
-                        </p>
-                        <p>
-                            <p class="text-dark">Nota unidade 2:</p>
-                        <h5 class="text-danger text-center" th:text="${matricula.nota.nota2}"> </h5>
-                        </p>
-                        <p>
-                            <p class="text-dark">Nota unidade 3:</p>
-                        <h5 class="text-danger text-center" th:text="${matricula.nota.nota3}"> </h5>
-                        </p>
-                        <p>
-                            <p class="text-dark">Recuperação:</p>
-                        <h5  class="text-danger text-center" th:text="${matricula.nota.rec}"> </h5>
-                        </p>
-                    </div>
-                    <a class="btn btn-warning" role="button" href="/aluno/listar-matriculas">Voltar</a>
+                <div class="conteudo-principal-content container-fluid mb-4">
+                    <table
+                        data-toggle="table"
+                        class="mt-2 table table-striped display"
+                        id="table-disciplinas">
+                        <thead>
+                        <tr>
+                            <th scope="col">Disciplina</th>
+                            <th scope="col">Professor</th>
+                            <th scope="col">Periodo</th>
+                            <th scope="col">Unid. 1</th>
+                            <th scope="col">Unid. 2</th>
+                            <th scope="col">Unid. 3</th>
+                            <th scope="col">Recuperação</th>
+                            <th scope="col"><a role="button" th:href="@{/aluno/listar-matriculas/}"><i class="fa fa-home"></i> Voltar</a></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="${#strings.toUpperCase(matricula.turma.disciplina.nome)}"></td>
+                            <td th:text="${#strings.toUpperCase(matricula.turma.professor.pessoa.nome)}"></td>
+                            <td th:text="${matricula.turma.periodo.nome}"></td>
+                            <td th:text="${matricula.nota.nota1}"></td>
+                            <td th:text="${matricula.nota.nota2}"></td>
+                            <td th:text="${matricula.nota.nota3}"></td>
+                            <td th:text="${matricula.nota.rec}"></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+            </article>
         </div>
     </div>
 </main>
